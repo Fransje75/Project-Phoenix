@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08111f">
+<title>Project Phoenix — Command Center</title>
+<style>
+:root{
+  --bg:#07101d;--panel:#0d1a2a;--panel2:#112238;--line:#1d3652;--text:#eef6ff;--muted:#91a7c0;
+  --blue:#4aa8ff;--green:#42d392;--amber:#ffbe55;--red:#ff6b75;--purple:#a786ff;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);
+background:radial-gradient(circle at 85% -10%,#163a64 0,transparent 38%),linear-gradient(160deg,#050b14,#091525 55%,#07101d);min-height:100vh}
+button,input,select{font:inherit}.shell{max-width:1480px;margin:auto;padding:20px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border:1px solid var(--line);
+background:rgba(9,22,38,.88);backdrop-filter:blur(14px);border-radius:20px;position:sticky;top:10px;z-index:20;box-shadow:0 20px 50px #0007}
+.brand{display:flex;align-items:center;gap:13px}.logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+background:linear-gradient(145deg,#ffb347,#ff6b45);font-size:24px;box-shadow:0 8px 28px #ff743966}
+.brand h1{font-size:18px;margin:0}.brand small{color:var(--muted)}
+.nav{display:flex;gap:6px;flex-wrap:wrap}.nav button{color:var(--muted);background:transparent;border:0;padding:9px 12px;border-radius:10px;cursor:pointer}
+.nav button.active,.nav button:hover{background:#17304c;color:white}
+.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:18px;margin:22px 0}
+.card{background:linear-gradient(160deg,rgba(17,34,56,.95),rgba(10,24,41,.95));border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 18px 45px #0004}
+.eyebrow{color:var(--blue);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800}
+.hero h2{font-size:clamp(30px,5vw,58px);line-height:1.02;margin:10px 0 14px;max-width:880px}.hero p{color:var(--muted);font-size:17px;max-width:780px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{border:1px solid var(--line);background:#132a46;color:white;padding:11px 15px;border-radius:12px;text-decoration:none;cursor:pointer;font-weight:700}
+.btn.primary{background:linear-gradient(135deg,#237fe5,#51b7ff);border-color:transparent}.btn:hover{filter:brightness(1.12)}
+.overall{display:grid;place-items:center;text-align:center}.ring{--p:70;width:180px;height:180px;border-radius:50%;display:grid;place-items:center;
+background:conic-gradient(var(--green) calc(var(--p)*1%),#17304b 0);position:relative}.ring:after{content:"";position:absolute;inset:14px;border-radius:50%;background:#0c1b2c}
+.ring strong,.ring span{position:relative;z-index:1}.ring strong{font-size:44px}.ring span{display:block;color:var(--muted);font-size:12px}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.metric{padding:18px}.metric b{font-size:28px;display:block}.metric span{color:var(--muted);font-size:13px}
+.section{display:none}.section.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 2px 14px}.section-head h3{font-size:28px;margin:0}.section-head p{color:var(--muted);margin:5px 0 0}
+.controls{display:flex;gap:8px;flex-wrap:wrap}.controls input,.controls select{background:#0b192a;color:white;border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+.systems{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.system{padding:18px;position:relative;overflow:hidden}.system:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--status)}
+.system-top{display:flex;justify-content:space-between;gap:12px}.system h4{margin:0 0 5px;font-size:17px}.group{color:var(--muted);font-size:12px}.percent{font-size:25px;font-weight:850}
+.badge{display:inline-flex;align-items:center;gap:7px;border:1px solid color-mix(in srgb,var(--status) 55%,transparent);color:var(--status);border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;text-transform:uppercase}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor}.bar{height:8px;background:#132840;border-radius:99px;overflow:hidden;margin:15px 0}.bar>i{display:block;height:100%;width:var(--progress);background:linear-gradient(90deg,var(--status),color-mix(in srgb,var(--status) 55%,white));border-radius:99px}
+.system p{color:var(--muted);font-size:13px;line-height:1.5;min-height:58px}.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;border-top:1px solid var(--line);padding-top:12px}
+.system details{margin-top:12px}.system summary{cursor:pointer;font-size:12px;color:#bad8f7}.system ul{color:var(--muted);font-size:12px;padding-left:18px}
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.doc{padding:18px;display:flex;flex-direction:column}.doc h4{margin:0 0 6px}.doc p{color:var(--muted);font-size:13px;line-height:1.5;flex:1}.doc-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px}.type{font-size:11px;color:var(--blue);font-weight:800}.download{color:white;text-decoration:none;background:#173657;border:1px solid #2a5279;padding:8px 11px;border-radius:9px;font-size:12px;font-weight:700}
+.timeline{position:relative;padding-left:24px}.timeline:before{content:"";position:absolute;left:7px;top:5px;bottom:5px;width:2px;background:var(--line)}.event{position:relative;margin-bottom:18px}.event:before{content:"";position:absolute;left:-22px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px #42d39222}.event time{color:var(--muted);font-size:12px}.event h4{margin:3px 0}.event p{color:var(--muted);margin:0}
+.matrix{width:100%;border-collapse:collapse;min-width:800px}.matrix th,.matrix td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:13px}.matrix th{color:#bcd4ed}.table-wrap{overflow:auto}
+footer{text-align:center;color:var(--muted);padding:38px 10px 20px;font-size:12px}
+.toast{position:fixed;right:20px;bottom:20px;background:#15304b;border:1px solid #31587c;padding:12px 15px;border-radius:12px;display:none;z-index:50}
+@media(max-width:1050px){.systems,.docs{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.summary-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.shell{padding:10px}.topbar{position:relative;top:0;border-radius:16px;align-items:flex-start}.nav{display:none}.brand small{display:none}.hero h2{font-size:38px}.card{border-radius:17px;padding:17px}.systems,.docs,.summary-grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.controls{width:100%}.controls input,.controls select{flex:1;min-width:0}.ring{width:150px;height:150px}.hero-actions .btn{flex:1;text-align:center}.system p{min-height:auto}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <div class="brand"><div class="logo">🔥</div><div><h1>Project Phoenix</h1><small>UEFA Manager 2000 Reconstruction Command Center</small></div></div>
+  <nav class="nav">
+    <button class="active" data-section="overview">Overzicht</button>
+    <button data-section="systems">Categorieën</button>
+    <button data-section="docs">Documentatie</button>
+    <button data-section="roadmap">Mijlpalen</button>
+    <button data-section="evidence">Traceability</button>
+  </nav>
+</header>
+
+<main>
+<section id="overview" class="section active">
+<div class="hero">
+  <article class="card">
+    <div class="eyebrow">Milestone 1 bereikt</div>
+    <h2>Van game-archeologie naar een bewijsbare digitale blauwdruk.</h2>
+    <p>Volg de reconstructie van de originele systemen, bekijk confidence-scores en download de actuele Project Phoenix-documentatie.</p>
+    <div class="hero-actions">
+      <button class="btn primary" onclick="go('systems')">Bekijk voortgang</button>
+      <button class="btn" onclick="go('docs')">Open documentatie</button>
+      <button class="btn" onclick="exportProgress()">Exporteer voortgang</button>
+      <label class="btn">Importeer JSON<input id="importFile" type="file" accept=".json" hidden></label>
+    </div>
+  </article>
+  <aside class="card overall">
+    <div class="ring" id="overallRing"><div><strong id="overallValue">0%</strong><span>gewogen voortgang</span></div></div>
+    <p id="updatedText">Bijgewerkt</p>
+  </aside>
+</div>
+<div class="summary-grid">
+  <div class="card metric"><b id="completeCount">0</b><span>categorieën afgerond</span></div>
+  <div class="card metric"><b id="activeCount">0</b><span>actief onderzocht</span></div>
+  <div class="card metric"><b id="researchCount">0</b><span>research/open</span></div>
+  <div class="card metric"><b id="docCount">0</b><span>downloadbare documenten</span></div>
+</div>
+<div class="card">
+  <div class="section-head"><div><h3>Focus van Sprint 1</h3><p>Eerst begrijpen en bewijzen; daarna pas bouwen.</p></div></div>
+  <div class="table-wrap"><table class="matrix" id="focusTable"><thead><tr><th>Categorie</th><th>Voortgang</th><th>Confidence</th><th>Volgende stap</th></tr></thead><tbody></tbody></table></div>
+</div>
+</section>
+
+<section id="systems" class="section">
+<div class="section-head"><div><h3>Voortgang per categorie</h3><p>Statuskleur, percentage, confidence en eerstvolgende verificatie.</p></div>
+<div class="controls"><input id="search" placeholder="Zoeken…"><select id="groupFilter"><option value="">Alle groepen</option></select></div></div>
+<div class="systems" id="systemsGrid"></div>
+</section>
+
+<section id="docs" class="section">
+<div class="section-head"><div><h3>Documentatiebibliotheek</h3><p>Alle beschikbare bron- en werkdocumenten in één overzicht.</p></div>
+<a class="btn primary" href="Project_Phoenix_Documentation_v0.3.zip" download>Download alle documentatie</a></div>
+<div class="docs" id="docsGrid"></div>
+</section>
+
+<section id="roadmap" class="section">
+<div class="section-head"><div><h3>Mijlpalen</h3><p>Belangrijkste stappen in de reconstructie.</p></div></div>
+<div class="card timeline" id="timeline"></div>
+</section>
+
+<section id="evidence" class="section">
+<div class="section-head"><div><h3>Requirements Traceability</h3><p>Welke bron ondersteunt iedere categorie?</p></div></div>
+<div class="card table-wrap"><table class="matrix"><thead><tr><th>Categorie</th><th>Handleiding</th><th>Tests</th><th>Savegames</th><th>Executable</th><th>Confidence</th></tr></thead><tbody id="matrixBody"></tbody></table></div>
+</section>
+</main>
+<footer>Project Phoenix Dashboard v1.0 · Volledig lokaal en responsive · Wijzigingen worden in deze browser opgeslagen</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const STATUS={complete:{label:"Afgerond",color:"#42d392"},active:{label:"Actief",color:"#4aa8ff"},research:{label:"Onderzoek",color:"#ffbe55"},blocked:{label:"Geblokkeerd",color:"#ff6b75"}};
+let DATA;
+async function boot(){
+  DATA=await fetch("data.json").then(r=>r.json());
+  const saved=localStorage.getItem("phoenix-progress-v1");
+  if(saved){try{const x=JSON.parse(saved); DATA.systems.forEach(s=>{const p=x[s.id];if(p){s.progress=p.progress;s.status=p.status;s.confidence=p.confidence}})}catch(e){}}
+  render();
+}
+function weighted(){return Math.round(DATA.systems.reduce((a,s)=>a+s.progress,0)/DATA.systems.length)}
+function render(){
+  const overall=weighted(); document.getElementById("overallValue").textContent=overall+"%"; document.getElementById("overallRing").style.setProperty("--p",overall);
+  document.getElementById("updatedText").textContent="Bijgewerkt: "+DATA.updated;
+  completeCount.textContent=DATA.systems.filter(s=>s.status==="complete").length;
+  activeCount.textContent=DATA.systems.filter(s=>s.status==="active").length;
+  researchCount.textContent=DATA.systems.filter(s=>s.status==="research").length;
+  docCount.textContent=DATA.documents.length;
+  const groups=[...new Set(DATA.systems.map(s=>s.group))].sort(); groupFilter.innerHTML='<option value="">Alle groepen</option>'+groups.map(g=>`<option>${g}</option>`).join("");
+  renderSystems(); renderDocs(); renderTimeline(); renderMatrix(); renderFocus();
+}
+function renderSystems(){
+  const q=(search.value||"").toLowerCase(), g=groupFilter.value;
+  const list=DATA.systems.filter(s=>(!g||s.group===g)&&(!q||(s.name+" "+s.summary+" "+s.group).toLowerCase().includes(q)));
+  systemsGrid.innerHTML=list.map(s=>{const st=STATUS[s.status]||STATUS.research;return `<article class="card system" style="--status:${st.color};--progress:${s.progress}%">
+    <div class="system-top"><div><span class="badge"><i class="dot"></i>${st.label}</span><h4>${s.name}</h4><div class="group">${s.group}</div></div><div class="percent">${s.progress}%</div></div>
+    <div class="bar"><i></i></div><p>${s.summary}</p><div class="meta"><span>Confidence ${s.confidence}%</span><span>${s.evidence.length} bewijsbronnen</span></div>
+    <details><summary>Details en volgende stap</summary><ul>${s.evidence.map(e=>`<li>${e}</li>`).join("")}</ul><p><b>Volgende:</b> ${s.next}</p>
+    <div class="controls"><input type="number" min="0" max="100" value="${s.progress}" onchange="edit('${s.id}','progress',this.value)" aria-label="Voortgang">
+    <select onchange="edit('${s.id}','status',this.value)">${Object.keys(STATUS).map(k=>`<option value="${k}" ${k===s.status?"selected":""}>${STATUS[k].label}</option>`).join("")}</select></div></details>
+  </article>`}).join("");
+}
+function renderDocs(){docsGrid.innerHTML=DATA.documents.map(d=>`<article class="card doc"><span class="type">${d.type} · ${d.status}</span><h4>${d.title}</h4><p>${d.description}</p><div class="doc-foot"><span></span><a class="download" href="docs/${d.file}" download>Download</a></div></article>`).join("")}
+function renderTimeline(){timeline.innerHTML=DATA.milestones.map(m=>`<div class="event"><time>${new Date(m.date+"T12:00:00").toLocaleDateString("nl-NL",{day:"numeric",month:"long",year:"numeric"})}</time><h4>${m.title}</h4><p>${m.text}</p></div>`).join("")}
+function source(s,t){if(t==="manual")return !["savegame","executable"].includes(s.id)?"✓":"—";if(t==="tests")return ["gameflow","team","training","player","match","transfers","savegame"].includes(s.id)?"✓":"○";if(t==="save")return ["savegame","team","training","match","transfers","player"].includes(s.id)?"✓":"○";return s.id==="executable"?"◐":"○"}
+function renderMatrix(){matrixBody.innerHTML=DATA.systems.map(s=>`<tr><td>${s.name}</td><td>${source(s,"manual")}</td><td>${source(s,"tests")}</td><td>${source(s,"save")}</td><td>${source(s,"exe")}</td><td>${s.confidence}%</td></tr>`).join("")}
+function renderFocus(){focusTable.querySelector("tbody").innerHTML=DATA.systems.slice().sort((a,b)=>a.progress-b.progress).slice(0,7).map(s=>`<tr><td>${s.name}</td><td>${s.progress}%</td><td>${s.confidence}%</td><td>${s.next}</td></tr>`).join("")}
+function go(id){document.querySelectorAll(".section").forEach(x=>x.classList.toggle("active",x.id===id));document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.section===id));scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.section));
+search.oninput=renderSystems;groupFilter.onchange=renderSystems;
+function edit(id,key,value){const s=DATA.systems.find(x=>x.id===id);s[key]=key==="progress"?Math.max(0,Math.min(100,+value)):value;save();render()}
+function save(){const obj={};DATA.systems.forEach(s=>obj[s.id]={progress:s.progress,status:s.status,confidence:s.confidence});localStorage.setItem("phoenix-progress-v1",JSON.stringify(obj));toastMsg("Voortgang lokaal opgeslagen")}
+function exportProgress(){const obj={exported:new Date().toISOString(),systems:DATA.systems};const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(obj,null,2)],{type:"application/json"}));a.download="project-phoenix-progress.json";a.click();URL.revokeObjectURL(a.href)}
+importFile.onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const x=JSON.parse(await f.text());(x.systems||[]).forEach(i=>{const s=DATA.systems.find(z=>z.id===i.id);if(s){s.progress=i.progress;s.status=i.status;s.confidence=i.confidence}});save();render();toastMsg("Voortgang geïmporteerd")}catch(err){toastMsg("Ongeldig JSON-bestand")}}
+function toastMsg(t){toast.textContent=t;toast.style.display="block";setTimeout(()=>toast.style.display="none",1800)}
+boot();
+</script>
+</body></html>
