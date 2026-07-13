@@ -4,80 +4,114 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#07101d">
-  <meta name="description" content="Project Phoenix Command Center Foundation">
+  <meta name="description" content="Project Phoenix Command Center">
   <title>Project Phoenix Command Center</title>
   <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
-  <div class="app-shell">
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">🔥</div>
+      <div><strong>Project Phoenix</strong><span>Command Center · v1.1</span></div>
+    </div>
+    <nav>
+      <button class="nav active" data-view="dashboard"><span>⌂</span>Dashboard</button>
+      <button class="nav" data-view="engines"><span>⚙</span>Engine Registry</button>
+      <button class="nav" data-view="updates"><span>↻</span>Updates</button>
+      <button class="nav" data-view="documents"><span>▤</span>Documentatie</button>
+      <button class="nav" data-view="evidence"><span>⌘</span>Evidence</button>
+    </nav>
+    <div class="sprint-card">
+      <small>HUIDIGE SPRINT</small>
+      <strong id="sprintName"></strong>
+      <div class="mini-bar"><i id="sprintBar"></i></div>
+      <span id="sprintPercent"></span>
+    </div>
+  </aside>
+
+  <div class="main">
     <header class="topbar">
-      <div class="brand">
-        <div class="logo">🔥</div>
-        <div>
-          <strong>Project Phoenix</strong>
-          <span>Command Center Foundation</span>
-        </div>
+      <button id="menuButton" class="icon-button mobile-only">☰</button>
+      <div><small>PROJECT PHOENIX COMMAND CENTER</small><h1 id="pageTitle">Dashboard</h1></div>
+      <div class="top-actions">
+        <button id="themeButton" class="icon-button">☀️</button>
+        <button id="exportButton" class="action-button">Exporteer voortgang</button>
       </div>
-      <button id="themeButton" class="icon-button" type="button" aria-label="Wissel thema">☀️</button>
     </header>
 
     <main class="content">
-      <section class="hero panel">
-        <div>
-          <p class="eyebrow">Foundation build</p>
-          <h1>De stabiele basis staat.</h1>
-          <p class="lead">
-            Deze versie gebruikt bewust geen npm, React of buildstap.
-            Eerst bewijzen we dat GitHub Pages betrouwbaar publiceert.
-          </p>
-          <div class="actions">
-            <button id="testButton" class="primary" type="button">Test interactie</button>
-            <a class="secondary" href="#status">Bekijk status</a>
+      <section class="view active" id="dashboard">
+        <div class="hero panel">
+          <div>
+            <p class="eyebrow">Milestone 1 bereikt</p>
+            <h2>Van game-archeologie naar een bewijsbare digitale blauwdruk.</h2>
+            <p>Het centrale overzicht voor documentatie, reverse engineering, bewijs, planning en toekomstige engine-debugging.</p>
+            <div class="hero-actions">
+              <button class="primary" data-go="engines">Bekijk engines</button>
+              <button class="secondary" data-go="documents">Open documentatie</button>
+            </div>
           </div>
+          <div class="ring" id="overallRing"><div><strong id="overallValue"></strong><span>overall progress</span></div></div>
         </div>
-        <div class="status-orb">
-          <strong>v1</strong>
-          <span>Foundation</span>
+
+        <div class="metrics">
+          <article class="panel metric"><span>Gewogen voortgang</span><strong id="metricOverall"></strong></article>
+          <article class="panel metric"><span>Gemiddelde confidence</span><strong id="metricConfidence"></strong></article>
+          <article class="panel metric"><span>Actief onderzocht</span><strong id="metricActive"></strong></article>
+          <article class="panel metric"><span>Documenten</span><strong id="metricDocs"></strong></article>
         </div>
+
+        <div class="dashboard-grid">
+          <section class="panel block">
+            <div class="block-head"><div><h3>Engine-overzicht</h3><p>Klik voor details, bewijs en vervolgstappen.</p></div><button class="text-button" data-go="engines">Alles bekijken →</button></div>
+            <div id="featuredEngines" class="engine-mini-grid"></div>
+          </section>
+          <section class="panel block">
+            <div class="block-head"><div><h3>Onderzoeksfocus</h3><p>Laagste voortgang, hoogste prioriteit.</p></div></div>
+            <div id="focusList" class="focus-list"></div>
+          </section>
+        </div>
+
+        <section class="panel block">
+          <div class="block-head"><div><h3>Laatste updates</h3><p>Nieuwe mijlpalen en ontdekkingen.</p></div><button class="text-button" data-go="updates">Volledige feed →</button></div>
+          <div id="recentUpdates" class="updates-list"></div>
+        </section>
       </section>
 
-      <section id="status" class="grid">
-        <article class="panel metric">
-          <span>GitHub Pages</span>
-          <strong>Gereed</strong>
-        </article>
-        <article class="panel metric">
-          <span>Responsive</span>
-          <strong>Ja</strong>
-        </article>
-        <article class="panel metric">
-          <span>Dependencies</span>
-          <strong>0</strong>
-        </article>
-        <article class="panel metric">
-          <span>Buildstap</span>
-          <strong>Niet nodig</strong>
-        </article>
+      <section class="view" id="engines">
+        <div class="section-header"><div><h2>Engine Registry</h2><p>Voortgang, confidence, feiten, hypotheses en gerelateerde tests.</p></div>
+          <div class="search"><span>⌕</span><input id="engineSearch" placeholder="Zoek engines…"></div>
+        </div>
+        <div id="engineGrid" class="engine-grid"></div>
       </section>
 
-      <section class="panel roadmap">
-        <h2>Foundation checklist</h2>
-        <ul>
-          <li>Statische GitHub Pages-deployment</li>
-          <li>Responsive desktop- en mobiele layout</li>
-          <li>Donker/licht thema</li>
-          <li>Werkende JavaScript-interactie</li>
-          <li>Verborgen <code>.github</code>-workflow inbegrepen</li>
-        </ul>
+      <section class="view" id="updates">
+        <div class="section-header"><div><h2>Updates & Changelog</h2><p>De onderzoeksgeschiedenis van Project Phoenix.</p></div></div>
+        <div id="updatesTimeline" class="timeline"></div>
+      </section>
+
+      <section class="view" id="documents">
+        <div class="section-header"><div><h2>Documentatiebibliotheek</h2><p>Werkdocumenten en originele bronnen.</p></div></div>
+        <div id="documentGrid" class="document-grid"></div>
+      </section>
+
+      <section class="view" id="evidence">
+        <div class="section-header"><div><h2>Evidence & Traceability</h2><p>Welke bronnen ondersteunen onze kennis per engine?</p></div></div>
+        <div class="panel table-wrap"><table><thead><tr><th>Engine</th><th>Handleiding</th><th>Tests</th><th>Savegames</th><th>Executable</th><th>Confidence</th></tr></thead><tbody id="evidenceBody"></tbody></table></div>
       </section>
     </main>
-
-    <footer>
-      Project Phoenix Command Center · Foundation v1
-    </footer>
   </div>
+</div>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="./assets/app.js"></script>
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer">
+  <button id="drawerClose" class="drawer-close">×</button>
+  <div id="drawerContent"></div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script src="./assets/project-data.js"></script>
+<script src="./assets/app.js"></script>
 </body>
 </html>

@@ -1,22 +1,24 @@
-# PPCC Foundation v1
+# Project Phoenix Command Center v1.1
 
-Dit is de minimale, stabiele foundation voor het Project Phoenix Command Center.
+De eerste volledige dashboardversie boven op de bewezen statische foundation.
 
-## Waarom zonder npm?
-De eerste stap is uitsluitend bewijzen dat GitHub Pages en GitHub Actions betrouwbaar functioneren. Daarom gebruikt deze foundation:
+## Inbegrepen
+- Responsive dashboard
+- Engine Registry
+- Detailpanelen met facts, hypotheses, tests en volgende stappen
+- Updates/changelog
+- Documentatiebibliotheek
+- Evidence & traceability
+- Dark/light mode
+- Lokale voortgangsaanpassingen
+- JSON-export van voortgang
+- Automatische GitHub Pages-deployment
+- Geen npm, dependencies of buildstap
 
-- HTML
-- CSS
-- JavaScript
-- nul externe dependencies
-- geen compile- of buildstap
-
-Na een succesvolle live deployment bouwen we de applicatie stapsgewijs verder uit.
-
-## Installeren in je lokale GitHub Desktop-repository
-1. Maak de lokale repositorymap leeg, maar verwijder de verborgen `.git`-map niet.
-2. Kopieer alle inhoud van deze foundation naar die map.
-3. Controleer dat `.github/workflows/deploy.yml` is meegekopieerd.
-4. Commit in GitHub Desktop.
-5. Push naar `main`.
-6. Controleer de workflow onder Actions.
+## Installeren
+1. Open via GitHub Desktop de lokale repositorymap.
+2. Vervang alle projectbestanden door de inhoud van deze map.
+3. Laat de verborgen `.git`-map staan.
+4. Commit: `Add PPCC v1.1 dashboard`
+5. Push origin.
+6. Controleer Actions en open daarna de live site.
