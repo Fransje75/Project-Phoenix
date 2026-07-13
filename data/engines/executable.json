@@ -1,0 +1,52 @@
+{
+  "id": "executable",
+  "name": "Executable Reconstruction",
+  "group": "Reverse Engineering",
+  "progress": 15,
+  "confidence": 20,
+  "status": "research",
+  "summary": "Ghidra, x32dbg en API Monitor zijn voorbereid; enginegerichte analyse moet nog beginnen.",
+  "facts": [
+    "UEFA2000b.exe is de werkende executable",
+    "DirectDraw rendering is aangeroepen"
+  ],
+  "hypotheses": [
+    "Enginefuncties zijn via data- en stringsreferenties te koppelen"
+  ],
+  "next": "Player- en save-structuren als eerste in Ghidra lokaliseren.",
+  "tests": [
+    "Ghidra setup",
+    "API Monitor",
+    "x32dbg"
+  ],
+  "dependencies": [
+    "savegame",
+    "player",
+    "match",
+    "training",
+    "tactics"
+  ],
+  "sources": [
+    "Ghidra",
+    "x32dbg",
+    "API Monitor"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-06",
+      "title": "Ghidra werkend",
+      "summary": "UEFA2000b.exe geopend en eerste zoekopdrachten uitgevoerd."
+    },
+    {
+      "date": "2026-07-07",
+      "title": "DirectDraw calls gemonitord",
+      "summary": "API Monitor bevestigt gebruik van DirectDraw-oppervlakken en blits."
+    }
+  ],
+  "documents": [
+    "Reverse_Engineering_Logbook_v0.4.md"
+  ],
+  "notes": [
+    "Start met enginegerichte analyse in plaats van willekeurige codeverkenning."
+  ]
+}

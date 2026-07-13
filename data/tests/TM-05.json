@@ -1,0 +1,33 @@
+{
+  "id": "TM-05",
+  "title": "Penaltynemer gewijzigd",
+  "category": "Team Management",
+  "status": "verified",
+  "confidence": 92,
+  "goal": "Set-piece assignment voor penalty’s testen.",
+  "procedure": [
+    "Referentiesave laden",
+    "Penaltynemer wijzigen",
+    "Opslaan",
+    "Vergelijken"
+  ],
+  "result": "Assignment persistent.",
+  "conclusion": "Penaltynemer is een apart tactisch veld.",
+  "engines": [
+    "tactics",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "TM-05 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Is er een fallbacklijst wanneer de eerste nemer niet speelt?"
+  ]
+}

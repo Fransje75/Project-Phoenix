@@ -1,0 +1,15 @@
+[
+  "manual.json",
+  "savegame.json",
+  "player.json",
+  "training.json",
+  "tactics.json",
+  "match.json",
+  "transfer.json",
+  "finance.json",
+  "stadium.json",
+  "staff.json",
+  "supporters.json",
+  "competition.json",
+  "executable.json"
+]

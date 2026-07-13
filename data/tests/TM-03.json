@@ -1,0 +1,33 @@
+{
+  "id": "TM-03",
+  "title": "Formatie gewijzigd",
+  "category": "Team Management",
+  "status": "verified",
+  "confidence": 95,
+  "goal": "Opslag van de gekozen formatie isoleren.",
+  "procedure": [
+    "Referentiesave laden",
+    "Formatie wijzigen",
+    "Opslaan",
+    "Vergelijken"
+  ],
+  "result": "Formatieverandering persistent vastgelegd.",
+  "conclusion": "Formation is een zelfstandig tactisch gegeven.",
+  "engines": [
+    "tactics",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "TM-03 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Wordt formatie als ID of volledige coordinatenset opgeslagen?"
+  ]
+}

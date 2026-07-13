@@ -1,0 +1,34 @@
+{
+  "id": "TR-02",
+  "title": "Reactie op transferbod",
+  "category": "Transfers",
+  "status": "verified",
+  "confidence": 90,
+  "goal": "Reactiestatus na clubbesluit isoleren.",
+  "procedure": [
+    "TR-01 laden",
+    "Tijd vooruit tot reactie",
+    "Opslaan",
+    "Vergelijken"
+  ],
+  "result": "Nieuwe transferstatus persistent zichtbaar.",
+  "conclusion": "Clubbesluit is een aparte fase vóór speleronderhandeling.",
+  "engines": [
+    "transfer",
+    "finance",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "TR-02 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Hoe wordt tegenbod of afwijzing gecodeerd?"
+  ]
+}

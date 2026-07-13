@@ -1,0 +1,32 @@
+{
+  "id": "BASELINE",
+  "title": "Baseline Save",
+  "category": "Savegame",
+  "status": "verified",
+  "confidence": 100,
+  "goal": "De vroegst mogelijke consistente referentiesave maken op Football Today.",
+  "procedure": [
+    "Nieuw spel starten",
+    "Manager instellen",
+    "Club Oss kiezen",
+    "Opslaan bij eerste mogelijkheid"
+  ],
+  "result": "Baseline voor alle latere differential tests vastgelegd.",
+  "conclusion": "Alle latere savegamevergelijkingen kunnen tegen één stabiele referentie worden uitgevoerd.",
+  "engines": [
+    "savegame"
+  ],
+  "evidence": {
+    "manual": false,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "baseline save set"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Welke records veranderen uitsluitend door tijdsverloop?"
+  ]
+}

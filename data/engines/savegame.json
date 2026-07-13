@@ -1,0 +1,63 @@
+{
+  "id": "savegame",
+  "name": "Savegame Engine",
+  "group": "Reverse Engineering",
+  "progress": 70,
+  "confidence": 72,
+  "status": "active",
+  "summary": "De modulaire save-opbouw is onderzocht met gecontroleerde savegame-reeksen.",
+  "facts": [
+    ".sav en .bin reageren op team- en tactiekwijzigingen",
+    ".mhs groeit sterk na wedstrijden",
+    ".chs groeit bij club- en transfergebeurtenissen"
+  ],
+  "hypotheses": [
+    ".phs bevat vaste spelerrecords",
+    ".dhs bevat divisie- of competitiehistorie"
+  ],
+  "next": "Binaire offsets, recordstructuren en eventuele checksums bepalen.",
+  "tests": [
+    "Baseline",
+    "TM-01 t/m TM-07",
+    "TR-01/02",
+    "ME-01"
+  ],
+  "dependencies": [
+    "player",
+    "training",
+    "tactics",
+    "match",
+    "transfer",
+    "competition"
+  ],
+  "sources": [
+    "Baseline saves",
+    "Differential save tests",
+    "Bestandsgroottes",
+    "Binaire vergelijkingen"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-06",
+      "title": "Baseline vastgesteld",
+      "summary": "Eerste mogelijke save op Football Today vastgelegd."
+    },
+    {
+      "date": "2026-07-07",
+      "title": "Modulaire save-opbouw bevestigd",
+      "summary": "Verschillende acties wijzigen verschillende savebestanden."
+    },
+    {
+      "date": "2026-07-11",
+      "title": "Match history-groei gezien",
+      "summary": ".mhs groeit sterk na een officiële wedstrijd."
+    }
+  ],
+  "documents": [
+    "Reverse_Engineering_Logbook_v0.4.md",
+    "Engine_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Volgende grote stap: records en offsets vastleggen in een formele structuur."
+  ]
+}

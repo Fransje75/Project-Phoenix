@@ -1,0 +1,34 @@
+{
+  "id": "PS-02",
+  "title": "Reactie op contractvoorstel",
+  "category": "Player / Contract",
+  "status": "verified",
+  "confidence": 90,
+  "goal": "Verandering na reactie op contractvoorstel isoleren.",
+  "procedure": [
+    "PS-01 laden",
+    "Tijd vooruit tot reactie",
+    "Opslaan",
+    "Vergelijken"
+  ],
+  "result": "Nieuwe contractstatus zichtbaar in saveverschillen.",
+  "conclusion": "Onderhandeling heeft meerdere persistente fasen.",
+  "engines": [
+    "transfer",
+    "player",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "PS-02 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Welke statussen bestaan exact?"
+  ]
+}

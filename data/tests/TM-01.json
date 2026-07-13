@@ -1,0 +1,34 @@
+{
+  "id": "TM-01",
+  "title": "Twee basisspelers omgewisseld",
+  "category": "Team Management",
+  "status": "verified",
+  "confidence": 95,
+  "goal": "Vaststellen hoe de basisopstelling wordt opgeslagen.",
+  "procedure": [
+    "Baseline laden",
+    "Twee spelers in de basis omwisselen",
+    "Opslaan",
+    "Savebestanden vergelijken"
+  ],
+  "result": "Gerichte wijzigingen zichtbaar in savebestanden.",
+  "conclusion": "Opstellingsvolgorde en/of pitch assignment zijn persistent.",
+  "engines": [
+    "tactics",
+    "player",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "TM-01 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Is de opstelling een lijst van player IDs of vaste slots?"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "finance",
+  "name": "Finance & Banking Engine",
+  "group": "Engines",
+  "progress": 58,
+  "confidence": 68,
+  "status": "research",
+  "summary": "Tickets, merchandising, sponsoring, leningen, overdraft en projecties zijn functioneel gemodelleerd.",
+  "facts": [
+    "Ticketprijs beïnvloedt opkomst",
+    "Projecties zijn niet zelfcorrigerend",
+    "Leningen en overdraft zijn afzonderlijk"
+  ],
+  "hypotheses": [
+    "Attendance-formule",
+    "Sponsor- en bank-AI"
+  ],
+  "next": "Gecontroleerde prijs-, sponsor- en krediettests uitvoeren.",
+  "tests": [],
+  "dependencies": [
+    "supporters",
+    "stadium",
+    "staff"
+  ],
+  "sources": [
+    "Handleiding"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-12",
+      "title": "Finance-model gedocumenteerd",
+      "summary": "Tickets, merchandising, sponsoring, loans en overdraft opgenomen."
+    }
+  ],
+  "documents": [
+    "Functional_Specification_v0.4.md",
+    "Engine_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Nog vrijwel volledig afhankelijk van handleiding; praktijktests nodig."
+  ]
+}

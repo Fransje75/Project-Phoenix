@@ -1,0 +1,41 @@
+{
+  "id": "competition",
+  "name": "Competition Engine",
+  "group": "Engines",
+  "progress": 40,
+  "confidence": 50,
+  "status": "research",
+  "summary": "Fixtures, standen, bekers, regels, historie en seizoensovergang zijn functioneel aanwezig.",
+  "facts": [
+    "Wedstrijdregels zijn raadpleegbaar",
+    "Historische standen en fixtures worden bewaard"
+  ],
+  "hypotheses": [
+    "Planningalgoritme",
+    "Promotie/degradatie en Europese kwalificatie"
+  ],
+  "next": "Competitie- en seizoenssavegames verzamelen.",
+  "tests": [],
+  "dependencies": [
+    "match",
+    "savegame"
+  ],
+  "sources": [
+    "Handleiding",
+    "Data-map"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-12",
+      "title": "Competition scope vastgelegd",
+      "summary": "Fixtures, standen, regels, cups en historie geïnventariseerd."
+    }
+  ],
+  "documents": [
+    "Functional_Specification_v0.4.md",
+    "Engine_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Seizoensovergang en kwalificatieregels moeten technisch worden bewezen."
+  ]
+}

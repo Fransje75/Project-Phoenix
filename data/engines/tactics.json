@@ -1,0 +1,51 @@
+{
+  "id": "tactics",
+  "name": "Tactical Engine",
+  "group": "Engines",
+  "progress": 88,
+  "confidence": 90,
+  "status": "active",
+  "summary": "Formaties, teamorders, spelerorders, marking, coverage en set pieces zijn beschreven.",
+  "facts": [
+    "Tactiek bestaat uit meerdere situaties",
+    "Player Orders vormen een bias op Team Orders",
+    "Coverage beïnvloedt belasting"
+  ],
+  "hypotheses": [
+    "Exacte runtime-weging van orders en coverage"
+  ],
+  "next": "Gecontroleerde wedstrijdbatches met één tactische variabele uitvoeren.",
+  "tests": [
+    "TM-01 t/m TM-07",
+    "Matchscreenshots"
+  ],
+  "dependencies": [
+    "player",
+    "match",
+    "training"
+  ],
+  "sources": [
+    "Handleiding",
+    "TM-tests",
+    "Wedstrijdscreenshots"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-07",
+      "title": "Team Management-testreeks voltooid",
+      "summary": "Opstelling, formatie en vaste spelhervattingen getest."
+    },
+    {
+      "date": "2026-07-12",
+      "title": "Situation-based tactics bevestigd",
+      "summary": "Tactieken bestaan uit meerdere wedstrijdsituaties."
+    }
+  ],
+  "documents": [
+    "Functional_Specification_v0.4.md",
+    "Engine_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Exacte impact van coverage en player bias nog meten."
+  ]
+}

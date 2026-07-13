@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Reverse Engineering Logbook",
+    "file": "Reverse_Engineering_Logbook_v0.4.md",
+    "type": "Markdown",
+    "status": "Actueel",
+    "description": "Chronologische tests, observaties en technisch bewijs."
+  },
+  {
+    "title": "Functional Specification",
+    "file": "Functional_Specification_v0.4.md",
+    "type": "Markdown",
+    "status": "Actueel",
+    "description": "Wat de originele game functioneel doet."
+  },
+  {
+    "title": "Engine Specification",
+    "file": "Engine_Specification_v0.4.md",
+    "type": "Markdown",
+    "status": "Actueel",
+    "description": "Simulatie-engines, afhankelijkheden en open vragen."
+  },
+  {
+    "title": "Domain Model Specification",
+    "file": "Domain_Model_Specification_v0.4.md",
+    "type": "Markdown",
+    "status": "Actueel",
+    "description": "Domeinobjecten en relaties."
+  },
+  {
+    "title": "Design Decision Log",
+    "file": "Design_Decision_Log_v0.4.md",
+    "type": "Markdown",
+    "status": "Actueel",
+    "description": "Vastgelegde ontwerpkeuzes en fidelity-regels."
+  },
+  {
+    "title": "Knowledge Graph",
+    "file": "Knowledge_Graph_v0.4.md",
+    "type": "Markdown",
+    "status": "Actueel",
+    "description": "Concepten en relaties tussen systemen."
+  },
+  {
+    "title": "Requirements Traceability Matrix",
+    "file": "Requirements_Traceability_Matrix_v0.3.csv",
+    "type": "CSV",
+    "status": "Actueel",
+    "description": "Bewijs per categorie en bron."
+  },
+  {
+    "title": "Originele handleiding",
+    "file": "UEFA_Manager_2000_Manual_EN.pdf",
+    "type": "PDF",
+    "status": "Bron",
+    "description": "Originele Engelstalige UEFA Manager 2000-handleiding."
+  }
+]

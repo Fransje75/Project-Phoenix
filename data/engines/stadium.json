@@ -1,0 +1,41 @@
+{
+  "id": "stadium",
+  "name": "Stadium Engine",
+  "group": "Engines",
+  "progress": 62,
+  "confidence": 72,
+  "status": "research",
+  "summary": "Bouwprojecten hebben een levenscyclus, betalingen, voortgang en onderhoudskosten.",
+  "facts": [
+    "Gefaseerde betalingen",
+    "Onderhoud na oplevering",
+    "Faciliteiten beïnvloeden club en supporters"
+  ],
+  "hypotheses": [
+    "Exacte bouwduur en ROI per project"
+  ],
+  "next": "Bouwproject in savegames isoleren.",
+  "tests": [],
+  "dependencies": [
+    "finance",
+    "supporters"
+  ],
+  "sources": [
+    "Handleiding"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-12",
+      "title": "Construction lifecycle vastgelegd",
+      "summary": "Planning, betaling, voortgang, oplevering en onderhoud beschreven."
+    }
+  ],
+  "documents": [
+    "Functional_Specification_v0.4.md",
+    "Engine_Specification_v0.4.md",
+    "Domain_Model_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Nog geen gecontroleerde bouwsave beschikbaar."
+  ]
+}

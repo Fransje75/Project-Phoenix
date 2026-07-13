@@ -1,0 +1,33 @@
+{
+  "id": "TM-06",
+  "title": "Vrije trapnemer gewijzigd",
+  "category": "Team Management",
+  "status": "verified",
+  "confidence": 92,
+  "goal": "Vrije-trapassignment testen.",
+  "procedure": [
+    "Referentiesave laden",
+    "Vrije trapnemer wijzigen",
+    "Opslaan",
+    "Vergelijken"
+  ],
+  "result": "Assignment persistent.",
+  "conclusion": "Vrije trapnemer is apart opgeslagen.",
+  "engines": [
+    "tactics",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "TM-06 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Zijn links/rechts en afstand afzonderlijke assignments?"
+  ]
+}

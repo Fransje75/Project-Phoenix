@@ -18,7 +18,7 @@
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
   const statusLabel = {complete:'Afgerond',active:'Actief',research:'Onderzoek',blocked:'Geblokkeerd'};
-  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',graph:'Knowledge Graph',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
+  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',graph:'Knowledge Graph',research:'Research Center',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
 
   function overall(){
     return Math.round(baseData.engines.reduce((a,e)=>a+e.progress,0)/baseData.engines.length);
@@ -66,6 +66,7 @@
     bindDocumentClicks();
     renderExplorerList();
     renderGraph($('#graphSearch')?$('#graphSearch').value:'');
+    renderResearchCenter();
     $('#evidenceBody').innerHTML=baseData.engines.map(e=>`<tr><td><strong>${e.name}</strong></td><td>✓</td><td>${e.tests.length?'✓':'○'}</td><td>${['savegame','player','training','tactics','match','transfer'].includes(e.id)?'✓':'○'}</td><td>${e.id==='executable'?'◐':'○'}</td><td>${e.confidence}%</td></tr>`).join('');
     bindEngineClicks();
   }
@@ -245,6 +246,58 @@
     $('#graphInspector').innerHTML='<div class="empty-state"><strong>Selecteer een node</strong><span>Bekijk relaties, gekoppelde engine en onderzoekstatus.</span></div>';
   }
 
+
+  let selectedTest = null;
+
+  function testStatusLabel(status){
+    return {verified:'Verified',active:'Active',planned:'Planned'}[status]||status;
+  }
+  function renderResearchMetrics(){
+    const verified=baseData.tests.filter(t=>t.status==='verified').length;
+    const active=baseData.tests.filter(t=>t.status==='active').length;
+    const avg=Math.round(baseData.tests.reduce((a,t)=>a+t.confidence,0)/Math.max(1,baseData.tests.length));
+    const engines=new Set(baseData.tests.flatMap(t=>t.engines)).size;
+    $('#researchMetrics').innerHTML=[
+      ['Tests',baseData.tests.length],['Verified',verified],['Gem. confidence',avg+'%'],['Engines covered',engines]
+    ].map(([label,value])=>`<article class="panel metric"><span>${label}</span><strong>${value}</strong></article>`).join('');
+  }
+  function renderTestList(){
+    const q=($('#testSearch').value||'').toLowerCase().trim();
+    const status=$('#testStatusFilter').value;
+    const list=baseData.tests.filter(t=>(!status||t.status===status)&&(!q||(t.id+' '+t.title+' '+t.category+' '+t.conclusion+' '+t.engines.join(' ')).toLowerCase().includes(q)));
+    $('#testList').innerHTML=list.map(t=>`<button class="test-link ${selectedTest===t.id?'active':''}" data-test-id="${t.id}">
+      <div class="test-link-top"><strong>${t.id} · ${t.title}</strong><span class="test-status ${t.status}">${testStatusLabel(t.status)}</span></div>
+      <p>${t.goal}</p>
+    </button>`).join('');
+    $$('[data-test-id]').forEach(b=>b.onclick=()=>openTest(b.dataset.testId));
+  }
+  function openTest(id){
+    const t=baseData.tests.find(x=>x.id===id);if(!t)return;selectedTest=id;renderTestList();
+    $('#testDetail').innerHTML=`<div class="test-hero"><div><span class="test-status ${t.status}">${testStatusLabel(t.status)}</span><h2>${t.id} · ${t.title}</h2><p>${t.goal}</p></div><div class="confidence-box"><strong>${t.confidence}%</strong><span>Confidence</span></div></div>
+      <section class="test-section"><h3>Procedure</h3><div class="steps">${t.procedure.map(s=>`<div class="step">${s}</div>`).join('')}</div></section>
+      <section class="test-section"><h3>Evidence chain</h3><div class="evidence-chain">
+        ${[['manual','Handleiding'],['test','Praktijktest'],['savegame','Savegame'],['executable','Executable']].map(([key,label])=>`<div class="evidence-chip ${t.evidence[key]?'yes':'no'}"><b>${t.evidence[key]?'✓':'○'}</b><span>${label}</span></div>`).join('')}
+      </div></section>
+      <section class="test-section"><h3>Resultaat</h3><div class="result-card">${t.result}</div></section>
+      <section class="test-section"><h3>Conclusie</h3><div class="conclusion-card">${t.conclusion}</div></section>
+      <section class="test-section"><h3>Gerelateerde engines</h3><div class="tag-list">${t.engines.map(e=>{const engine=baseData.engines.find(x=>x.id===e);return `<button class="tag" data-test-engine="${e}">${engine?engine.name:e}</button>`}).join('')}</div></section>
+      <section class="test-section"><h3>Bestanden & screenshots</h3><div class="file-list">${[...t.files,...t.screenshots].map(f=>`<div class="file-card">${f}</div>`).join('')||'<div class="file-card">Geen bestanden geregistreerd.</div>'}</div></section>
+      <section class="test-section"><h3>Open vragen</h3><div class="item-list">${t.openQuestions.map(q=>`<div class="item hyp"><i></i><span>${q}</span></div>`).join('')}</div></section>`;
+    $$('[data-test-engine]').forEach(b=>b.onclick=()=>{switchView('explorer');openExplorer(b.dataset.testEngine)});
+  }
+  function renderResearchMatrix(){
+    $('#researchMatrixBody').innerHTML=baseData.engines.map(e=>{
+      const related=baseData.tests.filter(t=>t.engines.includes(e.id));
+      const manual=related.some(t=>t.evidence.manual);
+      const save=related.some(t=>t.evidence.savegame);
+      const exe=related.some(t=>t.evidence.executable);
+      return `<tr><td><strong>${e.name}</strong></td><td>${related.length}</td><td>${manual?'✓':'○'}</td><td>${save?'✓':'○'}</td><td>${exe?'✓':'○'}</td><td>${e.confidence}%</td></tr>`;
+    }).join('');
+  }
+  function renderResearchCenter(){
+    renderResearchMetrics();renderTestList();renderResearchMatrix();
+  }
+
 function exportProgress(){
     const payload={version:baseData.version,exported:new Date().toISOString(),engines:baseData.engines.map(e=>({id:e.id,progress:e.progress,confidence:e.confidence,status:e.status}))};
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));a.download='ppcc-progress.json';a.click();URL.revokeObjectURL(a.href);toast('Voortgang geëxporteerd')
@@ -255,6 +308,8 @@ function exportProgress(){
   $('#explorerSearch').oninput=e=>renderExplorerList(e.target.value);
   $('#graphSearch').oninput=e=>renderGraph(e.target.value);
   $('#graphReset').onclick=resetGraph;
+  $('#testSearch').oninput=renderTestList;
+  $('#testStatusFilter').onchange=renderTestList;
   $('#engineSearch').oninput=e=>{
     const q=e.target.value.toLowerCase();
     $('#engineGrid').innerHTML=baseData.engines.filter(x=>(x.name+' '+x.group+' '+x.summary).toLowerCase().includes(q)).map(x=>engineCard(x)).join('');

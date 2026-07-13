@@ -1,0 +1,33 @@
+{
+  "id": "DAY-01",
+  "title": "Ingame dagen vooruit",
+  "category": "Savegame",
+  "status": "verified",
+  "confidence": 95,
+  "goal": "Vaststellen welke savebestanden veranderen door alleen tijd te laten verstrijken.",
+  "procedure": [
+    "Baseline laden",
+    "Meerdere ingame dagen vooruit",
+    "Nieuwe save maken",
+    "Bestanden vergelijken"
+  ],
+  "result": "Meerdere savebestanden veranderen zonder handmatige managementactie.",
+  "conclusion": "De save bewaart actieve wereldstatus en tijdsafhankelijke subsystemen.",
+  "engines": [
+    "savegame",
+    "competition"
+  ],
+  "evidence": {
+    "manual": false,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "day-forward save set"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Welke wijzigingen zijn kalender-, event- of AI-clubgedreven?"
+  ]
+}

@@ -13,13 +13,14 @@
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <div class="logo">🔥</div>
-      <div><strong>Project Phoenix</strong><span>Command Center · v1.4</span></div>
+      <div><strong>Project Phoenix</strong><span>Command Center · v1.5</span></div>
     </div>
     <nav>
       <button class="nav active" data-view="dashboard"><span>⌂</span>Dashboard</button>
       <button class="nav" data-view="engines"><span>⚙</span>Engine Registry</button>
       <button class="nav" data-view="explorer"><span>◉</span>Engine Explorer</button>
       <button class="nav" data-view="graph"><span>◎</span>Knowledge Graph</button>
+      <button class="nav" data-view="research"><span>⌬</span>Research Center</button>
       <button class="nav" data-view="updates"><span>↻</span>Updates</button>
       <button class="nav" data-view="documents"><span>▤</span>Documentatie</button>
       <button class="nav" data-view="evidence"><span>⌘</span>Evidence</button>
@@ -124,6 +125,38 @@
           <span><i class="legend-dot system"></i>System</span>
           <span><i class="legend-dot concept"></i>Concept</span>
         </div>
+      </section>
+
+      <section class="view" id="research">
+        <div class="section-header">
+          <div><h2>Research Center</h2><p>Tests, evidence chains, savegamebestanden en open onderzoek in één database.</p></div>
+          <div class="research-controls">
+            <div class="search"><span>⌕</span><input id="testSearch" placeholder="Zoek test, engine of conclusie…"></div>
+            <select id="testStatusFilter" class="select-control">
+              <option value="">Alle statussen</option>
+              <option value="verified">Verified</option>
+              <option value="active">Active</option>
+              <option value="planned">Planned</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="research-metrics" id="researchMetrics"></div>
+
+        <div class="research-layout">
+          <aside class="panel test-list" id="testList"></aside>
+          <section class="panel test-detail" id="testDetail">
+            <div class="empty-state"><strong>Selecteer een test</strong><span>Bekijk doel, uitvoering, bewijs, conclusie en open vragen.</span></div>
+          </section>
+        </div>
+
+        <section class="panel block">
+          <div class="block-head"><div><h3>Research Matrix</h3><p>Vergelijk de bewijsketen per engine.</p></div></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Engine</th><th>Tests</th><th>Handleiding</th><th>Savegames</th><th>Executable</th><th>Confidence</th></tr></thead>
+            <tbody id="researchMatrixBody"></tbody>
+          </table></div>
+        </section>
       </section>
 
       <section class="view" id="updates">

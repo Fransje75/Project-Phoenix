@@ -1,0 +1,51 @@
+{
+  "id": "training",
+  "name": "Training Engine",
+  "group": "Engines",
+  "progress": 90,
+  "confidence": 92,
+  "status": "complete",
+  "summary": "Teamtraining, presets, Custom-schema’s, trainingskamp en individuele training zijn functioneel beschreven.",
+  "facts": [
+    "Balanced/Defensive/Offensive/Week Off",
+    "Custom na handmatige wijziging",
+    "Delegate hangt af van Head Trainer rating"
+  ],
+  "hypotheses": [
+    "Exacte effectgroottes per trainingsactiviteit"
+  ],
+  "next": "Ontwikkelings- en vermoeidheidsformules reverse engineeren.",
+  "tests": [
+    "Balanced → Offensive",
+    "Offensive → Defensive"
+  ],
+  "dependencies": [
+    "player",
+    "staff",
+    "match"
+  ],
+  "sources": [
+    "Handleiding",
+    "Training savegames",
+    "Delegate tests"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-06",
+      "title": "Profielwijzigingen geïsoleerd",
+      "summary": "Balanced, Offensive en Defensive zijn gecontroleerd opgeslagen."
+    },
+    {
+      "date": "2026-07-12",
+      "title": "Individual Training-koppeling bevestigd",
+      "summary": "Individuele training gebruikt tijd die in Team Training is gereserveerd."
+    }
+  ],
+  "documents": [
+    "Functional_Specification_v0.4.md",
+    "Engine_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Functioneel vrijwel compleet; formules nog technisch bewijzen."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "supporters",
+  "name": "Supporter Engine",
+  "group": "Engines",
+  "progress": 48,
+  "confidence": 58,
+  "status": "research",
+  "summary": "Resultaten, ticketprijzen en faciliteiten beïnvloeden tevredenheid, opkomst en omzet.",
+  "facts": [
+    "Hoge prijzen kunnen opkomst verlagen",
+    "Sportief succes verhoogt prijsruimte"
+  ],
+  "hypotheses": [
+    "Invloed van weer, tegenstander, derby en loyaliteit"
+  ],
+  "next": "Attendance-experimenten met gecontroleerde variabelen.",
+  "tests": [],
+  "dependencies": [
+    "finance",
+    "stadium",
+    "match"
+  ],
+  "sources": [
+    "Handleiding"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-12",
+      "title": "Supporter feedback-loop vastgelegd",
+      "summary": "Resultaten, prijzen en faciliteiten beïnvloeden attendance en omzet."
+    }
+  ],
+  "documents": [
+    "Engine_Specification_v0.4.md",
+    "Knowledge_Graph_v0.4.md"
+  ],
+  "notes": [
+    "Attendance-formule nog volledig onbekend."
+  ]
+}

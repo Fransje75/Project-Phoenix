@@ -1,0 +1,43 @@
+{
+  "id": "staff",
+  "name": "Staff Engine",
+  "group": "Engines",
+  "progress": 70,
+  "confidence": 78,
+  "status": "active",
+  "summary": "Persoonlijkheden, relaties, werkdruk, afdelingsrollen, rapporten en delegatie zijn beschreven.",
+  "facts": [
+    "Staf kan meerdere rollen hebben",
+    "Overwerken veroorzaakt klachten",
+    "Rapportkwaliteit hangt af van medewerkers"
+  ],
+  "hypotheses": [
+    "Relatiematrix en exacte kwaliteitsmodifiers"
+  ],
+  "next": "Stafleden met verschillende ratings op dezelfde taak vergelijken.",
+  "tests": [],
+  "dependencies": [
+    "training",
+    "player",
+    "transfer",
+    "finance"
+  ],
+  "sources": [
+    "Handleiding",
+    "Editor"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-12",
+      "title": "Staff relationships gedocumenteerd",
+      "summary": "Persoonlijkheid, werkdruk, afdelingsrollen en delegatie vastgelegd."
+    }
+  ],
+  "documents": [
+    "Functional_Specification_v0.4.md",
+    "Engine_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Zelfde taak laten uitvoeren door staf met verschillende ratings."
+  ]
+}

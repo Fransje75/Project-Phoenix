@@ -1,0 +1,34 @@
+{
+  "id": "TM-04",
+  "title": "Captain gewijzigd",
+  "category": "Team Management",
+  "status": "verified",
+  "confidence": 92,
+  "goal": "Captain assignment isoleren.",
+  "procedure": [
+    "Referentiesave laden",
+    "Andere captain selecteren",
+    "Opslaan",
+    "Vergelijken"
+  ],
+  "result": "Captainwijziging persistent.",
+  "conclusion": "Captain is een apart team assignment.",
+  "engines": [
+    "tactics",
+    "player",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "TM-04 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Heeft captain runtime-invloed op morale of influence?"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "transfer",
+  "name": "Transfer & Contract Engine",
+  "group": "Engines",
+  "progress": 68,
+  "confidence": 75,
+  "status": "active",
+  "summary": "Bod, clubreactie, spelersonderhandeling, contractstatus, shortlist en huur zijn beschreven.",
+  "facts": [
+    "Club- en spelersonderhandeling zijn aparte fasen",
+    "Shortlist werkt als monitoringsysteem"
+  ],
+  "hypotheses": [
+    "AI-biedingsmodel",
+    "Waardebepaling en onderhandelingsgewichten"
+  ],
+  "next": "Een volledige transfer van bod tot inschrijving volgen.",
+  "tests": [
+    "TR-01/02",
+    "PS-01/02"
+  ],
+  "dependencies": [
+    "player",
+    "staff",
+    "finance"
+  ],
+  "sources": [
+    "TR-01/02",
+    "PS-01/02",
+    "Handleiding"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-08",
+      "title": "Openstaand bod vastgelegd",
+      "summary": "Transferbod zonder reactie als geïsoleerde state opgeslagen."
+    },
+    {
+      "date": "2026-07-09",
+      "title": "Reactie opgeslagen",
+      "summary": "Verandering na clubreactie aan savegame gekoppeld."
+    }
+  ],
+  "documents": [
+    "Reverse_Engineering_Logbook_v0.4.md",
+    "Functional_Specification_v0.4.md",
+    "Engine_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Volledige transferflow nog niet end-to-end getest."
+  ]
+}

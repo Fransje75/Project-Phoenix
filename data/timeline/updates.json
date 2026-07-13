@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2026-07-13",
+    "type": "release",
+    "title": "PPCC v1.4 — Knowledge Graph",
+    "summary": "Interactieve kenniskoppelingen tussen engines, objecten en concepten toegevoegd. Overall Progress-weergave grafisch gecorrigeerd."
+  },
+  {
+    "date": "2026-07-13",
+    "type": "release",
+    "title": "PPCC v1.3 — Engine Explorer",
+    "summary": "Engine-detailpagina’s bevatten nu dependencies, bronnen, tijdlijn, documenten en research notes."
+  },
+  {
+    "date": "2026-07-13",
+    "type": "release",
+    "title": "PPCC v1.2 — Documentation Reader",
+    "summary": "Documentatie is nu direct leesbaar en doorzoekbaar in het Command Center."
+  },
+  {
+    "date": "2026-07-13",
+    "type": "milestone",
+    "title": "PPCC Foundation live",
+    "summary": "GitHub Pages, Actions en automatische deployment werken stabiel."
+  },
+  {
+    "date": "2026-07-12",
+    "type": "milestone",
+    "title": "Handleiding volledig verwerkt",
+    "summary": "De volledige originele handleiding is als primaire ontwerpbron opgenomen."
+  },
+  {
+    "date": "2026-07-11",
+    "type": "discovery",
+    "title": "Wedstrijdsimulatie niet-deterministisch",
+    "summary": "Dezelfde wedstrijd levert verschillende uitslagen en statistieken op."
+  },
+  {
+    "date": "2026-07-11",
+    "type": "discovery",
+    "title": "Dynamische wedstrijdwaarden",
+    "summary": "Fitness, morale en aggression worden tijdens wedstrijden bijgewerkt."
+  }
+]

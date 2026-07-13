@@ -1,0 +1,57 @@
+{
+  "id": "player",
+  "name": "Player Engine",
+  "group": "Engines",
+  "progress": 62,
+  "confidence": 68,
+  "status": "active",
+  "summary": "Zichtbare vaardigheden, hidden attributes, potential en dynamische wedstrijdwaarden zijn geïdentificeerd.",
+  "facts": [
+    "Acht zichtbare trainbare skills",
+    "Hidden attributes bestaan en worden deels gerandomiseerd",
+    "Fitness en morale veranderen tijdens wedstrijden"
+  ],
+  "hypotheses": [
+    "Dynamische overall rating",
+    "Leeftijd × potential × training bepaalt ontwikkeling"
+  ],
+  "next": "Player-recordstructuur en ontwikkelingsformule technisch bewijzen.",
+  "tests": [
+    "PS-01/02",
+    "ME-01",
+    "Editoronderzoek"
+  ],
+  "dependencies": [
+    "training",
+    "tactics",
+    "match",
+    "transfer",
+    "staff"
+  ],
+  "sources": [
+    "Handleiding",
+    "Editor",
+    "Wedstrijdscreenshots",
+    "Savegame tests"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-10",
+      "title": "Hidden attributes bevestigd",
+      "summary": "De handleiding beschrijft verborgen persoonlijke eigenschappen."
+    },
+    {
+      "date": "2026-07-11",
+      "title": "Dynamische waarden gezien",
+      "summary": "Fitness en morale veranderen tijdens de wedstrijd."
+    }
+  ],
+  "documents": [
+    "Engine_Specification_v0.4.md",
+    "Domain_Model_Specification_v0.4.md",
+    "Knowledge_Graph_v0.4.md"
+  ],
+  "notes": [
+    "Dynamic rating en development curve hebben hoge onderzoeksprioriteit."
+  ]
+}

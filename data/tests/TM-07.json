@@ -1,0 +1,33 @@
+{
+  "id": "TM-07",
+  "title": "Cornernemer gewijzigd",
+  "category": "Team Management",
+  "status": "verified",
+  "confidence": 92,
+  "goal": "Cornerassignment testen.",
+  "procedure": [
+    "Referentiesave laden",
+    "Cornernemer wijzigen",
+    "Opslaan",
+    "Vergelijken"
+  ],
+  "result": "Assignment persistent.",
+  "conclusion": "Cornernemer is apart opgeslagen.",
+  "engines": [
+    "tactics",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "TM-07 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Zijn linker- en rechtercorners gescheiden?"
+  ]
+}

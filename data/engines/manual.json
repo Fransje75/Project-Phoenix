@@ -1,0 +1,39 @@
+{
+  "id": "manual",
+  "name": "Handleidinganalyse",
+  "group": "Bronnen",
+  "progress": 100,
+  "confidence": 100,
+  "status": "complete",
+  "summary": "De volledige handleiding is behandeld en verwerkt in de documentatiesuite.",
+  "facts": [
+    "Alle inhoudelijke pagina’s behandeld",
+    "Terminologie en ontwerpfilosofie vastgelegd",
+    "Koppelingen naar FSD, ES, DMS en DDL"
+  ],
+  "hypotheses": [],
+  "next": "Gebruik als primaire functionele referentie.",
+  "tests": [
+    "HM-001 t/m HM-088"
+  ],
+  "dependencies": [],
+  "sources": [
+    "Originele handleiding",
+    "Pagina-voor-pagina analyse"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-12",
+      "title": "Handleiding afgerond",
+      "summary": "Alle inhoudelijke pagina’s zijn behandeld en gekoppeld aan de documentatiesuite."
+    }
+  ],
+  "documents": [
+    "Functional_Specification_v0.4.md",
+    "Engine_Specification_v0.4.md",
+    "Domain_Model_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Primaire bron voor ontwerpintentie en officiële terminologie."
+  ]
+}

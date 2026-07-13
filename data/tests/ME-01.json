@@ -1,0 +1,40 @@
+{
+  "id": "ME-01",
+  "title": "Eerste officiële wedstrijd",
+  "category": "Match",
+  "status": "verified",
+  "confidence": 95,
+  "goal": "Effect van een gespeelde wedstrijd op savegame en wereldstatus vaststellen.",
+  "procedure": [
+    "Pre-match save laden",
+    "Wedstrijd spelen",
+    "Na wedstrijd opslaan",
+    "Bestanden vergelijken"
+  ],
+  "result": ".mhs groeit sterk; meerdere runtime- en historievelden veranderen.",
+  "conclusion": "Wedstrijdresultaat, events en historie worden uitgebreid persistent opgeslagen.",
+  "engines": [
+    "match",
+    "player",
+    "competition",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "ME-01 pre-match",
+    "ME-01 post-match"
+  ],
+  "screenshots": [
+    "Live match statistics",
+    "Dynamic player values"
+  ],
+  "openQuestions": [
+    "Welke events worden afzonderlijk opgeslagen?",
+    "Is random seed persistent?"
+  ]
+}

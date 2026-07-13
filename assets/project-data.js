@@ -1,6 +1,6 @@
 window.PPCC_DATA = {
-  "version": "1.4",
-  "updated": "13 juli 2026 — v1.4",
+  "version": "1.5",
+  "updated": "13 juli 2026 — v1.5",
   "overall": 67,
   "confidence": 74,
   "sprint": "Sprint 1 — Reverse Engineering",
@@ -636,6 +636,12 @@ window.PPCC_DATA = {
     {
       "date": "2026-07-13",
       "type": "release",
+      "title": "PPCC v1.5 — Research Center",
+      "summary": "Modulaire JSON-data, Test Explorer en uitgebreide Evidence Matrix toegevoegd."
+    },
+    {
+      "date": "2026-07-13",
+      "type": "release",
       "title": "PPCC v1.4 — Knowledge Graph",
       "summary": "Interactieve kenniskoppelingen tussen engines, objecten en concepten toegevoegd. Overall Progress-weergave grafisch gecorrigeerd."
     },
@@ -1004,6 +1010,551 @@ window.PPCC_DATA = {
       "y": 35,
       "links": [
         "finance"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "id": "BASELINE",
+      "title": "Baseline Save",
+      "category": "Savegame",
+      "status": "verified",
+      "confidence": 100,
+      "goal": "De vroegst mogelijke consistente referentiesave maken op Football Today.",
+      "procedure": [
+        "Nieuw spel starten",
+        "Manager instellen",
+        "Club Oss kiezen",
+        "Opslaan bij eerste mogelijkheid"
+      ],
+      "result": "Baseline voor alle latere differential tests vastgelegd.",
+      "conclusion": "Alle latere savegamevergelijkingen kunnen tegen één stabiele referentie worden uitgevoerd.",
+      "engines": [
+        "savegame"
+      ],
+      "evidence": {
+        "manual": false,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "baseline save set"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Welke records veranderen uitsluitend door tijdsverloop?"
+      ]
+    },
+    {
+      "id": "DAY-01",
+      "title": "Ingame dagen vooruit",
+      "category": "Savegame",
+      "status": "verified",
+      "confidence": 95,
+      "goal": "Vaststellen welke savebestanden veranderen door alleen tijd te laten verstrijken.",
+      "procedure": [
+        "Baseline laden",
+        "Meerdere ingame dagen vooruit",
+        "Nieuwe save maken",
+        "Bestanden vergelijken"
+      ],
+      "result": "Meerdere savebestanden veranderen zonder handmatige managementactie.",
+      "conclusion": "De save bewaart actieve wereldstatus en tijdsafhankelijke subsystemen.",
+      "engines": [
+        "savegame",
+        "competition"
+      ],
+      "evidence": {
+        "manual": false,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "day-forward save set"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Welke wijzigingen zijn kalender-, event- of AI-clubgedreven?"
+      ]
+    },
+    {
+      "id": "TRAIN-01",
+      "title": "Balanced naar Offensive",
+      "category": "Training",
+      "status": "verified",
+      "confidence": 95,
+      "goal": "Opslag van een gedelegeerd trainingsprofiel isoleren.",
+      "procedure": [
+        "Baseline laden",
+        "Team Training openen",
+        "Delegate gebruiken",
+        "Offensive kiezen",
+        "Opslaan"
+      ],
+      "result": "Trainingstatus verandert en relevante savebestanden wijzigen.",
+      "conclusion": "Het trainingsprofiel is persistent en maakt deel uit van de simulatiestatus.",
+      "engines": [
+        "training",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "training-offensive save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Welke bytes representeren profiel versus weekindeling?"
+      ]
+    },
+    {
+      "id": "TRAIN-02",
+      "title": "Offensive naar Defensive",
+      "category": "Training",
+      "status": "verified",
+      "confidence": 95,
+      "goal": "Tweede trainingsprofiel gebruiken om verschillen verder te isoleren.",
+      "procedure": [
+        "Offensive-save laden",
+        "Delegate gebruiken",
+        "Defensive kiezen",
+        "Opslaan",
+        "Vergelijken"
+      ],
+      "result": "Nieuwe, gecontroleerde wijzigingsset verkregen.",
+      "conclusion": "Meerdere presets zijn persistent en differentieel te onderzoeken.",
+      "engines": [
+        "training",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "training-defensive save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Zijn trainingstaken individueel gecodeerd of als profiel-ID opgeslagen?"
+      ]
+    },
+    {
+      "id": "TM-01",
+      "title": "Twee basisspelers omgewisseld",
+      "category": "Team Management",
+      "status": "verified",
+      "confidence": 95,
+      "goal": "Vaststellen hoe de basisopstelling wordt opgeslagen.",
+      "procedure": [
+        "Baseline laden",
+        "Twee spelers in de basis omwisselen",
+        "Opslaan",
+        "Savebestanden vergelijken"
+      ],
+      "result": "Gerichte wijzigingen zichtbaar in savebestanden.",
+      "conclusion": "Opstellingsvolgorde en/of pitch assignment zijn persistent.",
+      "engines": [
+        "tactics",
+        "player",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "TM-01 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Is de opstelling een lijst van player IDs of vaste slots?"
+      ]
+    },
+    {
+      "id": "TM-02",
+      "title": "Spelerpositie gewijzigd",
+      "category": "Team Management",
+      "status": "verified",
+      "confidence": 92,
+      "goal": "Positieassignment los van spelersvolgorde testen.",
+      "procedure": [
+        "Referentiesave laden",
+        "Eén speler naar andere veldpositie verplaatsen",
+        "Opslaan",
+        "Vergelijken"
+      ],
+      "result": "Positiegerelateerde persistente wijziging aangetoond.",
+      "conclusion": "Veldpositie is afzonderlijk opgeslagen van selectievolgorde.",
+      "engines": [
+        "tactics",
+        "player",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "TM-02 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Welke enumeratie gebruikt de game voor posities?"
+      ]
+    },
+    {
+      "id": "TM-03",
+      "title": "Formatie gewijzigd",
+      "category": "Team Management",
+      "status": "verified",
+      "confidence": 95,
+      "goal": "Opslag van de gekozen formatie isoleren.",
+      "procedure": [
+        "Referentiesave laden",
+        "Formatie wijzigen",
+        "Opslaan",
+        "Vergelijken"
+      ],
+      "result": "Formatieverandering persistent vastgelegd.",
+      "conclusion": "Formation is een zelfstandig tactisch gegeven.",
+      "engines": [
+        "tactics",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "TM-03 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Wordt formatie als ID of volledige coordinatenset opgeslagen?"
+      ]
+    },
+    {
+      "id": "TM-04",
+      "title": "Captain gewijzigd",
+      "category": "Team Management",
+      "status": "verified",
+      "confidence": 92,
+      "goal": "Captain assignment isoleren.",
+      "procedure": [
+        "Referentiesave laden",
+        "Andere captain selecteren",
+        "Opslaan",
+        "Vergelijken"
+      ],
+      "result": "Captainwijziging persistent.",
+      "conclusion": "Captain is een apart team assignment.",
+      "engines": [
+        "tactics",
+        "player",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "TM-04 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Heeft captain runtime-invloed op morale of influence?"
+      ]
+    },
+    {
+      "id": "TM-05",
+      "title": "Penaltynemer gewijzigd",
+      "category": "Team Management",
+      "status": "verified",
+      "confidence": 92,
+      "goal": "Set-piece assignment voor penalty’s testen.",
+      "procedure": [
+        "Referentiesave laden",
+        "Penaltynemer wijzigen",
+        "Opslaan",
+        "Vergelijken"
+      ],
+      "result": "Assignment persistent.",
+      "conclusion": "Penaltynemer is een apart tactisch veld.",
+      "engines": [
+        "tactics",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "TM-05 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Is er een fallbacklijst wanneer de eerste nemer niet speelt?"
+      ]
+    },
+    {
+      "id": "TM-06",
+      "title": "Vrije trapnemer gewijzigd",
+      "category": "Team Management",
+      "status": "verified",
+      "confidence": 92,
+      "goal": "Vrije-trapassignment testen.",
+      "procedure": [
+        "Referentiesave laden",
+        "Vrije trapnemer wijzigen",
+        "Opslaan",
+        "Vergelijken"
+      ],
+      "result": "Assignment persistent.",
+      "conclusion": "Vrije trapnemer is apart opgeslagen.",
+      "engines": [
+        "tactics",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "TM-06 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Zijn links/rechts en afstand afzonderlijke assignments?"
+      ]
+    },
+    {
+      "id": "TM-07",
+      "title": "Cornernemer gewijzigd",
+      "category": "Team Management",
+      "status": "verified",
+      "confidence": 92,
+      "goal": "Cornerassignment testen.",
+      "procedure": [
+        "Referentiesave laden",
+        "Cornernemer wijzigen",
+        "Opslaan",
+        "Vergelijken"
+      ],
+      "result": "Assignment persistent.",
+      "conclusion": "Cornernemer is apart opgeslagen.",
+      "engines": [
+        "tactics",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "TM-07 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Zijn linker- en rechtercorners gescheiden?"
+      ]
+    },
+    {
+      "id": "PS-01",
+      "title": "Contractvoorstel openstaand",
+      "category": "Player / Contract",
+      "status": "verified",
+      "confidence": 90,
+      "goal": "State vastleggen nadat een contractverlengingsvoorstel is gedaan maar nog niet beantwoord.",
+      "procedure": [
+        "Speler openen",
+        "Contractvoorstel doen",
+        "Niet verder simuleren",
+        "Opslaan"
+      ],
+      "result": "Openstaande contractonderhandeling als nieuwe save-state vastgelegd.",
+      "conclusion": "Contractoffer en response state zijn persistent.",
+      "engines": [
+        "transfer",
+        "player",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "PS-01 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Waar worden voorwaarden en status afzonderlijk opgeslagen?"
+      ]
+    },
+    {
+      "id": "PS-02",
+      "title": "Reactie op contractvoorstel",
+      "category": "Player / Contract",
+      "status": "verified",
+      "confidence": 90,
+      "goal": "Verandering na reactie op contractvoorstel isoleren.",
+      "procedure": [
+        "PS-01 laden",
+        "Tijd vooruit tot reactie",
+        "Opslaan",
+        "Vergelijken"
+      ],
+      "result": "Nieuwe contractstatus zichtbaar in saveverschillen.",
+      "conclusion": "Onderhandeling heeft meerdere persistente fasen.",
+      "engines": [
+        "transfer",
+        "player",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "PS-02 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Welke statussen bestaan exact?"
+      ]
+    },
+    {
+      "id": "TR-01",
+      "title": "Transferbod openstaand",
+      "category": "Transfers",
+      "status": "verified",
+      "confidence": 90,
+      "goal": "Een uitgaand transferbod zonder reactie vastleggen.",
+      "procedure": [
+        "Speler selecteren",
+        "Bod uitbrengen",
+        "Niet verder simuleren",
+        "Opslaan"
+      ],
+      "result": "Openstaand transferbod persistent vastgelegd.",
+      "conclusion": "TransferOffer is een zelfstandig object of record.",
+      "engines": [
+        "transfer",
+        "finance",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "TR-01 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Waar staan fee, club, speler en status?"
+      ]
+    },
+    {
+      "id": "TR-02",
+      "title": "Reactie op transferbod",
+      "category": "Transfers",
+      "status": "verified",
+      "confidence": 90,
+      "goal": "Reactiestatus na clubbesluit isoleren.",
+      "procedure": [
+        "TR-01 laden",
+        "Tijd vooruit tot reactie",
+        "Opslaan",
+        "Vergelijken"
+      ],
+      "result": "Nieuwe transferstatus persistent zichtbaar.",
+      "conclusion": "Clubbesluit is een aparte fase vóór speleronderhandeling.",
+      "engines": [
+        "transfer",
+        "finance",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "TR-02 save"
+      ],
+      "screenshots": [],
+      "openQuestions": [
+        "Hoe wordt tegenbod of afwijzing gecodeerd?"
+      ]
+    },
+    {
+      "id": "ME-01",
+      "title": "Eerste officiële wedstrijd",
+      "category": "Match",
+      "status": "verified",
+      "confidence": 95,
+      "goal": "Effect van een gespeelde wedstrijd op savegame en wereldstatus vaststellen.",
+      "procedure": [
+        "Pre-match save laden",
+        "Wedstrijd spelen",
+        "Na wedstrijd opslaan",
+        "Bestanden vergelijken"
+      ],
+      "result": ".mhs groeit sterk; meerdere runtime- en historievelden veranderen.",
+      "conclusion": "Wedstrijdresultaat, events en historie worden uitgebreid persistent opgeslagen.",
+      "engines": [
+        "match",
+        "player",
+        "competition",
+        "savegame"
+      ],
+      "evidence": {
+        "manual": true,
+        "test": true,
+        "savegame": true,
+        "executable": false
+      },
+      "files": [
+        "ME-01 pre-match",
+        "ME-01 post-match"
+      ],
+      "screenshots": [
+        "Live match statistics",
+        "Dynamic player values"
+      ],
+      "openQuestions": [
+        "Welke events worden afzonderlijk opgeslagen?",
+        "Is random seed persistent?"
       ]
     }
   ]

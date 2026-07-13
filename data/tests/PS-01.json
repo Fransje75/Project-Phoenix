@@ -1,0 +1,34 @@
+{
+  "id": "PS-01",
+  "title": "Contractvoorstel openstaand",
+  "category": "Player / Contract",
+  "status": "verified",
+  "confidence": 90,
+  "goal": "State vastleggen nadat een contractverlengingsvoorstel is gedaan maar nog niet beantwoord.",
+  "procedure": [
+    "Speler openen",
+    "Contractvoorstel doen",
+    "Niet verder simuleren",
+    "Opslaan"
+  ],
+  "result": "Openstaande contractonderhandeling als nieuwe save-state vastgelegd.",
+  "conclusion": "Contractoffer en response state zijn persistent.",
+  "engines": [
+    "transfer",
+    "player",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "PS-01 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Waar worden voorwaarden en status afzonderlijk opgeslagen?"
+  ]
+}

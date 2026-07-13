@@ -1,0 +1,54 @@
+{
+  "id": "match",
+  "name": "Match Engine",
+  "group": "Engines",
+  "progress": 55,
+  "confidence": 62,
+  "status": "active",
+  "summary": "Niet-deterministische eventgeneratie, live statistieken en dynamische spelersstatus zijn bevestigd.",
+  "facts": [
+    "Resultaten variëren bij herhaling",
+    "Team- en spelerstatistieken worden live bijgehouden",
+    "Presentatie staat los van simulatie"
+  ],
+  "hypotheses": [
+    "Centrale event queue",
+    "Hidden composite ratings sturen eventkansen"
+  ],
+  "next": "Dezelfde wedstrijd minimaal tienmaal gecontroleerd simuleren.",
+  "tests": [
+    "ME-01",
+    "Herhaalde wedstrijden"
+  ],
+  "dependencies": [
+    "player",
+    "tactics",
+    "training",
+    "staff"
+  ],
+  "sources": [
+    "Herhaalde wedstrijden",
+    "Live statistieken",
+    "Handleiding",
+    "ME-01"
+  ],
+  "timeline": [
+    {
+      "date": "2026-07-11",
+      "title": "Niet-determinisme bevestigd",
+      "summary": "Dezelfde wedstrijd levert verschillende uitslagen en statistieken."
+    },
+    {
+      "date": "2026-07-11",
+      "title": "Runtime player state zichtbaar",
+      "summary": "Fitness, morale en aggression worden live bijgewerkt."
+    }
+  ],
+  "documents": [
+    "Reverse_Engineering_Logbook_v0.4.md",
+    "Engine_Specification_v0.4.md"
+  ],
+  "notes": [
+    "Hoogste prioriteit: gecontroleerde 10-run benchmark en event-correlaties."
+  ]
+}

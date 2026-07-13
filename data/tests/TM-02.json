@@ -1,0 +1,34 @@
+{
+  "id": "TM-02",
+  "title": "Spelerpositie gewijzigd",
+  "category": "Team Management",
+  "status": "verified",
+  "confidence": 92,
+  "goal": "Positieassignment los van spelersvolgorde testen.",
+  "procedure": [
+    "Referentiesave laden",
+    "Eén speler naar andere veldpositie verplaatsen",
+    "Opslaan",
+    "Vergelijken"
+  ],
+  "result": "Positiegerelateerde persistente wijziging aangetoond.",
+  "conclusion": "Veldpositie is afzonderlijk opgeslagen van selectievolgorde.",
+  "engines": [
+    "tactics",
+    "player",
+    "savegame"
+  ],
+  "evidence": {
+    "manual": true,
+    "test": true,
+    "savegame": true,
+    "executable": false
+  },
+  "files": [
+    "TM-02 save"
+  ],
+  "screenshots": [],
+  "openQuestions": [
+    "Welke enumeratie gebruikt de game voor posities?"
+  ]
+}
