@@ -1,0 +1,30 @@
+{
+  "id": "tr-01",
+  "name": "TR-01 Open Transfer Offer",
+  "date": "2026-07-08",
+  "category": "Transfers",
+  "status": "verified",
+  "description": "Transferbod uitgebracht; reactie nog niet ontvangen.",
+  "relatedTests": [
+    "TR-01"
+  ],
+  "files": [
+    {
+      "name": "career.sav",
+      "type": "Core state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 88
+    },
+    {
+      "name": "career.chs",
+      "type": "Club history/state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 78
+    }
+  ],
+  "notes": [
+    "Belangrijk voor TransferOffer recordstructuur."
+  ]
+}

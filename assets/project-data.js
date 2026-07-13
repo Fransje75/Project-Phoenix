@@ -1,6 +1,6 @@
 window.PPCC_DATA = {
-  "version": "1.5",
-  "updated": "13 juli 2026 — v1.5",
+  "version": "1.6",
+  "updated": "13 juli 2026 — v1.6",
   "overall": 67,
   "confidence": 74,
   "sprint": "Sprint 1 — Reverse Engineering",
@@ -633,6 +633,12 @@ window.PPCC_DATA = {
     }
   ],
   "updates": [
+    {
+      "date": "2026-07-13",
+      "type": "release",
+      "title": "PPCC v1.6 — Savegame Explorer",
+      "summary": "Savegame Library, file matrix en differential analysis toegevoegd. Light mode en mobiele menuknop visueel verbeterd."
+    },
     {
       "date": "2026-07-13",
       "type": "release",
@@ -1555,6 +1561,267 @@ window.PPCC_DATA = {
       "openQuestions": [
         "Welke events worden afzonderlijk opgeslagen?",
         "Is random seed persistent?"
+      ]
+    }
+  ],
+  "savegames": [
+    {
+      "id": "baseline",
+      "name": "Baseline",
+      "date": "2026-07-06",
+      "category": "Reference",
+      "status": "verified",
+      "description": "Eerste mogelijke save op Football Today; vaste referentie voor differential analysis.",
+      "relatedTests": [
+        "BASELINE"
+      ],
+      "files": [
+        {
+          "name": "career.sav",
+          "type": "Core state",
+          "change": "Reference",
+          "size": "Unknown",
+          "confidence": 85
+        },
+        {
+          "name": "career.bin",
+          "type": "Binary state",
+          "change": "Reference",
+          "size": "Unknown",
+          "confidence": 72
+        },
+        {
+          "name": "career.chs",
+          "type": "Club history/state",
+          "change": "Reference",
+          "size": "Unknown",
+          "confidence": 55
+        },
+        {
+          "name": "career.mhs",
+          "type": "Match history",
+          "change": "Reference",
+          "size": "Unknown",
+          "confidence": 60
+        },
+        {
+          "name": "career.phs",
+          "type": "Player history/state",
+          "change": "Reference",
+          "size": "Unknown",
+          "confidence": 45
+        },
+        {
+          "name": "career.dhs",
+          "type": "Division history/state",
+          "change": "Reference",
+          "size": "Unknown",
+          "confidence": 40
+        }
+      ],
+      "notes": [
+        "Gebruik deze save als nulpunt voor alle binaire vergelijkingen."
+      ]
+    },
+    {
+      "id": "day-forward",
+      "name": "Day Forward",
+      "date": "2026-07-06",
+      "category": "Time progression",
+      "status": "verified",
+      "description": "Meerdere ingame dagen vooruit zonder gerichte managementwijziging.",
+      "relatedTests": [
+        "DAY-01"
+      ],
+      "files": [
+        {
+          "name": "career.sav",
+          "type": "Core state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 80
+        },
+        {
+          "name": "career.bin",
+          "type": "Binary state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 75
+        },
+        {
+          "name": "career.chs",
+          "type": "Club history/state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 65
+        }
+      ],
+      "notes": [
+        "Geschikt om kalender-, event- en AI-clubwijzigingen te isoleren."
+      ]
+    },
+    {
+      "id": "training-offensive",
+      "name": "Training Offensive",
+      "date": "2026-07-06",
+      "category": "Training",
+      "status": "verified",
+      "description": "Teamtraining gewijzigd van Balanced naar Offensive via Delegate.",
+      "relatedTests": [
+        "TRAIN-01"
+      ],
+      "files": [
+        {
+          "name": "career.sav",
+          "type": "Core state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 85
+        },
+        {
+          "name": "career.bin",
+          "type": "Binary state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 82
+        }
+      ],
+      "notes": [
+        "Kandidaat voor het lokaliseren van profiel-ID en weekschema."
+      ]
+    },
+    {
+      "id": "training-defensive",
+      "name": "Training Defensive",
+      "date": "2026-07-06",
+      "category": "Training",
+      "status": "verified",
+      "description": "Teamtraining gewijzigd van Offensive naar Defensive.",
+      "relatedTests": [
+        "TRAIN-02"
+      ],
+      "files": [
+        {
+          "name": "career.sav",
+          "type": "Core state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 85
+        },
+        {
+          "name": "career.bin",
+          "type": "Binary state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 82
+        }
+      ],
+      "notes": [
+        "Tweede profiel maakt differential triangulation mogelijk."
+      ]
+    },
+    {
+      "id": "tm-01",
+      "name": "TM-01 Line-up Swap",
+      "date": "2026-07-07",
+      "category": "Team Management",
+      "status": "verified",
+      "description": "Twee basisspelers omgewisseld.",
+      "relatedTests": [
+        "TM-01"
+      ],
+      "files": [
+        {
+          "name": "career.sav",
+          "type": "Core state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 90
+        },
+        {
+          "name": "career.bin",
+          "type": "Binary state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 85
+        }
+      ],
+      "notes": [
+        "Waarschijnlijk player IDs, slots of pitch assignments."
+      ]
+    },
+    {
+      "id": "tr-01",
+      "name": "TR-01 Open Transfer Offer",
+      "date": "2026-07-08",
+      "category": "Transfers",
+      "status": "verified",
+      "description": "Transferbod uitgebracht; reactie nog niet ontvangen.",
+      "relatedTests": [
+        "TR-01"
+      ],
+      "files": [
+        {
+          "name": "career.sav",
+          "type": "Core state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 88
+        },
+        {
+          "name": "career.chs",
+          "type": "Club history/state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 78
+        }
+      ],
+      "notes": [
+        "Belangrijk voor TransferOffer recordstructuur."
+      ]
+    },
+    {
+      "id": "me-01-post",
+      "name": "ME-01 Post Match",
+      "date": "2026-07-11",
+      "category": "Match",
+      "status": "verified",
+      "description": "Save direct na de eerste officiële wedstrijd.",
+      "relatedTests": [
+        "ME-01"
+      ],
+      "files": [
+        {
+          "name": "career.sav",
+          "type": "Core state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 90
+        },
+        {
+          "name": "career.bin",
+          "type": "Binary state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 85
+        },
+        {
+          "name": "career.mhs",
+          "type": "Match history",
+          "change": "Strong growth",
+          "size": "Larger",
+          "confidence": 95
+        },
+        {
+          "name": "career.chs",
+          "type": "Club history/state",
+          "change": "Changed",
+          "size": "Unknown",
+          "confidence": 82
+        }
+      ],
+      "notes": [
+        "Beste kandidaat voor het identificeren van match events, result history en dynamic player state."
       ]
     }
   ]

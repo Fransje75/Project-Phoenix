@@ -1,0 +1,37 @@
+{
+  "id": "day-forward",
+  "name": "Day Forward",
+  "date": "2026-07-06",
+  "category": "Time progression",
+  "status": "verified",
+  "description": "Meerdere ingame dagen vooruit zonder gerichte managementwijziging.",
+  "relatedTests": [
+    "DAY-01"
+  ],
+  "files": [
+    {
+      "name": "career.sav",
+      "type": "Core state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 80
+    },
+    {
+      "name": "career.bin",
+      "type": "Binary state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 75
+    },
+    {
+      "name": "career.chs",
+      "type": "Club history/state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 65
+    }
+  ],
+  "notes": [
+    "Geschikt om kalender-, event- en AI-clubwijzigingen te isoleren."
+  ]
+}

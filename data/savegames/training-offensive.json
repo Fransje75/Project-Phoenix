@@ -1,0 +1,30 @@
+{
+  "id": "training-offensive",
+  "name": "Training Offensive",
+  "date": "2026-07-06",
+  "category": "Training",
+  "status": "verified",
+  "description": "Teamtraining gewijzigd van Balanced naar Offensive via Delegate.",
+  "relatedTests": [
+    "TRAIN-01"
+  ],
+  "files": [
+    {
+      "name": "career.sav",
+      "type": "Core state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 85
+    },
+    {
+      "name": "career.bin",
+      "type": "Binary state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 82
+    }
+  ],
+  "notes": [
+    "Kandidaat voor het lokaliseren van profiel-ID en weekschema."
+  ]
+}

@@ -18,7 +18,7 @@
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
   const statusLabel = {complete:'Afgerond',active:'Actief',research:'Onderzoek',blocked:'Geblokkeerd'};
-  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',graph:'Knowledge Graph',research:'Research Center',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
+  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',graph:'Knowledge Graph',research:'Research Center',savegames:'Savegame Explorer',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
 
   function overall(){
     return Math.round(baseData.engines.reduce((a,e)=>a+e.progress,0)/baseData.engines.length);
@@ -67,6 +67,7 @@
     renderExplorerList();
     renderGraph($('#graphSearch')?$('#graphSearch').value:'');
     renderResearchCenter();
+    renderSavegameExplorer();
     $('#evidenceBody').innerHTML=baseData.engines.map(e=>`<tr><td><strong>${e.name}</strong></td><td>✓</td><td>${e.tests.length?'✓':'○'}</td><td>${['savegame','player','training','tactics','match','transfer'].includes(e.id)?'✓':'○'}</td><td>${e.id==='executable'?'◐':'○'}</td><td>${e.confidence}%</td></tr>`).join('');
     bindEngineClicks();
   }
@@ -298,6 +299,58 @@
     renderResearchMetrics();renderTestList();renderResearchMatrix();
   }
 
+
+  let selectedSavegame = null;
+
+  function renderSaveMetrics(){
+    const files=baseData.savegames.reduce((a,s)=>a+s.files.length,0);
+    const verified=baseData.savegames.filter(s=>s.status==='verified').length;
+    const avg=Math.round(baseData.savegames.flatMap(s=>s.files).reduce((a,f)=>a+f.confidence,0)/Math.max(1,files));
+    const tests=new Set(baseData.savegames.flatMap(s=>s.relatedTests)).size;
+    $('#saveMetrics').innerHTML=[
+      ['Save sets',baseData.savegames.length],['Verified',verified],['Bestanden',files],['Gem. confidence',avg+'%']
+    ].map(([label,value])=>`<article class="panel metric"><span>${label}</span><strong>${value}</strong></article>`).join('');
+  }
+  function populateSaveCategories(){
+    const select=$('#saveCategoryFilter');
+    const current=select.value;
+    const cats=[...new Set(baseData.savegames.map(s=>s.category))].sort();
+    select.innerHTML='<option value="">Alle categorieën</option>'+cats.map(c=>`<option ${c===current?'selected':''}>${c}</option>`).join('');
+  }
+  function renderSaveList(){
+    const q=($('#saveSearch').value||'').toLowerCase().trim();
+    const cat=$('#saveCategoryFilter').value;
+    const list=baseData.savegames.filter(s=>(!cat||s.category===cat)&&(!q||(s.name+' '+s.description+' '+s.relatedTests.join(' ')+' '+s.files.map(f=>f.name).join(' ')).toLowerCase().includes(q)));
+    $('#saveList').innerHTML=list.map(s=>`<button class="save-link ${selectedSavegame===s.id?'active':''}" data-save-id="${s.id}">
+      <div class="save-link-top"><div><strong>${s.name}</strong><small>${s.category}</small></div><span class="test-status ${s.status}">${s.status}</span></div>
+      <p>${s.description}</p>
+    </button>`).join('');
+    $$('[data-save-id]').forEach(b=>b.onclick=()=>openSavegame(b.dataset.saveId));
+  }
+  function changeClass(change){
+    const c=change.toLowerCase().replace(/\s+/g,'-');
+    return c==='strong-growth'?'strong-growth':c;
+  }
+  function openSavegame(id){
+    const s=baseData.savegames.find(x=>x.id===id);if(!s)return;selectedSavegame=id;renderSaveList();
+    $('#saveDetail').innerHTML=`<div class="save-hero"><div><span class="test-status ${s.status}">${s.status}</span><h2>${s.name}</h2><p>${s.description}</p></div><div class="confidence-box"><strong>${s.files.length}</strong><span>Files tracked</span></div></div>
+      <section class="test-section"><h3>Bestanden</h3><div class="save-files">${s.files.map(f=>`<article class="save-file-card"><div class="save-file-top"><div><h4>${f.name}</h4><small>${f.type}</small></div><span class="change-badge ${changeClass(f.change)}">${f.change}</span></div><div class="save-confidence"><span><b>Confidence</b><b>${f.confidence}%</b></span><div class="progress"><i style="width:${f.confidence}%"></i></div></div></article>`).join('')}</div></section>
+      <section class="test-section"><h3>Gerelateerde tests</h3><div class="tag-list">${s.relatedTests.map(t=>`<button class="tag" data-save-test="${t}">${t}</button>`).join('')}</div></section>
+      <section class="test-section"><h3>Differential analysis</h3><div class="diff-callout">${s.notes.join('<br>')}</div></section>`;
+    $$('[data-save-test]').forEach(b=>b.onclick=()=>{switchView('research');openTest(b.dataset.saveTest)});
+  }
+  function fileState(save,ext){
+    const f=save.files.find(x=>x.name.endsWith(ext));if(!f)return '<span class="matrix-change no">○</span>';
+    const strong=f.change.toLowerCase().includes('strong');
+    return `<span class="matrix-change ${strong?'strong':'yes'}">${strong?'▲':'✓'}</span>`;
+  }
+  function renderSaveMatrix(){
+    $('#saveMatrixBody').innerHTML=baseData.savegames.map(s=>`<tr><td><strong>${s.name}</strong></td>${['.sav','.bin','.chs','.mhs','.phs','.dhs'].map(ext=>`<td>${fileState(s,ext)}</td>`).join('')}</tr>`).join('');
+  }
+  function renderSavegameExplorer(){
+    renderSaveMetrics();populateSaveCategories();renderSaveList();renderSaveMatrix();
+  }
+
 function exportProgress(){
     const payload={version:baseData.version,exported:new Date().toISOString(),engines:baseData.engines.map(e=>({id:e.id,progress:e.progress,confidence:e.confidence,status:e.status}))};
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));a.download='ppcc-progress.json';a.click();URL.revokeObjectURL(a.href);toast('Voortgang geëxporteerd')
@@ -310,6 +363,8 @@ function exportProgress(){
   $('#graphReset').onclick=resetGraph;
   $('#testSearch').oninput=renderTestList;
   $('#testStatusFilter').onchange=renderTestList;
+  $('#saveSearch').oninput=renderSaveList;
+  $('#saveCategoryFilter').onchange=renderSaveList;
   $('#engineSearch').oninput=e=>{
     const q=e.target.value.toLowerCase();
     $('#engineGrid').innerHTML=baseData.engines.filter(x=>(x.name+' '+x.group+' '+x.summary).toLowerCase().includes(q)).map(x=>engineCard(x)).join('');

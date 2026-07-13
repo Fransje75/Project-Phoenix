@@ -1,0 +1,30 @@
+{
+  "id": "tm-01",
+  "name": "TM-01 Line-up Swap",
+  "date": "2026-07-07",
+  "category": "Team Management",
+  "status": "verified",
+  "description": "Twee basisspelers omgewisseld.",
+  "relatedTests": [
+    "TM-01"
+  ],
+  "files": [
+    {
+      "name": "career.sav",
+      "type": "Core state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 90
+    },
+    {
+      "name": "career.bin",
+      "type": "Binary state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 85
+    }
+  ],
+  "notes": [
+    "Waarschijnlijk player IDs, slots of pitch assignments."
+  ]
+}

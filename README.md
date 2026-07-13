@@ -1,43 +1,24 @@
-# Project Phoenix Command Center v1.5
+# Project Phoenix Command Center v1.6
 
 ## Nieuwe functionaliteit
-- Research Center
-- Volledig dossier per test
-- Procedure, resultaat, conclusie en open vragen
-- Evidence chain per test
-- Koppeling naar gerelateerde engines
-- Bestanden- en screenshotregistratie
-- Research Matrix per engine
-- Zoek- en statusfilters
-- Modulaire Data Architecture 2.0
+- Savegame Explorer
+- Savegame Library met dossiers per save set
+- File Change Matrix voor `.sav`, `.bin`, `.chs`, `.mhs`, `.phs` en `.dhs`
+- Differential analysis per savegame
+- Confidence per bestandstype
+- Koppeling naar gerelateerde tests
+- Modulaire `data/savegames/`-structuur
 
-## Nieuwe data-opbouw
-```text
-data/
-  manifest.json
-  engines/
-    index.json
-    player.json
-    match.json
-    ...
-  tests/
-    index.json
-    TM-01.json
-    TR-01.json
-    ...
-  knowledge/
-    graph.json
-  timeline/
-    updates.json
-  documents/
-    index.json
-```
+## Visuele verbeteringen
+- Light mode heeft nu heldere, vrijwel ondoorzichtige panelen
+- Tekstcontrast in light mode is sterk verbeterd
+- Mobiele menuknop heeft grotere, perfect gecentreerde hamburgerlijnen
 
 ## Installeren
 1. Pak de ZIP uit.
 2. Vervang via GitHub Desktop de huidige PPCC-bestanden.
 3. Laat de verborgen `.git`-map staan.
-4. Commit: `Add PPCC v1.5 Research Center`
+4. Commit: `Add PPCC v1.6 Savegame Explorer`
 5. Push origin.
 6. Controleer Actions en de live site.
 

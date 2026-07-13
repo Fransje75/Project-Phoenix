@@ -1,0 +1,58 @@
+{
+  "id": "baseline",
+  "name": "Baseline",
+  "date": "2026-07-06",
+  "category": "Reference",
+  "status": "verified",
+  "description": "Eerste mogelijke save op Football Today; vaste referentie voor differential analysis.",
+  "relatedTests": [
+    "BASELINE"
+  ],
+  "files": [
+    {
+      "name": "career.sav",
+      "type": "Core state",
+      "change": "Reference",
+      "size": "Unknown",
+      "confidence": 85
+    },
+    {
+      "name": "career.bin",
+      "type": "Binary state",
+      "change": "Reference",
+      "size": "Unknown",
+      "confidence": 72
+    },
+    {
+      "name": "career.chs",
+      "type": "Club history/state",
+      "change": "Reference",
+      "size": "Unknown",
+      "confidence": 55
+    },
+    {
+      "name": "career.mhs",
+      "type": "Match history",
+      "change": "Reference",
+      "size": "Unknown",
+      "confidence": 60
+    },
+    {
+      "name": "career.phs",
+      "type": "Player history/state",
+      "change": "Reference",
+      "size": "Unknown",
+      "confidence": 45
+    },
+    {
+      "name": "career.dhs",
+      "type": "Division history/state",
+      "change": "Reference",
+      "size": "Unknown",
+      "confidence": 40
+    }
+  ],
+  "notes": [
+    "Gebruik deze save als nulpunt voor alle binaire vergelijkingen."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "me-01-post",
+  "name": "ME-01 Post Match",
+  "date": "2026-07-11",
+  "category": "Match",
+  "status": "verified",
+  "description": "Save direct na de eerste officiële wedstrijd.",
+  "relatedTests": [
+    "ME-01"
+  ],
+  "files": [
+    {
+      "name": "career.sav",
+      "type": "Core state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 90
+    },
+    {
+      "name": "career.bin",
+      "type": "Binary state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 85
+    },
+    {
+      "name": "career.mhs",
+      "type": "Match history",
+      "change": "Strong growth",
+      "size": "Larger",
+      "confidence": 95
+    },
+    {
+      "name": "career.chs",
+      "type": "Club history/state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 82
+    }
+  ],
+  "notes": [
+    "Beste kandidaat voor het identificeren van match events, result history en dynamic player state."
+  ]
+}

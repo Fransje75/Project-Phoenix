@@ -1,0 +1,30 @@
+{
+  "id": "training-defensive",
+  "name": "Training Defensive",
+  "date": "2026-07-06",
+  "category": "Training",
+  "status": "verified",
+  "description": "Teamtraining gewijzigd van Offensive naar Defensive.",
+  "relatedTests": [
+    "TRAIN-02"
+  ],
+  "files": [
+    {
+      "name": "career.sav",
+      "type": "Core state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 85
+    },
+    {
+      "name": "career.bin",
+      "type": "Binary state",
+      "change": "Changed",
+      "size": "Unknown",
+      "confidence": 82
+    }
+  ],
+  "notes": [
+    "Tweede profiel maakt differential triangulation mogelijk."
+  ]
+}

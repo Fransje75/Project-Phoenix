@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <div class="logo">🔥</div>
-      <div><strong>Project Phoenix</strong><span>Command Center · v1.5</span></div>
+      <div><strong>Project Phoenix</strong><span>Command Center · v1.6</span></div>
     </div>
     <nav>
       <button class="nav active" data-view="dashboard"><span>⌂</span>Dashboard</button>
@@ -21,6 +21,7 @@
       <button class="nav" data-view="explorer"><span>◉</span>Engine Explorer</button>
       <button class="nav" data-view="graph"><span>◎</span>Knowledge Graph</button>
       <button class="nav" data-view="research"><span>⌬</span>Research Center</button>
+      <button class="nav" data-view="savegames"><span>▣</span>Savegame Explorer</button>
       <button class="nav" data-view="updates"><span>↻</span>Updates</button>
       <button class="nav" data-view="documents"><span>▤</span>Documentatie</button>
       <button class="nav" data-view="evidence"><span>⌘</span>Evidence</button>
@@ -35,7 +36,7 @@
 
   <div class="main">
     <header class="topbar">
-      <button id="menuButton" class="icon-button mobile-only">☰</button>
+      <button id="menuButton" class="icon-button mobile-only menu-icon-button" aria-label="Open menu"><span></span><span></span><span></span></button>
       <div><small>PROJECT PHOENIX COMMAND CENTER</small><h1 id="pageTitle">Dashboard</h1></div>
       <div class="top-actions">
         <button id="themeButton" class="icon-button">☀️</button>
@@ -155,6 +156,35 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Engine</th><th>Tests</th><th>Handleiding</th><th>Savegames</th><th>Executable</th><th>Confidence</th></tr></thead>
             <tbody id="researchMatrixBody"></tbody>
+          </table></div>
+        </section>
+      </section>
+
+      <section class="view" id="savegames">
+        <div class="section-header">
+          <div><h2>Savegame Explorer</h2><p>Bekijk save sets, veranderde bestanden, confidence en differential analysis.</p></div>
+          <div class="save-controls">
+            <div class="search"><span>⌕</span><input id="saveSearch" placeholder="Zoek savegame, test of bestand…"></div>
+            <select id="saveCategoryFilter" class="select-control">
+              <option value="">Alle categorieën</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="research-metrics" id="saveMetrics"></div>
+
+        <div class="save-layout">
+          <aside class="panel save-list" id="saveList"></aside>
+          <section class="panel save-detail" id="saveDetail">
+            <div class="empty-state"><strong>Selecteer een savegame</strong><span>Bekijk bestanden, wijzigingen en gerelateerde tests.</span></div>
+          </section>
+        </div>
+
+        <section class="panel block">
+          <div class="block-head"><div><h3>File Change Matrix</h3><p>Welke bestandstypen reageren op welke testscenario’s?</p></div></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Savegame</th><th>.sav</th><th>.bin</th><th>.chs</th><th>.mhs</th><th>.phs</th><th>.dhs</th></tr></thead>
+            <tbody id="saveMatrixBody"></tbody>
           </table></div>
         </section>
       </section>
