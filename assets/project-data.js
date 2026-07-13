@@ -1,6 +1,6 @@
 window.PPCC_DATA = {
-  "version": "1.3",
-  "updated": "13 juli 2026 — v1.3",
+  "version": "1.4",
+  "updated": "13 juli 2026 — v1.4",
   "overall": 67,
   "confidence": 74,
   "sprint": "Sprint 1 — Reverse Engineering",
@@ -636,6 +636,12 @@ window.PPCC_DATA = {
     {
       "date": "2026-07-13",
       "type": "release",
+      "title": "PPCC v1.4 — Knowledge Graph",
+      "summary": "Interactieve kenniskoppelingen tussen engines, objecten en concepten toegevoegd. Overall Progress-weergave grafisch gecorrigeerd."
+    },
+    {
+      "date": "2026-07-13",
+      "type": "release",
       "title": "PPCC v1.3 — Engine Explorer",
       "summary": "Engine-detailpagina’s bevatten nu dependencies, bronnen, tijdlijn, documenten en research notes."
     },
@@ -726,6 +732,279 @@ window.PPCC_DATA = {
       "type": "PDF",
       "status": "Bron",
       "description": "Originele Engelstalige UEFA Manager 2000-handleiding."
+    }
+  ],
+  "knowledgeGraph": [
+    {
+      "id": "world",
+      "label": "World",
+      "type": "core",
+      "x": 50,
+      "y": 8,
+      "links": [
+        "competition",
+        "club",
+        "manager"
+      ]
+    },
+    {
+      "id": "club",
+      "label": "Club",
+      "type": "core",
+      "x": 50,
+      "y": 25,
+      "links": [
+        "player",
+        "staff",
+        "finance",
+        "stadium",
+        "supporters",
+        "board"
+      ]
+    },
+    {
+      "id": "manager",
+      "label": "Manager",
+      "type": "actor",
+      "x": 18,
+      "y": 25,
+      "links": [
+        "club",
+        "reputation",
+        "staff"
+      ]
+    },
+    {
+      "id": "competition",
+      "label": "Competition",
+      "type": "system",
+      "x": 82,
+      "y": 24,
+      "links": [
+        "match",
+        "club",
+        "savegame"
+      ]
+    },
+    {
+      "id": "player",
+      "label": "Player",
+      "type": "actor",
+      "x": 20,
+      "y": 50,
+      "links": [
+        "training",
+        "tactics",
+        "match",
+        "transfer",
+        "medical",
+        "morale",
+        "fitness",
+        "potential"
+      ]
+    },
+    {
+      "id": "staff",
+      "label": "Staff",
+      "type": "actor",
+      "x": 42,
+      "y": 48,
+      "links": [
+        "training",
+        "scouting",
+        "medical",
+        "transfer"
+      ]
+    },
+    {
+      "id": "finance",
+      "label": "Finance",
+      "type": "system",
+      "x": 65,
+      "y": 48,
+      "links": [
+        "stadium",
+        "supporters",
+        "banking",
+        "transfer"
+      ]
+    },
+    {
+      "id": "stadium",
+      "label": "Stadium",
+      "type": "system",
+      "x": 83,
+      "y": 50,
+      "links": [
+        "supporters",
+        "finance"
+      ]
+    },
+    {
+      "id": "training",
+      "label": "Training",
+      "type": "engine",
+      "x": 15,
+      "y": 72,
+      "links": [
+        "fitness",
+        "morale",
+        "potential",
+        "match"
+      ]
+    },
+    {
+      "id": "tactics",
+      "label": "Tactics",
+      "type": "engine",
+      "x": 34,
+      "y": 70,
+      "links": [
+        "match",
+        "fitness"
+      ]
+    },
+    {
+      "id": "match",
+      "label": "Match Engine",
+      "type": "engine",
+      "x": 50,
+      "y": 67,
+      "links": [
+        "morale",
+        "fitness",
+        "supporters",
+        "competition",
+        "savegame"
+      ]
+    },
+    {
+      "id": "transfer",
+      "label": "Transfer",
+      "type": "engine",
+      "x": 66,
+      "y": 69,
+      "links": [
+        "finance",
+        "player",
+        "staff"
+      ]
+    },
+    {
+      "id": "supporters",
+      "label": "Supporters",
+      "type": "system",
+      "x": 84,
+      "y": 70,
+      "links": [
+        "finance",
+        "stadium",
+        "match"
+      ]
+    },
+    {
+      "id": "fitness",
+      "label": "Fitness",
+      "type": "concept",
+      "x": 18,
+      "y": 90,
+      "links": [
+        "match",
+        "medical"
+      ]
+    },
+    {
+      "id": "morale",
+      "label": "Morale",
+      "type": "concept",
+      "x": 36,
+      "y": 88,
+      "links": [
+        "match",
+        "training",
+        "staff"
+      ]
+    },
+    {
+      "id": "potential",
+      "label": "Potential",
+      "type": "concept",
+      "x": 52,
+      "y": 90,
+      "links": [
+        "player",
+        "training"
+      ]
+    },
+    {
+      "id": "medical",
+      "label": "Medical",
+      "type": "engine",
+      "x": 68,
+      "y": 88,
+      "links": [
+        "player",
+        "fitness"
+      ]
+    },
+    {
+      "id": "savegame",
+      "label": "Savegame",
+      "type": "engine",
+      "x": 84,
+      "y": 90,
+      "links": [
+        "world",
+        "match",
+        "competition"
+      ]
+    },
+    {
+      "id": "board",
+      "label": "Board",
+      "type": "actor",
+      "x": 30,
+      "y": 35,
+      "links": [
+        "manager",
+        "finance",
+        "stadium",
+        "reputation"
+      ]
+    },
+    {
+      "id": "reputation",
+      "label": "Reputation",
+      "type": "concept",
+      "x": 11,
+      "y": 36,
+      "links": [
+        "manager",
+        "club",
+        "player"
+      ]
+    },
+    {
+      "id": "scouting",
+      "label": "Scouting",
+      "type": "engine",
+      "x": 57,
+      "y": 36,
+      "links": [
+        "player",
+        "transfer",
+        "staff"
+      ]
+    },
+    {
+      "id": "banking",
+      "label": "Banking",
+      "type": "system",
+      "x": 73,
+      "y": 35,
+      "links": [
+        "finance"
+      ]
     }
   ]
 };

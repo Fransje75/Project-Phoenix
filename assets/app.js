@@ -18,7 +18,7 @@
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
   const statusLabel = {complete:'Afgerond',active:'Actief',research:'Onderzoek',blocked:'Geblokkeerd'};
-  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
+  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',graph:'Knowledge Graph',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
 
   function overall(){
     return Math.round(baseData.engines.reduce((a,e)=>a+e.progress,0)/baseData.engines.length);
@@ -65,6 +65,7 @@
     $('#documentGrid').innerHTML=baseData.documents.map(d=>`<article class="panel document"><span class="type">${d.type} · ${d.status}</span><h3>${d.title}</h3><p>${d.description}</p><div class="document-actions">${d.type==='Markdown'?`<button class="read-button" data-document="${d.file}" data-title="${d.title}">Lees document</button>`:''}<a class="download" href="./docs/${d.file}" download>Download</a></div></article>`).join('');
     bindDocumentClicks();
     renderExplorerList();
+    renderGraph($('#graphSearch')?$('#graphSearch').value:'');
     $('#evidenceBody').innerHTML=baseData.engines.map(e=>`<tr><td><strong>${e.name}</strong></td><td>✓</td><td>${e.tests.length?'✓':'○'}</td><td>${['savegame','player','training','tactics','match','transfer'].includes(e.id)?'✓':'○'}</td><td>${e.id==='executable'?'◐':'○'}</td><td>${e.confidence}%</td></tr>`).join('');
     bindEngineClicks();
   }
@@ -200,6 +201,50 @@
     return `<section class="explorer-section"><h3>Research notes</h3><div class="item-list">${(e.notes||[]).length?e.notes.map(x=>`<div class="note-card">${x}</div>`).join(''):'<div class="note-card">Geen notities geregistreerd.</div>'}</div></section>`;
   }
 
+
+  let selectedGraphNode = null;
+
+  function graphNodeEngine(node){
+    const direct=baseData.engines.find(e=>e.id===node.id);
+    if(direct)return direct;
+    const aliases={fitness:'player',morale:'player',potential:'player',medical:'player',club:'manual',manager:'manual',world:'savegame',board:'staff',reputation:'player',scouting:'staff',banking:'finance'};
+    return aliases[node.id]?baseData.engines.find(e=>e.id===aliases[node.id]):null;
+  }
+  function renderGraph(query=''){
+    const canvas=$('#graphCanvas'),svg=$('#graphLines');
+    const q=query.trim().toLowerCase();
+    canvas.innerHTML=baseData.knowledgeGraph.map(n=>{
+      const match=!q||n.label.toLowerCase().includes(q)||n.type.toLowerCase().includes(q);
+      return `<button class="graph-node ${n.type} ${selectedGraphNode===n.id?'active':''} ${q&&!match?'dim':''}" data-graph-node="${n.id}" style="left:${n.x}%;top:${n.y}%">${n.label}</button>`;
+    }).join('');
+    const byId=Object.fromEntries(baseData.knowledgeGraph.map(n=>[n.id,n]));
+    const seen=new Set(),lines=[];
+    baseData.knowledgeGraph.forEach(n=>(n.links||[]).forEach(id=>{
+      const t=byId[id];if(!t)return;const key=[n.id,id].sort().join('|');if(seen.has(key))return;seen.add(key);
+      const active=selectedGraphNode&&(n.id===selectedGraphNode||id===selectedGraphNode);
+      lines.push(`<line class="${active?'active':''}" x1="${n.x*10}" y1="${n.y*7.6}" x2="${t.x*10}" y2="${t.y*7.6}"></line>`);
+    }));
+    svg.innerHTML=lines.join('');
+    $$('[data-graph-node]').forEach(b=>b.onclick=()=>selectGraphNode(b.dataset.graphNode));
+  }
+  function selectGraphNode(id){
+    selectedGraphNode=id;renderGraph($('#graphSearch').value||'');
+    const n=baseData.knowledgeGraph.find(x=>x.id===id);if(!n)return;
+    const related=(n.links||[]).map(link=>baseData.knowledgeGraph.find(x=>x.id===link)).filter(Boolean);
+    const engine=graphNodeEngine(n);
+    $('#graphInspector').innerHTML=`<span class="node-type">${n.type}</span><h3>${n.label}</h3>
+      <p>${engine?engine.summary:'Kernconcept binnen het Project Phoenix-domeinmodel en de gereconstrueerde simulatie.'}</p>
+      ${engine?`<div class="graph-stat-grid"><div class="graph-stat"><strong>${engine.progress}%</strong><span>Progress</span></div><div class="graph-stat"><strong>${engine.confidence}%</strong><span>Confidence</span></div></div>`:''}
+      <div class="explorer-section"><h3>Directe relaties</h3><div class="graph-related">${related.length?related.map(r=>`<button data-graph-related="${r.id}">${r.label}</button>`).join(''):'<span>Geen directe relaties.</span>'}</div></div>
+      ${engine?`<div class="explorer-section"><h3>Volgende onderzoek</h3><div class="note-card">${engine.next}</div></div><button class="graph-action" data-open-engine="${engine.id}">Open in Engine Explorer</button>`:''}`;
+    $$('[data-graph-related]').forEach(b=>b.onclick=()=>selectGraphNode(b.dataset.graphRelated));
+    $$('[data-open-engine]').forEach(b=>b.onclick=()=>{switchView('explorer');openExplorer(b.dataset.openEngine)});
+  }
+  function resetGraph(){
+    selectedGraphNode=null;$('#graphSearch').value='';renderGraph('');
+    $('#graphInspector').innerHTML='<div class="empty-state"><strong>Selecteer een node</strong><span>Bekijk relaties, gekoppelde engine en onderzoekstatus.</span></div>';
+  }
+
 function exportProgress(){
     const payload={version:baseData.version,exported:new Date().toISOString(),engines:baseData.engines.map(e=>({id:e.id,progress:e.progress,confidence:e.confidence,status:e.status}))};
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));a.download='ppcc-progress.json';a.click();URL.revokeObjectURL(a.href);toast('Voortgang geëxporteerd')
@@ -208,6 +253,8 @@ function exportProgress(){
   $$('.nav').forEach(n=>n.onclick=()=>switchView(n.dataset.view));
   $$('[data-go]').forEach(b=>b.onclick=()=>switchView(b.dataset.go));
   $('#explorerSearch').oninput=e=>renderExplorerList(e.target.value);
+  $('#graphSearch').oninput=e=>renderGraph(e.target.value);
+  $('#graphReset').onclick=resetGraph;
   $('#engineSearch').oninput=e=>{
     const q=e.target.value.toLowerCase();
     $('#engineGrid').innerHTML=baseData.engines.filter(x=>(x.name+' '+x.group+' '+x.summary).toLowerCase().includes(q)).map(x=>engineCard(x)).join('');
