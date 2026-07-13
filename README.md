@@ -1,27 +1,43 @@
-# Project Phoenix Dashboard
+# Project Phoenix Command Center v0.1
 
-## Openen
-Dubbelklik op `index.html`.
+Eerste React + TypeScript + Tailwind-versie van het centrale Project Phoenix-onderzoeksplatform.
 
-Omdat sommige browsers lokale `fetch()` blokkeren, werkt het dashboard het betrouwbaarst via een eenvoudige lokale webserver:
+## Functies in v0.1
+- Responsive desktop- en mobiele navigatie
+- Donkere en lichte weergave
+- Engine Registry met voortgang, status en confidence
+- Detailpanelen met confirmed facts, hypotheses, tests en vervolgstappen
+- Lokale aanpassing van voortgang via browseropslag
+- Documentatiebibliotheek met downloads
+- Evidence/traceability-overzicht
+- Projecttijdlijn
+- GitHub Pages-geschikte Vite-configuratie
 
-### Windows
-Open de map in PowerShell en voer uit:
-`python -m http.server 8080`
+## Lokaal starten
+```bash
+npm install
+npm run dev
+```
 
-Open daarna:
-`http://localhost:8080`
+## Productiebuild
+```bash
+npm run build
+```
 
-## Functies
-- Responsive desktop- en mobiele layout
-- Voortgang per categorie
-- Statuskleuren en confidence-scores
-- Zoek- en groepsfilters
-- Downloadbibliotheek
-- Mijlpalen
-- Requirements traceability
-- Lokale aanpassing via browseropslag
-- JSON import/export
+De bestanden verschijnen daarna in `dist/`.
 
-## Inhoud
-De meegeleverde documentatie v0.3 is een geconsolideerde werkversie op basis van de huidige Project Phoenix-bevindingen. Exacte technische details blijven groeien tijdens verdere reverse engineering.
+## GitHub Pages
+1. Upload deze projectmap naar je GitHub-repository.
+2. Voer lokaal `npm install` en `npm run build` uit.
+3. Publiceer `dist/` of gebruik `npm run deploy`.
+4. Voor automatische deployment kan later een GitHub Actions-workflow worden toegevoegd.
+
+## Volgende geplande modules
+- Browsergebaseerde Markdown-reader
+- Universele zoekfunctie door alle documentatie
+- Research Wiki
+- Savegame Explorer
+- Interactieve Knowledge Graph
+- Screenshot Gallery
+- Executable Explorer
+- GitHub-integratie en automatische updates
