@@ -1,6 +1,6 @@
 window.PPCC_DATA = {
-  "version": "1.2",
-  "updated": "13 juli 2026 — v1.2",
+  "version": "1.3",
+  "updated": "13 juli 2026 — v1.3",
   "overall": 67,
   "confidence": 74,
   "sprint": "Sprint 1 — Reverse Engineering",
@@ -22,6 +22,26 @@ window.PPCC_DATA = {
       "next": "Gebruik als primaire functionele referentie.",
       "tests": [
         "HM-001 t/m HM-088"
+      ],
+      "dependencies": [],
+      "sources": [
+        "Originele handleiding",
+        "Pagina-voor-pagina analyse"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-12",
+          "title": "Handleiding afgerond",
+          "summary": "Alle inhoudelijke pagina’s zijn behandeld en gekoppeld aan de documentatiesuite."
+        }
+      ],
+      "documents": [
+        "Functional_Specification_v0.4.md",
+        "Engine_Specification_v0.4.md",
+        "Domain_Model_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Primaire bron voor ontwerpintentie en officiële terminologie."
       ]
     },
     {
@@ -47,6 +67,44 @@ window.PPCC_DATA = {
         "TM-01 t/m TM-07",
         "TR-01/02",
         "ME-01"
+      ],
+      "dependencies": [
+        "player",
+        "training",
+        "tactics",
+        "match",
+        "transfer",
+        "competition"
+      ],
+      "sources": [
+        "Baseline saves",
+        "Differential save tests",
+        "Bestandsgroottes",
+        "Binaire vergelijkingen"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-06",
+          "title": "Baseline vastgesteld",
+          "summary": "Eerste mogelijke save op Football Today vastgelegd."
+        },
+        {
+          "date": "2026-07-07",
+          "title": "Modulaire save-opbouw bevestigd",
+          "summary": "Verschillende acties wijzigen verschillende savebestanden."
+        },
+        {
+          "date": "2026-07-11",
+          "title": "Match history-groei gezien",
+          "summary": ".mhs groeit sterk na een officiële wedstrijd."
+        }
+      ],
+      "documents": [
+        "Reverse_Engineering_Logbook_v0.4.md",
+        "Engine_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Volgende grote stap: records en offsets vastleggen in een formele structuur."
       ]
     },
     {
@@ -71,6 +129,39 @@ window.PPCC_DATA = {
         "PS-01/02",
         "ME-01",
         "Editoronderzoek"
+      ],
+      "dependencies": [
+        "training",
+        "tactics",
+        "match",
+        "transfer",
+        "staff"
+      ],
+      "sources": [
+        "Handleiding",
+        "Editor",
+        "Wedstrijdscreenshots",
+        "Savegame tests"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-10",
+          "title": "Hidden attributes bevestigd",
+          "summary": "De handleiding beschrijft verborgen persoonlijke eigenschappen."
+        },
+        {
+          "date": "2026-07-11",
+          "title": "Dynamische waarden gezien",
+          "summary": "Fitness en morale veranderen tijdens de wedstrijd."
+        }
+      ],
+      "documents": [
+        "Engine_Specification_v0.4.md",
+        "Domain_Model_Specification_v0.4.md",
+        "Knowledge_Graph_v0.4.md"
+      ],
+      "notes": [
+        "Dynamic rating en development curve hebben hoge onderzoeksprioriteit."
       ]
     },
     {
@@ -93,6 +184,35 @@ window.PPCC_DATA = {
       "tests": [
         "Balanced → Offensive",
         "Offensive → Defensive"
+      ],
+      "dependencies": [
+        "player",
+        "staff",
+        "match"
+      ],
+      "sources": [
+        "Handleiding",
+        "Training savegames",
+        "Delegate tests"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-06",
+          "title": "Profielwijzigingen geïsoleerd",
+          "summary": "Balanced, Offensive en Defensive zijn gecontroleerd opgeslagen."
+        },
+        {
+          "date": "2026-07-12",
+          "title": "Individual Training-koppeling bevestigd",
+          "summary": "Individuele training gebruikt tijd die in Team Training is gereserveerd."
+        }
+      ],
+      "documents": [
+        "Functional_Specification_v0.4.md",
+        "Engine_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Functioneel vrijwel compleet; formules nog technisch bewijzen."
       ]
     },
     {
@@ -115,6 +235,35 @@ window.PPCC_DATA = {
       "tests": [
         "TM-01 t/m TM-07",
         "Matchscreenshots"
+      ],
+      "dependencies": [
+        "player",
+        "match",
+        "training"
+      ],
+      "sources": [
+        "Handleiding",
+        "TM-tests",
+        "Wedstrijdscreenshots"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-07",
+          "title": "Team Management-testreeks voltooid",
+          "summary": "Opstelling, formatie en vaste spelhervattingen getest."
+        },
+        {
+          "date": "2026-07-12",
+          "title": "Situation-based tactics bevestigd",
+          "summary": "Tactieken bestaan uit meerdere wedstrijdsituaties."
+        }
+      ],
+      "documents": [
+        "Functional_Specification_v0.4.md",
+        "Engine_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Exacte impact van coverage en player bias nog meten."
       ]
     },
     {
@@ -138,6 +287,37 @@ window.PPCC_DATA = {
       "tests": [
         "ME-01",
         "Herhaalde wedstrijden"
+      ],
+      "dependencies": [
+        "player",
+        "tactics",
+        "training",
+        "staff"
+      ],
+      "sources": [
+        "Herhaalde wedstrijden",
+        "Live statistieken",
+        "Handleiding",
+        "ME-01"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-11",
+          "title": "Niet-determinisme bevestigd",
+          "summary": "Dezelfde wedstrijd levert verschillende uitslagen en statistieken."
+        },
+        {
+          "date": "2026-07-11",
+          "title": "Runtime player state zichtbaar",
+          "summary": "Fitness, morale en aggression worden live bijgewerkt."
+        }
+      ],
+      "documents": [
+        "Reverse_Engineering_Logbook_v0.4.md",
+        "Engine_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Hoogste prioriteit: gecontroleerde 10-run benchmark en event-correlaties."
       ]
     },
     {
@@ -160,6 +340,36 @@ window.PPCC_DATA = {
       "tests": [
         "TR-01/02",
         "PS-01/02"
+      ],
+      "dependencies": [
+        "player",
+        "staff",
+        "finance"
+      ],
+      "sources": [
+        "TR-01/02",
+        "PS-01/02",
+        "Handleiding"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-08",
+          "title": "Openstaand bod vastgelegd",
+          "summary": "Transferbod zonder reactie als geïsoleerde state opgeslagen."
+        },
+        {
+          "date": "2026-07-09",
+          "title": "Reactie opgeslagen",
+          "summary": "Verandering na clubreactie aan savegame gekoppeld."
+        }
+      ],
+      "documents": [
+        "Reverse_Engineering_Logbook_v0.4.md",
+        "Functional_Specification_v0.4.md",
+        "Engine_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Volledige transferflow nog niet end-to-end getest."
       ]
     },
     {
@@ -180,7 +390,29 @@ window.PPCC_DATA = {
         "Sponsor- en bank-AI"
       ],
       "next": "Gecontroleerde prijs-, sponsor- en krediettests uitvoeren.",
-      "tests": []
+      "tests": [],
+      "dependencies": [
+        "supporters",
+        "stadium",
+        "staff"
+      ],
+      "sources": [
+        "Handleiding"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-12",
+          "title": "Finance-model gedocumenteerd",
+          "summary": "Tickets, merchandising, sponsoring, loans en overdraft opgenomen."
+        }
+      ],
+      "documents": [
+        "Functional_Specification_v0.4.md",
+        "Engine_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Nog vrijwel volledig afhankelijk van handleiding; praktijktests nodig."
+      ]
     },
     {
       "id": "stadium",
@@ -199,7 +431,29 @@ window.PPCC_DATA = {
         "Exacte bouwduur en ROI per project"
       ],
       "next": "Bouwproject in savegames isoleren.",
-      "tests": []
+      "tests": [],
+      "dependencies": [
+        "finance",
+        "supporters"
+      ],
+      "sources": [
+        "Handleiding"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-12",
+          "title": "Construction lifecycle vastgelegd",
+          "summary": "Planning, betaling, voortgang, oplevering en onderhoud beschreven."
+        }
+      ],
+      "documents": [
+        "Functional_Specification_v0.4.md",
+        "Engine_Specification_v0.4.md",
+        "Domain_Model_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Nog geen gecontroleerde bouwsave beschikbaar."
+      ]
     },
     {
       "id": "staff",
@@ -218,7 +472,31 @@ window.PPCC_DATA = {
         "Relatiematrix en exacte kwaliteitsmodifiers"
       ],
       "next": "Stafleden met verschillende ratings op dezelfde taak vergelijken.",
-      "tests": []
+      "tests": [],
+      "dependencies": [
+        "training",
+        "player",
+        "transfer",
+        "finance"
+      ],
+      "sources": [
+        "Handleiding",
+        "Editor"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-12",
+          "title": "Staff relationships gedocumenteerd",
+          "summary": "Persoonlijkheid, werkdruk, afdelingsrollen en delegatie vastgelegd."
+        }
+      ],
+      "documents": [
+        "Functional_Specification_v0.4.md",
+        "Engine_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Zelfde taak laten uitvoeren door staf met verschillende ratings."
+      ]
     },
     {
       "id": "supporters",
@@ -236,7 +514,29 @@ window.PPCC_DATA = {
         "Invloed van weer, tegenstander, derby en loyaliteit"
       ],
       "next": "Attendance-experimenten met gecontroleerde variabelen.",
-      "tests": []
+      "tests": [],
+      "dependencies": [
+        "finance",
+        "stadium",
+        "match"
+      ],
+      "sources": [
+        "Handleiding"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-12",
+          "title": "Supporter feedback-loop vastgelegd",
+          "summary": "Resultaten, prijzen en faciliteiten beïnvloeden attendance en omzet."
+        }
+      ],
+      "documents": [
+        "Engine_Specification_v0.4.md",
+        "Knowledge_Graph_v0.4.md"
+      ],
+      "notes": [
+        "Attendance-formule nog volledig onbekend."
+      ]
     },
     {
       "id": "competition",
@@ -255,7 +555,29 @@ window.PPCC_DATA = {
         "Promotie/degradatie en Europese kwalificatie"
       ],
       "next": "Competitie- en seizoenssavegames verzamelen.",
-      "tests": []
+      "tests": [],
+      "dependencies": [
+        "match",
+        "savegame"
+      ],
+      "sources": [
+        "Handleiding",
+        "Data-map"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-12",
+          "title": "Competition scope vastgelegd",
+          "summary": "Fixtures, standen, regels, cups en historie geïnventariseerd."
+        }
+      ],
+      "documents": [
+        "Functional_Specification_v0.4.md",
+        "Engine_Specification_v0.4.md"
+      ],
+      "notes": [
+        "Seizoensovergang en kwalificatieregels moeten technisch worden bewezen."
+      ]
     },
     {
       "id": "executable",
@@ -277,10 +599,46 @@ window.PPCC_DATA = {
         "Ghidra setup",
         "API Monitor",
         "x32dbg"
+      ],
+      "dependencies": [
+        "savegame",
+        "player",
+        "match",
+        "training",
+        "tactics"
+      ],
+      "sources": [
+        "Ghidra",
+        "x32dbg",
+        "API Monitor"
+      ],
+      "timeline": [
+        {
+          "date": "2026-07-06",
+          "title": "Ghidra werkend",
+          "summary": "UEFA2000b.exe geopend en eerste zoekopdrachten uitgevoerd."
+        },
+        {
+          "date": "2026-07-07",
+          "title": "DirectDraw calls gemonitord",
+          "summary": "API Monitor bevestigt gebruik van DirectDraw-oppervlakken en blits."
+        }
+      ],
+      "documents": [
+        "Reverse_Engineering_Logbook_v0.4.md"
+      ],
+      "notes": [
+        "Start met enginegerichte analyse in plaats van willekeurige codeverkenning."
       ]
     }
   ],
   "updates": [
+    {
+      "date": "2026-07-13",
+      "type": "release",
+      "title": "PPCC v1.3 — Engine Explorer",
+      "summary": "Engine-detailpagina’s bevatten nu dependencies, bronnen, tijdlijn, documenten en research notes."
+    },
     {
       "date": "2026-07-13",
       "type": "release",

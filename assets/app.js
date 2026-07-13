@@ -18,7 +18,7 @@
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
   const statusLabel = {complete:'Afgerond',active:'Actief',research:'Onderzoek',blocked:'Geblokkeerd'};
-  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
+  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
 
   function overall(){
     return Math.round(baseData.engines.reduce((a,e)=>a+e.progress,0)/baseData.engines.length);
@@ -64,6 +64,7 @@
     $('#updatesTimeline').innerHTML=baseData.updates.map(updateRow).join('');
     $('#documentGrid').innerHTML=baseData.documents.map(d=>`<article class="panel document"><span class="type">${d.type} · ${d.status}</span><h3>${d.title}</h3><p>${d.description}</p><div class="document-actions">${d.type==='Markdown'?`<button class="read-button" data-document="${d.file}" data-title="${d.title}">Lees document</button>`:''}<a class="download" href="./docs/${d.file}" download>Download</a></div></article>`).join('');
     bindDocumentClicks();
+    renderExplorerList();
     $('#evidenceBody').innerHTML=baseData.engines.map(e=>`<tr><td><strong>${e.name}</strong></td><td>✓</td><td>${e.tests.length?'✓':'○'}</td><td>${['savegame','player','training','tactics','match','transfer'].includes(e.id)?'✓':'○'}</td><td>${e.id==='executable'?'◐':'○'}</td><td>${e.confidence}%</td></tr>`).join('');
     bindEngineClicks();
   }
@@ -165,6 +166,40 @@
     box.classList.add('open');bindDocumentClicks();
   }
 
+
+  let selectedExplorerEngine = null;
+  let selectedExplorerTab = 'overview';
+
+  function renderExplorerList(query=''){
+    const q=query.toLowerCase().trim();
+    const list=baseData.engines.filter(e=>!q||(e.name+' '+e.group+' '+e.summary).toLowerCase().includes(q));
+    $('#explorerList').innerHTML=list.map(e=>`<button class="explorer-link ${selectedExplorerEngine===e.id?'active':''}" data-explore="${e.id}"><span><strong>${e.name}</strong><small>${e.group}</small></span><b>${e.progress}%</b></button>`).join('');
+    $$('[data-explore]').forEach(b=>b.onclick=()=>openExplorer(b.dataset.explore));
+  }
+  function openExplorer(id,tab='overview'){
+    const e=baseData.engines.find(x=>x.id===id);if(!e)return;
+    selectedExplorerEngine=id;selectedExplorerTab=tab;renderExplorerList($('#explorerSearch').value||'');
+    const dependencyNames=(e.dependencies||[]).map(dep=>baseData.engines.find(x=>x.id===dep)).filter(Boolean);
+    $('#explorerDetail').innerHTML=`<div class="explorer-hero"><div>${badge(e)}<h2>${e.name}</h2><p>${e.summary}</p></div><div class="score-stack"><div class="score"><strong>${e.progress}%</strong><span>Progress</span></div><div class="score"><strong>${e.confidence}%</strong><span>Confidence</span></div></div></div>
+      <div class="explorer-tabs">
+        ${[['overview','Overview'],['evidence','Evidence'],['timeline','Timeline'],['documents','Documents'],['notes','Notes']].map(([key,label])=>`<button class="explorer-tab ${tab===key?'active':''}" data-explorer-tab="${key}">${label}</button>`).join('')}
+      </div><div class="explorer-panel">${explorerPanel(e,tab,dependencyNames)}</div>`;
+    $$('[data-explorer-tab]').forEach(b=>b.onclick=()=>openExplorer(id,b.dataset.explorerTab));
+    bindDocumentClicks();
+    $$('[data-dependency]').forEach(b=>b.onclick=()=>openExplorer(b.dataset.dependency));
+  }
+  function explorerPanel(e,tab,deps){
+    if(tab==='overview')return `<section class="explorer-section"><h3>Dependencies</h3><div class="dependency-grid">${deps.length?deps.map(d=>`<button class="dependency" data-dependency="${d.id}">${d.name}</button>`).join(''):'<span>Geen dependencies geregistreerd.</span>'}</div></section>
+      <section class="explorer-section"><h3>Confirmed facts</h3><div class="item-list">${e.facts.map(x=>`<div class="item"><i></i><span>${x}</span></div>`).join('')}</div></section>
+      <section class="explorer-section"><h3>Hypotheses</h3><div class="item-list">${e.hypotheses.length?e.hypotheses.map(x=>`<div class="item hyp"><i></i><span>${x}</span></div>`).join(''):'<div class="item"><span>Geen open hypotheses.</span></div>'}</div></section>
+      <section class="explorer-section"><h3>Next research</h3><div class="note-card">${e.next}</div></section>`;
+    if(tab==='evidence')return `<section class="explorer-section"><h3>Evidence sources</h3><div class="source-grid">${(e.sources||[]).map(x=>`<div class="source">${x}</div>`).join('')}</div></section>
+      <section class="explorer-section"><h3>Gerelateerde tests</h3><div class="item-list">${e.tests.length?e.tests.map(x=>`<div class="item"><i></i><span>${x}</span></div>`).join(''):'<div class="item"><span>Nog geen tests geregistreerd.</span></div>'}</div></section>`;
+    if(tab==='timeline')return `<section class="explorer-section"><h3>Research timeline</h3><div class="engine-timeline">${(e.timeline||[]).length?e.timeline.map(t=>`<article class="engine-event"><time>${new Date(t.date+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</time><h4>${t.title}</h4><p>${t.summary}</p></article>`).join(''):'<p>Geen tijdlijnitems geregistreerd.</p>'}</div></section>`;
+    if(tab==='documents')return `<section class="explorer-section"><h3>Related documents</h3><div class="doc-links">${(e.documents||[]).length?e.documents.map(file=>{const d=baseData.documents.find(x=>x.file===file);return `<button class="doc-link" data-document="${file}" data-title="${d?d.title:file}">${d?d.title:file}</button>`}).join(''):'<span>Geen documenten gekoppeld.</span>'}</div></section>`;
+    return `<section class="explorer-section"><h3>Research notes</h3><div class="item-list">${(e.notes||[]).length?e.notes.map(x=>`<div class="note-card">${x}</div>`).join(''):'<div class="note-card">Geen notities geregistreerd.</div>'}</div></section>`;
+  }
+
 function exportProgress(){
     const payload={version:baseData.version,exported:new Date().toISOString(),engines:baseData.engines.map(e=>({id:e.id,progress:e.progress,confidence:e.confidence,status:e.status}))};
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));a.download='ppcc-progress.json';a.click();URL.revokeObjectURL(a.href);toast('Voortgang geëxporteerd')
@@ -172,6 +207,7 @@ function exportProgress(){
 
   $$('.nav').forEach(n=>n.onclick=()=>switchView(n.dataset.view));
   $$('[data-go]').forEach(b=>b.onclick=()=>switchView(b.dataset.go));
+  $('#explorerSearch').oninput=e=>renderExplorerList(e.target.value);
   $('#engineSearch').oninput=e=>{
     const q=e.target.value.toLowerCase();
     $('#engineGrid').innerHTML=baseData.engines.filter(x=>(x.name+' '+x.group+' '+x.summary).toLowerCase().includes(q)).map(x=>engineCard(x)).join('');

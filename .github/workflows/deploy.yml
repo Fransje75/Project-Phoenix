@@ -1,4 +1,4 @@
-name: Deploy PPCC v1.2 to GitHub Pages
+name: Deploy PPCC v1.3 to GitHub Pages
 
 on:
   push:
