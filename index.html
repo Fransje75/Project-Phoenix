@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07101d">
+  <meta name="description" content="Project Phoenix Command Center Foundation">
+  <title>Project Phoenix Command Center</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">🔥</div>
+        <div>
+          <strong>Project Phoenix</strong>
+          <span>Command Center Foundation</span>
+        </div>
+      </div>
+      <button id="themeButton" class="icon-button" type="button" aria-label="Wissel thema">☀️</button>
+    </header>
+
+    <main class="content">
+      <section class="hero panel">
+        <div>
+          <p class="eyebrow">Foundation build</p>
+          <h1>De stabiele basis staat.</h1>
+          <p class="lead">
+            Deze versie gebruikt bewust geen npm, React of buildstap.
+            Eerst bewijzen we dat GitHub Pages betrouwbaar publiceert.
+          </p>
+          <div class="actions">
+            <button id="testButton" class="primary" type="button">Test interactie</button>
+            <a class="secondary" href="#status">Bekijk status</a>
+          </div>
+        </div>
+        <div class="status-orb">
+          <strong>v1</strong>
+          <span>Foundation</span>
+        </div>
+      </section>
+
+      <section id="status" class="grid">
+        <article class="panel metric">
+          <span>GitHub Pages</span>
+          <strong>Gereed</strong>
+        </article>
+        <article class="panel metric">
+          <span>Responsive</span>
+          <strong>Ja</strong>
+        </article>
+        <article class="panel metric">
+          <span>Dependencies</span>
+          <strong>0</strong>
+        </article>
+        <article class="panel metric">
+          <span>Buildstap</span>
+          <strong>Niet nodig</strong>
+        </article>
+      </section>
+
+      <section class="panel roadmap">
+        <h2>Foundation checklist</h2>
+        <ul>
+          <li>Statische GitHub Pages-deployment</li>
+          <li>Responsive desktop- en mobiele layout</li>
+          <li>Donker/licht thema</li>
+          <li>Werkende JavaScript-interactie</li>
+          <li>Verborgen <code>.github</code>-workflow inbegrepen</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      Project Phoenix Command Center · Foundation v1
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./assets/app.js"></script>
+</body>
+</html>
