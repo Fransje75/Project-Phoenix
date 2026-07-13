@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <div class="logo">🔥</div>
-      <div><strong>Project Phoenix</strong><span>Command Center · v1.6</span></div>
+      <div><strong>Project Phoenix</strong><span>Command Center · v1.7</span></div>
     </div>
     <nav>
       <button class="nav active" data-view="dashboard"><span>⌂</span>Dashboard</button>
@@ -22,6 +22,7 @@
       <button class="nav" data-view="graph"><span>◎</span>Knowledge Graph</button>
       <button class="nav" data-view="research"><span>⌬</span>Research Center</button>
       <button class="nav" data-view="savegames"><span>▣</span>Savegame Explorer</button>
+      <button class="nav" data-view="executable"><span>⌘</span>Executable Explorer</button>
       <button class="nav" data-view="updates"><span>↻</span>Updates</button>
       <button class="nav" data-view="documents"><span>▤</span>Documentatie</button>
       <button class="nav" data-view="evidence"><span>⌘</span>Evidence</button>
@@ -185,6 +186,47 @@
           <div class="table-wrap"><table>
             <thead><tr><th>Savegame</th><th>.sav</th><th>.bin</th><th>.chs</th><th>.mhs</th><th>.phs</th><th>.dhs</th></tr></thead>
             <tbody id="saveMatrixBody"></tbody>
+          </table></div>
+        </section>
+      </section>
+
+      <section class="view" id="executable">
+        <div class="section-header">
+          <div><h2>Executable Explorer</h2><p>Leg functies, structuren, adressen en cross references uit Ghidra en x32dbg vast.</p></div>
+          <div class="exe-controls">
+            <div class="search"><span>⌕</span><input id="exeSearch" placeholder="Zoek naam, adres, engine of notitie…"></div>
+            <select id="exeTypeFilter" class="select-control">
+              <option value="">Alle recordtypen</option>
+              <option value="function">Functions</option>
+              <option value="structure">Structures</option>
+              <option value="module">Modules</option>
+              <option value="address">Addresses</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="research-metrics" id="exeMetrics"></div>
+
+        <div class="exe-layout">
+          <aside class="panel exe-list" id="exeList"></aside>
+          <section class="panel exe-detail" id="exeDetail">
+            <div class="empty-state"><strong>Selecteer een executable-record</strong><span>Bekijk status, confidence, cross references en onderzoeksvragen.</span></div>
+          </section>
+        </div>
+
+        <section class="panel block">
+          <div class="block-head"><div><h3>Reverse Engineering Status</h3><p>Brondekking per engine: handleiding, savegame, executable en memory.</p></div></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Engine</th><th>Handleiding</th><th>Savegames</th><th>Executable</th><th>Memory</th><th>Confidence</th></tr></thead>
+            <tbody id="reverseStatusBody"></tbody>
+          </table></div>
+        </section>
+
+        <section class="panel block">
+          <div class="block-head"><div><h3>Address Register</h3><p>Centraal register voor code- en data-adressen.</p></div></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Address</th><th>Label</th><th>Kind</th><th>Engine</th><th>Status</th><th>Confidence</th></tr></thead>
+            <tbody id="addressRegisterBody"></tbody>
           </table></div>
         </section>
       </section>

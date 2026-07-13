@@ -1,0 +1,22 @@
+[
+  {
+    "address": "0x00000000",
+    "label": "Placeholder — BltFast caller",
+    "module": "uefa2000b",
+    "kind": "Code",
+    "status": "unresolved",
+    "confidence": 0,
+    "engine": "executable",
+    "notes": "Vervangen zodra x32dbg een stabiele caller toont."
+  },
+  {
+    "address": "0x00000000",
+    "label": "Placeholder — Save coordinator",
+    "module": "uefa2000b",
+    "kind": "Code",
+    "status": "unresolved",
+    "confidence": 0,
+    "engine": "savegame",
+    "notes": "Te vinden via WriteFile-breakpoints tijdens Save."
+  }
+]

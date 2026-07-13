@@ -1,0 +1,40 @@
+{
+  "id": "FUN_TRAINING_PROFILE",
+  "address": "Unknown",
+  "name": "Training profile apply",
+  "module": "uefa2000b",
+  "engine": "training",
+  "category": "Simulation",
+  "status": "planned",
+  "confidence": 35,
+  "description": "Past een preset of custom weekschema toe op de actieve club.",
+  "signature": "Unknown",
+  "calls": [
+    "Training schedule update",
+    "Savegame state update"
+  ],
+  "crossReferences": [
+    "Balanced → Offensive",
+    "Offensive → Defensive"
+  ],
+  "evidence": [
+    "Handleiding",
+    "Training savegames"
+  ],
+  "relatedTests": [
+    "TRAIN-01",
+    "TRAIN-02"
+  ],
+  "relatedSavegames": [
+    "training-offensive",
+    "training-defensive"
+  ],
+  "notes": [
+    "Goede eerste enginefunctie omdat input en output gecontroleerd zijn.",
+    "Zoek naar UI-stringreferenties rond Balanced, Offensive, Defensive of Delegate."
+  ],
+  "openQuestions": [
+    "Is een preset alleen een ID of een volledige reeks trainingsslots?",
+    "Wanneer worden development- en fatigue-effecten berekend?"
+  ]
+}

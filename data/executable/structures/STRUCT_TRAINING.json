@@ -1,0 +1,36 @@
+{
+  "id": "STRUCT_TRAINING",
+  "name": "Training schedule",
+  "module": "uefa2000b",
+  "engine": "training",
+  "status": "hypothesis",
+  "confidence": 45,
+  "size": "Unknown",
+  "description": "Weekplanning met dag- en tijdslots plus profielstatus.",
+  "fields": [
+    {
+      "offset": "?",
+      "name": "Profile ID",
+      "type": "enum",
+      "status": "hypothesis"
+    },
+    {
+      "offset": "?",
+      "name": "Weekly slots",
+      "type": "array",
+      "status": "manual confirmed concept"
+    },
+    {
+      "offset": "?",
+      "name": "Individual training time",
+      "type": "derived or stored",
+      "status": "manual confirmed concept"
+    }
+  ],
+  "relatedFunctions": [
+    "FUN_TRAINING_PROFILE"
+  ],
+  "notes": [
+    "Differential saves maken deze structuur geschikt voor vroege reconstructie."
+  ]
+}

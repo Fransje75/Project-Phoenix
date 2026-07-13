@@ -1,0 +1,18 @@
+{
+  "modules": [
+    "modules/uefa2000b.json",
+    "modules/ddraw.json"
+  ],
+  "functions": [
+    "functions/FUN_RENDER_BLTFAST.json",
+    "functions/FUN_SAVEGAME_WRITE.json",
+    "functions/FUN_TRAINING_PROFILE.json",
+    "functions/FUN_MATCH_EVENT.json"
+  ],
+  "structures": [
+    "structures/STRUCT_PLAYER.json",
+    "structures/STRUCT_TRAINING.json",
+    "structures/STRUCT_MATCH_EVENT.json"
+  ],
+  "addresses": "addresses/address-register.json"
+}

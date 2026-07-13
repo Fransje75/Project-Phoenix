@@ -1,0 +1,18 @@
+{
+  "id": "ddraw",
+  "name": "DirectDraw runtime",
+  "type": "Graphics dependency",
+  "format": "Win32 API / COM",
+  "architecture": "x86 / 32-bit",
+  "status": "research",
+  "confidence": 78,
+  "description": "Renderinglaag voor surfaces, Blt/BltFast, display modes en presentatie.",
+  "tools": [
+    "API Monitor",
+    "x32dbg"
+  ],
+  "notes": [
+    "De game rendert intern in het oorspronkelijke 800×600-gebied.",
+    "BltFast is een belangrijk breakpoint voor het lokaliseren van de renderpipeline."
+  ]
+}

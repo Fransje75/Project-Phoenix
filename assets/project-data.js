@@ -1,6 +1,6 @@
 window.PPCC_DATA = {
-  "version": "1.6",
-  "updated": "13 juli 2026 — v1.6",
+  "version": "1.7",
+  "updated": "13 juli 2026 — v1.7",
   "overall": 67,
   "confidence": 74,
   "sprint": "Sprint 1 — Reverse Engineering",
@@ -633,6 +633,12 @@ window.PPCC_DATA = {
     }
   ],
   "updates": [
+    {
+      "date": "2026-07-13",
+      "type": "release",
+      "title": "PPCC v1.7 — Executable Explorer",
+      "summary": "Modules, functies, structuren, adresregister en cross references toegevoegd."
+    },
     {
       "date": "2026-07-13",
       "type": "release",
@@ -1823,6 +1829,355 @@ window.PPCC_DATA = {
       "notes": [
         "Beste kandidaat voor het identificeren van match events, result history en dynamic player state."
       ]
+    }
+  ],
+  "executableModules": [
+    {
+      "id": "uefa2000b",
+      "name": "UEFA2000b.exe",
+      "type": "Primary executable",
+      "format": "PE32",
+      "architecture": "x86 / 32-bit",
+      "status": "active",
+      "confidence": 100,
+      "description": "Werkende executable op moderne Windows-systemen en primaire target voor Ghidra en x32dbg.",
+      "tools": [
+        "Ghidra",
+        "x32dbg",
+        "API Monitor"
+      ],
+      "notes": [
+        "UEFA2000.exe geeft een zwart scherm; UEFA2000b.exe is de werkende target.",
+        "DirectDraw-calls zijn via API Monitor waargenomen.",
+        "Start met enginegerichte analyse in plaats van willekeurige codeverkenning."
+      ]
+    },
+    {
+      "id": "ddraw",
+      "name": "DirectDraw runtime",
+      "type": "Graphics dependency",
+      "format": "Win32 API / COM",
+      "architecture": "x86 / 32-bit",
+      "status": "research",
+      "confidence": 78,
+      "description": "Renderinglaag voor surfaces, Blt/BltFast, display modes en presentatie.",
+      "tools": [
+        "API Monitor",
+        "x32dbg"
+      ],
+      "notes": [
+        "De game rendert intern in het oorspronkelijke 800×600-gebied.",
+        "BltFast is een belangrijk breakpoint voor het lokaliseren van de renderpipeline."
+      ]
+    }
+  ],
+  "executableFunctions": [
+    {
+      "id": "FUN_RENDER_BLTFAST",
+      "address": "Unknown",
+      "name": "DirectDraw BltFast call path",
+      "module": "uefa2000b",
+      "engine": "executable",
+      "category": "Rendering",
+      "status": "hypothesis",
+      "confidence": 42,
+      "description": "Call path die het interne 800×600 backbuffer-gebied naar het zichtbare oppervlak kopieert.",
+      "signature": "IDirectDrawSurface::BltFast(...)",
+      "calls": [
+        "DirectDraw surface methods"
+      ],
+      "crossReferences": [
+        "API Monitor hits",
+        "x32dbg breakpoint research"
+      ],
+      "evidence": [
+        "API Monitor",
+        "Widescreen patch tests"
+      ],
+      "relatedTests": [],
+      "relatedSavegames": [],
+      "notes": [
+        "Nog geen stabiel codeadres vastgelegd.",
+        "Waarschijnlijk cruciaal voor widescreen-scaling en het zwarte gebied buiten 800×600."
+      ],
+      "openQuestions": [
+        "Welke caller in UEFA2000b.exe roept BltFast aan?",
+        "Wordt de source rect hardcoded of afgeleid van de surface?"
+      ]
+    },
+    {
+      "id": "FUN_SAVEGAME_WRITE",
+      "address": "Unknown",
+      "name": "Savegame write coordinator",
+      "module": "uefa2000b",
+      "engine": "savegame",
+      "category": "Persistence",
+      "status": "planned",
+      "confidence": 25,
+      "description": "Vermoedelijke centrale coördinator die de modulaire savebestanden schrijft.",
+      "signature": "Unknown",
+      "calls": [
+        "File I/O",
+        "Subsystem serializers"
+      ],
+      "crossReferences": [
+        "Baseline",
+        "TM-01 t/m TM-07",
+        "TR-01/02",
+        "ME-01"
+      ],
+      "evidence": [
+        "Differential save tests"
+      ],
+      "relatedTests": [
+        "BASELINE",
+        "TM-01",
+        "TR-01",
+        "ME-01"
+      ],
+      "relatedSavegames": [
+        "baseline",
+        "tm-01",
+        "tr-01",
+        "me-01-post"
+      ],
+      "notes": [
+        "Te vinden via breakpoints op CreateFile/WriteFile tijdens opslaan.",
+        "Waarschijnlijk splitst de functie output over meerdere extensies."
+      ],
+      "openQuestions": [
+        "Bestaat er één coordinator of schrijft ieder subsysteem zelfstandig?",
+        "Zijn checksums of compressie aanwezig?"
+      ]
+    },
+    {
+      "id": "FUN_TRAINING_PROFILE",
+      "address": "Unknown",
+      "name": "Training profile apply",
+      "module": "uefa2000b",
+      "engine": "training",
+      "category": "Simulation",
+      "status": "planned",
+      "confidence": 35,
+      "description": "Past een preset of custom weekschema toe op de actieve club.",
+      "signature": "Unknown",
+      "calls": [
+        "Training schedule update",
+        "Savegame state update"
+      ],
+      "crossReferences": [
+        "Balanced → Offensive",
+        "Offensive → Defensive"
+      ],
+      "evidence": [
+        "Handleiding",
+        "Training savegames"
+      ],
+      "relatedTests": [
+        "TRAIN-01",
+        "TRAIN-02"
+      ],
+      "relatedSavegames": [
+        "training-offensive",
+        "training-defensive"
+      ],
+      "notes": [
+        "Goede eerste enginefunctie omdat input en output gecontroleerd zijn.",
+        "Zoek naar UI-stringreferenties rond Balanced, Offensive, Defensive of Delegate."
+      ],
+      "openQuestions": [
+        "Is een preset alleen een ID of een volledige reeks trainingsslots?",
+        "Wanneer worden development- en fatigue-effecten berekend?"
+      ]
+    },
+    {
+      "id": "FUN_MATCH_EVENT",
+      "address": "Unknown",
+      "name": "Match event generator",
+      "module": "uefa2000b",
+      "engine": "match",
+      "category": "Simulation",
+      "status": "planned",
+      "confidence": 28,
+      "description": "Vermoedelijke functie of functiegroep die schoten, goals, kaarten en blessures genereert.",
+      "signature": "Unknown",
+      "calls": [
+        "Random number generation",
+        "Player runtime state",
+        "Match statistics"
+      ],
+      "crossReferences": [
+        "ME-01",
+        "Herhaalde wedstrijdtests"
+      ],
+      "evidence": [
+        "Live statistics",
+        "Non-deterministic results"
+      ],
+      "relatedTests": [
+        "ME-01"
+      ],
+      "relatedSavegames": [
+        "me-01-post"
+      ],
+      "notes": [
+        "Waarschijnlijk geen enkele monolithische functie maar een event pipeline.",
+        "Random seed en event queue zijn nog hypotheses."
+      ],
+      "openQuestions": [
+        "Waar wordt de random state bijgehouden?",
+        "Welke composite player values bepalen eventkansen?"
+      ]
+    }
+  ],
+  "executableStructures": [
+    {
+      "id": "STRUCT_PLAYER",
+      "name": "Player record",
+      "module": "uefa2000b",
+      "engine": "player",
+      "status": "hypothesis",
+      "confidence": 38,
+      "size": "Unknown",
+      "description": "Runtime- of persistente structuur met skills, hidden attributes en statuswaarden.",
+      "fields": [
+        {
+          "offset": "?",
+          "name": "Visible skills",
+          "type": "8 values",
+          "status": "confirmed concept"
+        },
+        {
+          "offset": "?",
+          "name": "Fitness",
+          "type": "integer",
+          "status": "runtime observed"
+        },
+        {
+          "offset": "?",
+          "name": "Morale",
+          "type": "integer",
+          "status": "runtime observed"
+        },
+        {
+          "offset": "?",
+          "name": "Potential",
+          "type": "integer",
+          "status": "manual/editor"
+        },
+        {
+          "offset": "?",
+          "name": "Hidden attributes",
+          "type": "multiple values",
+          "status": "manual confirmed"
+        }
+      ],
+      "relatedFunctions": [
+        "FUN_MATCH_EVENT"
+      ],
+      "notes": [
+        "Editor toont een groot deel van het conceptuele record, maar niet de echte geheugenlayout."
+      ]
+    },
+    {
+      "id": "STRUCT_TRAINING",
+      "name": "Training schedule",
+      "module": "uefa2000b",
+      "engine": "training",
+      "status": "hypothesis",
+      "confidence": 45,
+      "size": "Unknown",
+      "description": "Weekplanning met dag- en tijdslots plus profielstatus.",
+      "fields": [
+        {
+          "offset": "?",
+          "name": "Profile ID",
+          "type": "enum",
+          "status": "hypothesis"
+        },
+        {
+          "offset": "?",
+          "name": "Weekly slots",
+          "type": "array",
+          "status": "manual confirmed concept"
+        },
+        {
+          "offset": "?",
+          "name": "Individual training time",
+          "type": "derived or stored",
+          "status": "manual confirmed concept"
+        }
+      ],
+      "relatedFunctions": [
+        "FUN_TRAINING_PROFILE"
+      ],
+      "notes": [
+        "Differential saves maken deze structuur geschikt voor vroege reconstructie."
+      ]
+    },
+    {
+      "id": "STRUCT_MATCH_EVENT",
+      "name": "Match event",
+      "module": "uefa2000b",
+      "engine": "match",
+      "status": "hypothesis",
+      "confidence": 30,
+      "size": "Unknown",
+      "description": "Eventrecord voor doelpunt, kaart, blessure, wissel of statistische actie.",
+      "fields": [
+        {
+          "offset": "?",
+          "name": "Minute / tick",
+          "type": "integer",
+          "status": "UI observed"
+        },
+        {
+          "offset": "?",
+          "name": "Event type",
+          "type": "enum",
+          "status": "manual/UI observed"
+        },
+        {
+          "offset": "?",
+          "name": "Primary player",
+          "type": "player reference",
+          "status": "UI observed"
+        },
+        {
+          "offset": "?",
+          "name": "Secondary player",
+          "type": "player reference",
+          "status": "hypothesis"
+        }
+      ],
+      "relatedFunctions": [
+        "FUN_MATCH_EVENT"
+      ],
+      "notes": [
+        "Kan zowel runtime als in .mhs een afgeleide vorm hebben."
+      ]
+    }
+  ],
+  "executableAddresses": [
+    {
+      "address": "0x00000000",
+      "label": "Placeholder — BltFast caller",
+      "module": "uefa2000b",
+      "kind": "Code",
+      "status": "unresolved",
+      "confidence": 0,
+      "engine": "executable",
+      "notes": "Vervangen zodra x32dbg een stabiele caller toont."
+    },
+    {
+      "address": "0x00000000",
+      "label": "Placeholder — Save coordinator",
+      "module": "uefa2000b",
+      "kind": "Code",
+      "status": "unresolved",
+      "confidence": 0,
+      "engine": "savegame",
+      "notes": "Te vinden via WriteFile-breakpoints tijdens Save."
     }
   ]
 };

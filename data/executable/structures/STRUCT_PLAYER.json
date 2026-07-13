@@ -1,0 +1,48 @@
+{
+  "id": "STRUCT_PLAYER",
+  "name": "Player record",
+  "module": "uefa2000b",
+  "engine": "player",
+  "status": "hypothesis",
+  "confidence": 38,
+  "size": "Unknown",
+  "description": "Runtime- of persistente structuur met skills, hidden attributes en statuswaarden.",
+  "fields": [
+    {
+      "offset": "?",
+      "name": "Visible skills",
+      "type": "8 values",
+      "status": "confirmed concept"
+    },
+    {
+      "offset": "?",
+      "name": "Fitness",
+      "type": "integer",
+      "status": "runtime observed"
+    },
+    {
+      "offset": "?",
+      "name": "Morale",
+      "type": "integer",
+      "status": "runtime observed"
+    },
+    {
+      "offset": "?",
+      "name": "Potential",
+      "type": "integer",
+      "status": "manual/editor"
+    },
+    {
+      "offset": "?",
+      "name": "Hidden attributes",
+      "type": "multiple values",
+      "status": "manual confirmed"
+    }
+  ],
+  "relatedFunctions": [
+    "FUN_MATCH_EVENT"
+  ],
+  "notes": [
+    "Editor toont een groot deel van het conceptuele record, maar niet de echte geheugenlayout."
+  ]
+}

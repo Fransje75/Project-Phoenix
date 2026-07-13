@@ -1,0 +1,20 @@
+{
+  "id": "uefa2000b",
+  "name": "UEFA2000b.exe",
+  "type": "Primary executable",
+  "format": "PE32",
+  "architecture": "x86 / 32-bit",
+  "status": "active",
+  "confidence": 100,
+  "description": "Werkende executable op moderne Windows-systemen en primaire target voor Ghidra en x32dbg.",
+  "tools": [
+    "Ghidra",
+    "x32dbg",
+    "API Monitor"
+  ],
+  "notes": [
+    "UEFA2000.exe geeft een zwart scherm; UEFA2000b.exe is de werkende target.",
+    "DirectDraw-calls zijn via API Monitor waargenomen.",
+    "Start met enginegerichte analyse in plaats van willekeurige codeverkenning."
+  ]
+}

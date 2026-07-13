@@ -18,7 +18,7 @@
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
   const statusLabel = {complete:'Afgerond',active:'Actief',research:'Onderzoek',blocked:'Geblokkeerd'};
-  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',graph:'Knowledge Graph',research:'Research Center',savegames:'Savegame Explorer',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
+  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',graph:'Knowledge Graph',research:'Research Center',savegames:'Savegame Explorer',executable:'Executable Explorer',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
 
   function overall(){
     return Math.round(baseData.engines.reduce((a,e)=>a+e.progress,0)/baseData.engines.length);
@@ -68,6 +68,7 @@
     renderGraph($('#graphSearch')?$('#graphSearch').value:'');
     renderResearchCenter();
     renderSavegameExplorer();
+    renderExecutableExplorer();
     $('#evidenceBody').innerHTML=baseData.engines.map(e=>`<tr><td><strong>${e.name}</strong></td><td>✓</td><td>${e.tests.length?'✓':'○'}</td><td>${['savegame','player','training','tactics','match','transfer'].includes(e.id)?'✓':'○'}</td><td>${e.id==='executable'?'◐':'○'}</td><td>${e.confidence}%</td></tr>`).join('');
     bindEngineClicks();
   }
@@ -351,6 +352,114 @@
     renderSaveMetrics();populateSaveCategories();renderSaveList();renderSaveMatrix();
   }
 
+
+  let selectedExecutableRecord = null;
+
+  function allExecutableRecords(){
+    return [
+      ...baseData.executableFunctions.map(x=>({...x,recordType:'function'})),
+      ...baseData.executableStructures.map(x=>({...x,recordType:'structure'})),
+      ...baseData.executableModules.map(x=>({...x,recordType:'module'})),
+      ...baseData.executableAddresses.map((x,i)=>({...x,id:'ADDRESS_'+i,name:x.label,description:x.notes,recordType:'address'}))
+    ];
+  }
+  function exeStatusLabel(status){
+    return {verified:'Verified',active:'Active',research:'Research',hypothesis:'Hypothesis',planned:'Planned',unresolved:'Unresolved'}[status]||status;
+  }
+  function renderExeMetrics(){
+    const records=allExecutableRecords();
+    const resolved=baseData.executableAddresses.filter(a=>a.status!=='unresolved').length;
+    const avg=Math.round(records.reduce((a,r)=>a+(r.confidence||0),0)/Math.max(1,records.length));
+    $('#exeMetrics').innerHTML=[
+      ['Modules',baseData.executableModules.length],
+      ['Functions',baseData.executableFunctions.length],
+      ['Structures',baseData.executableStructures.length],
+      ['Gem. confidence',avg+'%']
+    ].map(([label,value])=>`<article class="panel metric"><span>${label}</span><strong>${value}</strong></article>`).join('');
+  }
+  function renderExeList(){
+    const q=($('#exeSearch').value||'').toLowerCase().trim();
+    const type=$('#exeTypeFilter').value;
+    const records=allExecutableRecords().filter(r=>(!type||r.recordType===type)&&(!q||JSON.stringify(r).toLowerCase().includes(q)));
+    $('#exeList').innerHTML=records.map(r=>`<button class="exe-link ${selectedExecutableRecord===r.id?'active':''}" data-exe-id="${r.id}" data-exe-type="${r.recordType}">
+      <div class="exe-link-top"><div><strong>${r.name||r.label}</strong>${r.address?`<code>${r.address}</code>`:''}</div><span class="record-type ${r.recordType}">${r.recordType}</span></div>
+      <p>${r.description||r.notes||''}</p>
+    </button>`).join('');
+    $$('[data-exe-id]').forEach(b=>b.onclick=()=>openExecutableRecord(b.dataset.exeId,b.dataset.exeType));
+  }
+  function getExecutableRecord(id,type){
+    if(type==='function')return baseData.executableFunctions.find(x=>x.id===id);
+    if(type==='structure')return baseData.executableStructures.find(x=>x.id===id);
+    if(type==='module')return baseData.executableModules.find(x=>x.id===id);
+    const index=+id.replace('ADDRESS_','');return baseData.executableAddresses[index];
+  }
+  function openExecutableRecord(id,type){
+    const r=getExecutableRecord(id,type);if(!r)return;selectedExecutableRecord=id;renderExeList();
+    if(type==='function')renderFunctionRecord(r);
+    else if(type==='structure')renderStructureRecord(r);
+    else if(type==='module')renderModuleRecord(r);
+    else renderAddressRecord(r);
+  }
+  function baseExeHero(r,type){
+    return `<div class="exe-hero"><div><span class="record-type ${type}">${type}</span><h2>${r.name||r.label}</h2>${r.address?`<span class="exe-address">${r.address}</span>`:''}<p>${r.description||r.notes||''}</p></div><div class="confidence-box"><strong>${r.confidence||0}%</strong><span>Confidence</span></div></div>`;
+  }
+  function renderFunctionRecord(r){
+    const engine=baseData.engines.find(e=>e.id===r.engine);
+    $('#exeDetail').innerHTML=baseExeHero(r,'function')+`
+      <div class="exe-meta-grid"><div class="exe-meta"><span>Status</span><strong>${exeStatusLabel(r.status)}</strong></div><div class="exe-meta"><span>Engine</span><strong>${engine?engine.name:r.engine}</strong></div><div class="exe-meta"><span>Category</span><strong>${r.category}</strong></div></div>
+      <section class="test-section"><h3>Signature</h3><div class="code-block">${r.signature}</div></section>
+      <section class="test-section"><h3>Calls</h3><div class="xref-list">${r.calls.map(x=>`<div class="xref-card">${x}</div>`).join('')}</div></section>
+      <section class="test-section"><h3>Cross references</h3><div class="xref-list">${r.crossReferences.map(x=>`<div class="xref-card">${x}</div>`).join('')}</div></section>
+      <section class="test-section"><h3>Evidence</h3><div class="tag-list">${r.evidence.map(x=>`<span class="tag">${x}</span>`).join('')}</div></section>
+      <section class="test-section"><h3>Related tests</h3><div class="tag-list">${r.relatedTests.length?r.relatedTests.map(x=>`<button class="tag" data-exe-test="${x}">${x}</button>`).join(''):'<span>Geen tests gekoppeld.</span>'}</div></section>
+      <section class="test-section"><h3>Related savegames</h3><div class="tag-list">${r.relatedSavegames.length?r.relatedSavegames.map(x=>`<button class="tag" data-exe-save="${x}">${x}</button>`).join(''):'<span>Geen savegames gekoppeld.</span>'}</div></section>
+      <section class="test-section"><h3>Research notes</h3><div class="item-list">${r.notes.map(x=>`<div class="item"><i></i><span>${x}</span></div>`).join('')}</div></section>
+      <section class="test-section"><h3>Open questions</h3><div class="item-list">${r.openQuestions.map(x=>`<div class="item hyp"><i></i><span>${x}</span></div>`).join('')}</div></section>`;
+    bindExeLinks();
+  }
+  function renderStructureRecord(r){
+    const engine=baseData.engines.find(e=>e.id===r.engine);
+    $('#exeDetail').innerHTML=baseExeHero(r,'structure')+`
+      <div class="exe-meta-grid"><div class="exe-meta"><span>Status</span><strong>${exeStatusLabel(r.status)}</strong></div><div class="exe-meta"><span>Engine</span><strong>${engine?engine.name:r.engine}</strong></div><div class="exe-meta"><span>Size</span><strong>${r.size}</strong></div></div>
+      <section class="test-section"><h3>Fields</h3><div class="table-wrap"><table class="field-table"><thead><tr><th>Offset</th><th>Name</th><th>Type</th><th>Status</th></tr></thead><tbody>${r.fields.map(f=>`<tr><td><code>${f.offset}</code></td><td>${f.name}</td><td>${f.type}</td><td>${f.status}</td></tr>`).join('')}</tbody></table></div></section>
+      <section class="test-section"><h3>Related functions</h3><div class="tag-list">${r.relatedFunctions.map(x=>`<button class="tag" data-exe-function="${x}">${x}</button>`).join('')}</div></section>
+      <section class="test-section"><h3>Notes</h3><div class="item-list">${r.notes.map(x=>`<div class="item"><i></i><span>${x}</span></div>`).join('')}</div></section>`;
+    bindExeLinks();
+  }
+  function renderModuleRecord(r){
+    $('#exeDetail').innerHTML=baseExeHero(r,'module')+`
+      <div class="exe-meta-grid"><div class="exe-meta"><span>Status</span><strong>${exeStatusLabel(r.status)}</strong></div><div class="exe-meta"><span>Format</span><strong>${r.format}</strong></div><div class="exe-meta"><span>Architecture</span><strong>${r.architecture}</strong></div></div>
+      <section class="test-section"><h3>Tools</h3><div class="exe-tool-list">${r.tools.map(x=>`<span class="exe-tool">${x}</span>`).join('')}</div></section>
+      <section class="test-section"><h3>Notes</h3><div class="item-list">${r.notes.map(x=>`<div class="item"><i></i><span>${x}</span></div>`).join('')}</div></section>`;
+  }
+  function renderAddressRecord(r){
+    const engine=baseData.engines.find(e=>e.id===r.engine);
+    $('#exeDetail').innerHTML=baseExeHero(r,'address')+`
+      <div class="exe-meta-grid"><div class="exe-meta"><span>Status</span><strong>${exeStatusLabel(r.status)}</strong></div><div class="exe-meta"><span>Kind</span><strong>${r.kind}</strong></div><div class="exe-meta"><span>Engine</span><strong>${engine?engine.name:r.engine}</strong></div></div>
+      <section class="test-section"><h3>Notes</h3><div class="note-card">${r.notes}</div></section>`;
+  }
+  function bindExeLinks(){
+    $$('[data-exe-test]').forEach(b=>b.onclick=()=>{switchView('research');openTest(b.dataset.exeTest)});
+    $$('[data-exe-save]').forEach(b=>b.onclick=()=>{switchView('savegames');openSavegame(b.dataset.exeSave)});
+    $$('[data-exe-function]').forEach(b=>b.onclick=()=>openExecutableRecord(b.dataset.exeFunction,'function'));
+  }
+  function renderReverseStatus(){
+    $('#reverseStatusBody').innerHTML=baseData.engines.map(e=>{
+      const fn=baseData.executableFunctions.some(f=>f.engine===e.id);
+      const st=baseData.executableStructures.some(s=>s.engine===e.id);
+      const exe=fn||st||e.id==='executable';
+      const memory=e.id==='executable'?'◐':'○';
+      const save=['savegame','player','training','tactics','match','transfer','competition'].includes(e.id);
+      return `<tr><td><strong>${e.name}</strong></td><td>✓</td><td>${save?'✓':'○'}</td><td>${exe?'◐':'○'}</td><td>${memory}</td><td>${e.confidence}%</td></tr>`;
+    }).join('');
+  }
+  function renderAddressRegister(){
+    $('#addressRegisterBody').innerHTML=baseData.executableAddresses.map(a=>`<tr><td><code>${a.address}</code></td><td>${a.label}</td><td>${a.kind}</td><td>${a.engine}</td><td><span class="address-status ${a.status}">${a.status}</span></td><td>${a.confidence}%</td></tr>`).join('');
+  }
+  function renderExecutableExplorer(){
+    renderExeMetrics();renderExeList();renderReverseStatus();renderAddressRegister();
+  }
+
 function exportProgress(){
     const payload={version:baseData.version,exported:new Date().toISOString(),engines:baseData.engines.map(e=>({id:e.id,progress:e.progress,confidence:e.confidence,status:e.status}))};
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));a.download='ppcc-progress.json';a.click();URL.revokeObjectURL(a.href);toast('Voortgang geëxporteerd')
@@ -365,6 +474,8 @@ function exportProgress(){
   $('#testStatusFilter').onchange=renderTestList;
   $('#saveSearch').oninput=renderSaveList;
   $('#saveCategoryFilter').onchange=renderSaveList;
+  $('#exeSearch').oninput=renderExeList;
+  $('#exeTypeFilter').onchange=renderExeList;
   $('#engineSearch').oninput=e=>{
     const q=e.target.value.toLowerCase();
     $('#engineGrid').innerHTML=baseData.engines.filter(x=>(x.name+' '+x.group+' '+x.summary).toLowerCase().includes(q)).map(x=>engineCard(x)).join('');

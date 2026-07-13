@@ -1,0 +1,39 @@
+{
+  "id": "FUN_MATCH_EVENT",
+  "address": "Unknown",
+  "name": "Match event generator",
+  "module": "uefa2000b",
+  "engine": "match",
+  "category": "Simulation",
+  "status": "planned",
+  "confidence": 28,
+  "description": "Vermoedelijke functie of functiegroep die schoten, goals, kaarten en blessures genereert.",
+  "signature": "Unknown",
+  "calls": [
+    "Random number generation",
+    "Player runtime state",
+    "Match statistics"
+  ],
+  "crossReferences": [
+    "ME-01",
+    "Herhaalde wedstrijdtests"
+  ],
+  "evidence": [
+    "Live statistics",
+    "Non-deterministic results"
+  ],
+  "relatedTests": [
+    "ME-01"
+  ],
+  "relatedSavegames": [
+    "me-01-post"
+  ],
+  "notes": [
+    "Waarschijnlijk geen enkele monolithische functie maar een event pipeline.",
+    "Random seed en event queue zijn nog hypotheses."
+  ],
+  "openQuestions": [
+    "Waar wordt de random state bijgehouden?",
+    "Welke composite player values bepalen eventkansen?"
+  ]
+}

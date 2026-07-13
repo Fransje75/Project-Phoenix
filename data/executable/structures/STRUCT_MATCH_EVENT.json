@@ -1,0 +1,42 @@
+{
+  "id": "STRUCT_MATCH_EVENT",
+  "name": "Match event",
+  "module": "uefa2000b",
+  "engine": "match",
+  "status": "hypothesis",
+  "confidence": 30,
+  "size": "Unknown",
+  "description": "Eventrecord voor doelpunt, kaart, blessure, wissel of statistische actie.",
+  "fields": [
+    {
+      "offset": "?",
+      "name": "Minute / tick",
+      "type": "integer",
+      "status": "UI observed"
+    },
+    {
+      "offset": "?",
+      "name": "Event type",
+      "type": "enum",
+      "status": "manual/UI observed"
+    },
+    {
+      "offset": "?",
+      "name": "Primary player",
+      "type": "player reference",
+      "status": "UI observed"
+    },
+    {
+      "offset": "?",
+      "name": "Secondary player",
+      "type": "player reference",
+      "status": "hypothesis"
+    }
+  ],
+  "relatedFunctions": [
+    "FUN_MATCH_EVENT"
+  ],
+  "notes": [
+    "Kan zowel runtime als in .mhs een afgeleide vorm hebben."
+  ]
+}

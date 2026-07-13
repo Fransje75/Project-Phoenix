@@ -1,0 +1,45 @@
+{
+  "id": "FUN_SAVEGAME_WRITE",
+  "address": "Unknown",
+  "name": "Savegame write coordinator",
+  "module": "uefa2000b",
+  "engine": "savegame",
+  "category": "Persistence",
+  "status": "planned",
+  "confidence": 25,
+  "description": "Vermoedelijke centrale coördinator die de modulaire savebestanden schrijft.",
+  "signature": "Unknown",
+  "calls": [
+    "File I/O",
+    "Subsystem serializers"
+  ],
+  "crossReferences": [
+    "Baseline",
+    "TM-01 t/m TM-07",
+    "TR-01/02",
+    "ME-01"
+  ],
+  "evidence": [
+    "Differential save tests"
+  ],
+  "relatedTests": [
+    "BASELINE",
+    "TM-01",
+    "TR-01",
+    "ME-01"
+  ],
+  "relatedSavegames": [
+    "baseline",
+    "tm-01",
+    "tr-01",
+    "me-01-post"
+  ],
+  "notes": [
+    "Te vinden via breakpoints op CreateFile/WriteFile tijdens opslaan.",
+    "Waarschijnlijk splitst de functie output over meerdere extensies."
+  ],
+  "openQuestions": [
+    "Bestaat er één coordinator of schrijft ieder subsysteem zelfstandig?",
+    "Zijn checksums of compressie aanwezig?"
+  ]
+}

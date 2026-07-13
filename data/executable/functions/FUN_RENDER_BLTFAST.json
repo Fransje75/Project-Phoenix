@@ -1,0 +1,33 @@
+{
+  "id": "FUN_RENDER_BLTFAST",
+  "address": "Unknown",
+  "name": "DirectDraw BltFast call path",
+  "module": "uefa2000b",
+  "engine": "executable",
+  "category": "Rendering",
+  "status": "hypothesis",
+  "confidence": 42,
+  "description": "Call path die het interne 800×600 backbuffer-gebied naar het zichtbare oppervlak kopieert.",
+  "signature": "IDirectDrawSurface::BltFast(...)",
+  "calls": [
+    "DirectDraw surface methods"
+  ],
+  "crossReferences": [
+    "API Monitor hits",
+    "x32dbg breakpoint research"
+  ],
+  "evidence": [
+    "API Monitor",
+    "Widescreen patch tests"
+  ],
+  "relatedTests": [],
+  "relatedSavegames": [],
+  "notes": [
+    "Nog geen stabiel codeadres vastgelegd.",
+    "Waarschijnlijk cruciaal voor widescreen-scaling en het zwarte gebied buiten 800×600."
+  ],
+  "openQuestions": [
+    "Welke caller in UEFA2000b.exe roept BltFast aan?",
+    "Wordt de source rect hardcoded of afgeleid van de surface?"
+  ]
+}

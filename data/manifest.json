@@ -1,10 +1,11 @@
 {
-  "version": "1.6",
+  "version": "1.7",
   "updated": "2026-07-13",
   "engineIndex": "./data/engines/index.json",
   "testIndex": "./data/tests/index.json",
   "graph": "./data/knowledge/graph.json",
   "updates": "./data/timeline/updates.json",
   "documents": "./data/documents/index.json",
-  "savegameIndex": "./data/savegames/index.json"
+  "savegameIndex": "./data/savegames/index.json",
+  "executableIndex": "./data/executable/index.json"
 }
