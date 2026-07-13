@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <div class="logo">🔥</div>
-      <div><strong>Project Phoenix</strong><span>Command Center · v1.1</span></div>
+      <div><strong>Project Phoenix</strong><span>Command Center · v1.2</span></div>
     </div>
     <nav>
       <button class="nav active" data-view="dashboard"><span>⌂</span>Dashboard</button>
@@ -92,7 +92,9 @@
       </section>
 
       <section class="view" id="documents">
-        <div class="section-header"><div><h2>Documentatiebibliotheek</h2><p>Werkdocumenten en originele bronnen.</p></div></div>
+        <div class="section-header"><div><h2>Documentatiebibliotheek</h2><p>Lees en doorzoek werkdocumenten rechtstreeks in PPCC.</p></div>
+<div class="search"><span>⌕</span><input id="documentSearch" placeholder="Zoek in documentatie…"></div></div>
+<div id="documentSearchResults" class="doc-search-results"></div>
         <div id="documentGrid" class="document-grid"></div>
       </section>
 
@@ -108,6 +110,15 @@
 <aside class="drawer" id="drawer">
   <button id="drawerClose" class="drawer-close">×</button>
   <div id="drawerContent"></div>
+</aside>
+<div class="reader-backdrop" id="readerBackdrop"></div>
+<aside class="reader" id="reader">
+  <header class="reader-head">
+    <div><small>PPCC DOCUMENTATION READER</small><h2 id="readerTitle">Document</h2></div>
+    <div class="reader-actions"><button id="readerDownload" class="secondary">Download</button><button id="readerClose" class="drawer-close">×</button></div>
+  </header>
+  <div class="reader-search"><span>⌕</span><input id="readerSearch" placeholder="Zoek in dit document…"><span id="readerMatches"></span></div>
+  <article id="readerContent" class="markdown-body"></article>
 </aside>
 <div class="toast" id="toast"></div>
 

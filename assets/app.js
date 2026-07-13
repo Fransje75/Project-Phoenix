@@ -62,7 +62,8 @@
     $('#recentUpdates').innerHTML=baseData.updates.slice(0,3).map(updateRow).join('');
     $('#engineGrid').innerHTML=baseData.engines.map(e=>engineCard(e)).join('');
     $('#updatesTimeline').innerHTML=baseData.updates.map(updateRow).join('');
-    $('#documentGrid').innerHTML=baseData.documents.map(d=>`<article class="panel document"><span class="type">${d.type} · ${d.status}</span><h3>${d.title}</h3><p>${d.description}</p><a class="download" href="./docs/${d.file}" download>Download</a></article>`).join('');
+    $('#documentGrid').innerHTML=baseData.documents.map(d=>`<article class="panel document"><span class="type">${d.type} · ${d.status}</span><h3>${d.title}</h3><p>${d.description}</p><div class="document-actions">${d.type==='Markdown'?`<button class="read-button" data-document="${d.file}" data-title="${d.title}">Lees document</button>`:''}<a class="download" href="./docs/${d.file}" download>Download</a></div></article>`).join('');
+    bindDocumentClicks();
     $('#evidenceBody').innerHTML=baseData.engines.map(e=>`<tr><td><strong>${e.name}</strong></td><td>✓</td><td>${e.tests.length?'✓':'○'}</td><td>${['savegame','player','training','tactics','match','transfer'].includes(e.id)?'✓':'○'}</td><td>${e.id==='executable'?'◐':'○'}</td><td>${e.confidence}%</td></tr>`).join('');
     bindEngineClicks();
   }
@@ -86,7 +87,85 @@
   }
   function closeDrawer(){$('#drawer').classList.remove('open');$('#drawerBackdrop').classList.remove('open')}
   function toast(t){$('#toast').textContent=t;$('#toast').style.display='block';setTimeout(()=>$('#toast').style.display='none',2000)}
-  function exportProgress(){
+  
+  const documentCache = {};
+  let activeDocument = null;
+  let activeMarkdown = '';
+
+  function escapeHtml(value){
+    return value.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function inlineMarkdown(text){
+    return escapeHtml(text)
+      .replace(/`([^`]+)`/g,'<code>$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+      .replace(/\*([^*]+)\*/g,'<em>$1</em>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  }
+  function markdownToHtml(md, query=''){
+    const lines=md.replace(/\r/g,'').split('\n');let out='',inList=false,inTable=false,headers=[];
+    const endList=()=>{if(inList){out+='</ul>';inList=false}};
+    const endTable=()=>{if(inTable){out+='</tbody></table></div>';inTable=false}};
+    for(let i=0;i<lines.length;i++){
+      const line=lines[i];
+      if(/^#{1,3}\s/.test(line)){endList();endTable();const level=line.match(/^#+/)[0].length;out+=`<h${level}>${inlineMarkdown(line.replace(/^#{1,3}\s/,''))}</h${level}>`;continue}
+      if(/^>\s?/.test(line)){endList();endTable();out+=`<blockquote>${inlineMarkdown(line.replace(/^>\s?/,''))}</blockquote>`;continue}
+      if(/^\|.*\|$/.test(line)){
+        endList();
+        const cells=line.slice(1,-1).split('|').map(x=>x.trim());
+        if(i+1<lines.length && /^\|(?:\s*:?-+:?\s*\|)+$/.test(lines[i+1])){
+          endTable();inTable=true;headers=cells;out+='<div class="table-wrap"><table><thead><tr>'+cells.map(c=>`<th>${inlineMarkdown(c)}</th>`).join('')+'</tr></thead><tbody>';i++;continue
+        }
+        if(inTable){out+='<tr>'+cells.map(c=>`<td>${inlineMarkdown(c)}</td>`).join('')+'</tr>';continue}
+      }
+      endTable();
+      if(/^[-*]\s+/.test(line)){if(!inList){out+='<ul>';inList=true}out+=`<li>${inlineMarkdown(line.replace(/^[-*]\s+/,''))}</li>`;continue}
+      endList();
+      if(!line.trim()){continue}
+      out+=`<p>${inlineMarkdown(line)}</p>`;
+    }
+    endList();endTable();
+    if(query){
+      const safe=query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+      out=out.replace(new RegExp(`(${safe})`,'gi'),'<mark>$1</mark>');
+    }
+    return out;
+  }
+  async function loadDocument(file){
+    if(documentCache[file])return documentCache[file];
+    const response=await fetch('./docs/'+file);
+    if(!response.ok)throw new Error('Document kon niet worden geladen');
+    const text=await response.text();documentCache[file]=text;return text;
+  }
+  async function openDocument(file,title){
+    try{
+      activeDocument={file,title};activeMarkdown=await loadDocument(file);
+      $('#readerTitle').textContent=title;$('#readerSearch').value='';$('#readerMatches').textContent='';
+      $('#readerContent').innerHTML=markdownToHtml(activeMarkdown);
+      $('#readerDownload').onclick=()=>{location.href='./docs/'+file};
+      $('#reader').classList.add('open');$('#readerBackdrop').classList.add('open');
+    }catch(err){toast(err.message)}
+  }
+  function closeReader(){$('#reader').classList.remove('open');$('#readerBackdrop').classList.remove('open')}
+  function bindDocumentClicks(){
+    $$('[data-document]').forEach(b=>b.onclick=()=>openDocument(b.dataset.document,b.dataset.title));
+  }
+  async function searchDocuments(query){
+    const box=$('#documentSearchResults');const q=query.trim().toLowerCase();
+    if(q.length<2){box.classList.remove('open');box.innerHTML='';return}
+    const markdownDocs=baseData.documents.filter(d=>d.type==='Markdown');
+    const results=[];
+    for(const d of markdownDocs){
+      try{
+        const text=await loadDocument(d.file);const index=text.toLowerCase().indexOf(q);
+        if(index>=0){results.push({d,snippet:text.slice(Math.max(0,index-75),Math.min(text.length,index+145)).replace(/\n+/g,' ')})}
+      }catch(_){}
+    }
+    box.innerHTML=results.length?results.map(r=>`<button class="doc-result" data-document="${r.d.file}" data-title="${r.d.title}"><strong>${r.d.title}</strong><span>…${escapeHtml(r.snippet)}…</span></button>`).join(''):'<span>Geen resultaten gevonden.</span>';
+    box.classList.add('open');bindDocumentClicks();
+  }
+
+function exportProgress(){
     const payload={version:baseData.version,exported:new Date().toISOString(),engines:baseData.engines.map(e=>({id:e.id,progress:e.progress,confidence:e.confidence,status:e.status}))};
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));a.download='ppcc-progress.json';a.click();URL.revokeObjectURL(a.href);toast('Voortgang geëxporteerd')
   }
@@ -106,5 +185,11 @@
   };
   if(localStorage.getItem('ppcc-theme')==='light'){document.documentElement.classList.add('light');$('#themeButton').textContent='🌙'}
   $('#exportButton').onclick=exportProgress;
+  $('#readerClose').onclick=closeReader;$('#readerBackdrop').onclick=closeReader;
+  $('#readerSearch').oninput=e=>{
+    const q=e.target.value.trim();$('#readerContent').innerHTML=markdownToHtml(activeMarkdown,q);
+    $('#readerMatches').textContent=q?((activeMarkdown.toLowerCase().match(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'))||[]).length+' resultaten'):'';
+  };
+  let docSearchTimer;$('#documentSearch').oninput=e=>{clearTimeout(docSearchTimer);docSearchTimer=setTimeout(()=>searchDocuments(e.target.value),180)};
   render();
 })();

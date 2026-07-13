@@ -1,6 +1,6 @@
 window.PPCC_DATA = {
-  "version": "1.1",
-  "updated": "13 juli 2026",
+  "version": "1.2",
+  "updated": "13 juli 2026 — v1.2",
   "overall": 67,
   "confidence": 74,
   "sprint": "Sprint 1 — Reverse Engineering",
@@ -283,6 +283,12 @@ window.PPCC_DATA = {
   "updates": [
     {
       "date": "2026-07-13",
+      "type": "release",
+      "title": "PPCC v1.2 — Documentation Reader",
+      "summary": "Documentatie is nu direct leesbaar en doorzoekbaar in het Command Center."
+    },
+    {
+      "date": "2026-07-13",
       "type": "milestone",
       "title": "PPCC Foundation live",
       "summary": "GitHub Pages, Actions en automatische deployment werken stabiel."
@@ -309,42 +315,42 @@ window.PPCC_DATA = {
   "documents": [
     {
       "title": "Reverse Engineering Logbook",
-      "file": "Reverse_Engineering_Logbook_v0.3.md",
+      "file": "Reverse_Engineering_Logbook_v0.4.md",
       "type": "Markdown",
       "status": "Actueel",
       "description": "Chronologische tests, observaties en technisch bewijs."
     },
     {
       "title": "Functional Specification",
-      "file": "Functional_Specification_v0.3.md",
+      "file": "Functional_Specification_v0.4.md",
       "type": "Markdown",
       "status": "Actueel",
       "description": "Wat de originele game functioneel doet."
     },
     {
       "title": "Engine Specification",
-      "file": "Engine_Specification_v0.3.md",
+      "file": "Engine_Specification_v0.4.md",
       "type": "Markdown",
       "status": "Actueel",
       "description": "Simulatie-engines, afhankelijkheden en open vragen."
     },
     {
       "title": "Domain Model Specification",
-      "file": "Domain_Model_Specification_v0.3.md",
+      "file": "Domain_Model_Specification_v0.4.md",
       "type": "Markdown",
       "status": "Actueel",
       "description": "Domeinobjecten en relaties."
     },
     {
       "title": "Design Decision Log",
-      "file": "Design_Decision_Log_v0.3.md",
+      "file": "Design_Decision_Log_v0.4.md",
       "type": "Markdown",
       "status": "Actueel",
       "description": "Vastgelegde ontwerpkeuzes en fidelity-regels."
     },
     {
       "title": "Knowledge Graph",
-      "file": "Knowledge_Graph_v0.3.md",
+      "file": "Knowledge_Graph_v0.4.md",
       "type": "Markdown",
       "status": "Actueel",
       "description": "Concepten en relaties tussen systemen."
