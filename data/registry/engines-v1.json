@@ -1,0 +1,258 @@
+[
+  {
+    "id": "player",
+    "name": "Player Engine",
+    "domain": "Core Simulation",
+    "status": "active",
+    "progress": 62,
+    "confidence": 68
+  },
+  {
+    "id": "team",
+    "name": "Team Engine",
+    "domain": "Core Simulation",
+    "status": "active",
+    "progress": 58,
+    "confidence": 70
+  },
+  {
+    "id": "club",
+    "name": "Club Engine",
+    "domain": "Core Simulation",
+    "status": "research",
+    "progress": 45,
+    "confidence": 58
+  },
+  {
+    "id": "competition",
+    "name": "Competition Engine",
+    "domain": "Core Simulation",
+    "status": "research",
+    "progress": 40,
+    "confidence": 50
+  },
+  {
+    "id": "match",
+    "name": "Match Engine",
+    "domain": "Core Simulation",
+    "status": "active",
+    "progress": 55,
+    "confidence": 62
+  },
+  {
+    "id": "calendar",
+    "name": "Calendar Engine",
+    "domain": "Core Simulation",
+    "status": "research",
+    "progress": 46,
+    "confidence": 61
+  },
+  {
+    "id": "finance",
+    "name": "Finance Engine",
+    "domain": "Core Simulation",
+    "status": "active",
+    "progress": 58,
+    "confidence": 68
+  },
+  {
+    "id": "formation",
+    "name": "Formation Engine",
+    "domain": "Tactical Systems",
+    "status": "active",
+    "progress": 78,
+    "confidence": 90
+  },
+  {
+    "id": "role",
+    "name": "Role Engine",
+    "domain": "Tactical Systems",
+    "status": "active",
+    "progress": 76,
+    "confidence": 88
+  },
+  {
+    "id": "team-orders",
+    "name": "Team Orders Engine",
+    "domain": "Tactical Systems",
+    "status": "active",
+    "progress": 62,
+    "confidence": 72
+  },
+  {
+    "id": "set-piece",
+    "name": "Set Piece Engine",
+    "domain": "Tactical Systems",
+    "status": "research",
+    "progress": 38,
+    "confidence": 48
+  },
+  {
+    "id": "delegate-ai",
+    "name": "Delegate AI Engine",
+    "domain": "Tactical Systems",
+    "status": "active",
+    "progress": 64,
+    "confidence": 78
+  },
+  {
+    "id": "transfer",
+    "name": "Transfer Engine",
+    "domain": "Management",
+    "status": "active",
+    "progress": 68,
+    "confidence": 75
+  },
+  {
+    "id": "contract",
+    "name": "Contract Engine",
+    "domain": "Management",
+    "status": "active",
+    "progress": 64,
+    "confidence": 72
+  },
+  {
+    "id": "training",
+    "name": "Training Engine",
+    "domain": "Management",
+    "status": "active",
+    "progress": 90,
+    "confidence": 92
+  },
+  {
+    "id": "staff",
+    "name": "Staff Engine",
+    "domain": "Management",
+    "status": "active",
+    "progress": 70,
+    "confidence": 78
+  },
+  {
+    "id": "youth",
+    "name": "Youth Engine",
+    "domain": "Management",
+    "status": "research",
+    "progress": 35,
+    "confidence": 44
+  },
+  {
+    "id": "scouting",
+    "name": "Scouting Engine",
+    "domain": "Management",
+    "status": "research",
+    "progress": 46,
+    "confidence": 58
+  },
+  {
+    "id": "news",
+    "name": "News Engine",
+    "domain": "World Simulation",
+    "status": "research",
+    "progress": 42,
+    "confidence": 60
+  },
+  {
+    "id": "notification",
+    "name": "Notification Engine",
+    "domain": "World Simulation",
+    "status": "active",
+    "progress": 69,
+    "confidence": 84
+  },
+  {
+    "id": "stadium",
+    "name": "Stadium Development Engine",
+    "domain": "World Simulation",
+    "status": "active",
+    "progress": 62,
+    "confidence": 72
+  },
+  {
+    "id": "sponsor",
+    "name": "Sponsor Engine",
+    "domain": "World Simulation",
+    "status": "research",
+    "progress": 41,
+    "confidence": 53
+  },
+  {
+    "id": "board",
+    "name": "Board Engine",
+    "domain": "World Simulation",
+    "status": "research",
+    "progress": 43,
+    "confidence": 55
+  },
+  {
+    "id": "supporters",
+    "name": "Fan / Supporter Engine",
+    "domain": "World Simulation",
+    "status": "research",
+    "progress": 48,
+    "confidence": 58
+  },
+  {
+    "id": "savegame",
+    "name": "Savegame Engine",
+    "domain": "Technical",
+    "status": "active",
+    "progress": 70,
+    "confidence": 72
+  },
+  {
+    "id": "database",
+    "name": "Database Engine",
+    "domain": "Technical",
+    "status": "research",
+    "progress": 28,
+    "confidence": 35
+  },
+  {
+    "id": "ui-framework",
+    "name": "UI Framework",
+    "domain": "Technical",
+    "status": "active",
+    "progress": 74,
+    "confidence": 88
+  },
+  {
+    "id": "audio",
+    "name": "Audio Engine",
+    "domain": "Technical",
+    "status": "research",
+    "progress": 12,
+    "confidence": 20
+  },
+  {
+    "id": "executable",
+    "name": "Executable Reconstruction",
+    "domain": "Technical",
+    "status": "research",
+    "progress": 15,
+    "confidence": 20
+  },
+  {
+    "id": "statistics",
+    "name": "Statistics Engine",
+    "domain": "Analytics",
+    "status": "research",
+    "progress": 44,
+    "confidence": 56
+  },
+  {
+    "id": "history",
+    "name": "History Engine",
+    "domain": "Analytics",
+    "status": "research",
+    "progress": 47,
+    "confidence": 61
+  },
+  {
+    "id": "forecast",
+    "name": "Forecast Engine",
+    "domain": "Analytics",
+    "status": "research",
+    "progress": 54,
+    "confidence": 76
+  }
+]

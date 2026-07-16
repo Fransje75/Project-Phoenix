@@ -18,7 +18,7 @@
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
   const statusLabel = {complete:'Afgerond',active:'Actief',research:'Onderzoek',blocked:'Geblokkeerd'};
-  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',explorer:'Engine Explorer',graph:'Knowledge Graph',research:'Research Center',savegames:'Savegame Explorer',executable:'Executable Explorer',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
+  const pageNames = {dashboard:'Dashboard',engines:'Engine Registry',registry:'Engine Registry v1.0',discoveries:'Discoveries',screens:'Screen Analysis',principles:'Design Principles',explorer:'Engine Explorer',graph:'Knowledge Graph',research:'Research Center',savegames:'Savegame Explorer',executable:'Executable Explorer',updates:'Updates',documents:'Documentatie',evidence:'Evidence'};
 
   function overall(){
     return Math.round(baseData.engines.reduce((a,e)=>a+e.progress,0)/baseData.engines.length);
@@ -69,6 +69,7 @@
     renderResearchCenter();
     renderSavegameExplorer();
     renderExecutableExplorer();
+    renderEngineRegistryV1();
     $('#evidenceBody').innerHTML=baseData.engines.map(e=>`<tr><td><strong>${e.name}</strong></td><td>✓</td><td>${e.tests.length?'✓':'○'}</td><td>${['savegame','player','training','tactics','match','transfer'].includes(e.id)?'✓':'○'}</td><td>${e.id==='executable'?'◐':'○'}</td><td>${e.confidence}%</td></tr>`).join('');
     bindEngineClicks();
   }
@@ -460,7 +461,15 @@
     renderExeMetrics();renderExeList();renderReverseStatus();renderAddressRegister();
   }
 
-function exportProgress(){
+
+  let selectedScreenAnalysis=null;
+  function renderRegistry(){const q=($('#registrySearch').value||'').toLowerCase();const ds=[...new Set(baseData.engineRegistryV1.map(e=>e.domain))];$('#registryDomains').innerHTML=ds.map(d=>{const es=baseData.engineRegistryV1.filter(e=>e.domain===d&&(!q||(e.name+' '+d).toLowerCase().includes(q)));return es.length?`<section class="panel registry-domain"><h3>${d}</h3><div class="registry-grid">${es.map(e=>`<article class="registry-engine"><div class="registry-engine-top"><div><h4>${e.name}</h4><small>${e.status}</small></div><strong>${e.progress}%</strong></div><div class="progress"><i style="width:${e.progress}%"></i></div><small>Confidence ${e.confidence}%</small></article>`).join('')}</div></section>`:''}).join('')}
+  function renderDiscoveries(){const q=($('#discoverySearch').value||'').toLowerCase();$('#discoveryList').innerHTML=baseData.discoveries.filter(d=>!q||JSON.stringify(d).toLowerCase().includes(q)).map(d=>`<article class="panel discovery-card"><div class="discovery-head"><div><span class="badge active">${d.id}</span><h3>${d.title}</h3></div><div class="confidence-box"><strong>${d.confidence}%</strong><span>Confidence</span></div></div><p>${d.summary}</p>${d.screens.map(x=>`<span class="source-pill">Screen ${x}</span>`).join('')}${d.engines.map(x=>`<span class="source-pill">${x}</span>`).join('')}${d.confirmedBy.map(x=>`<span class="source-pill yes">${x}</span>`).join('')}</article>`).join('')}
+  function renderScreenList(){const q=($('#screenSearch').value||'').toLowerCase();$('#screenList').innerHTML=baseData.screenAnalyses.filter(s=>!q||JSON.stringify(s).toLowerCase().includes(q)).map(s=>`<button class="screen-link ${selectedScreenAnalysis===s.id?'active':''}" data-screen-analysis="${s.id}"><strong>${s.chapter} · ${s.title}</strong><small>Screenshot ${s.id}</small></button>`).join('');$$('[data-screen-analysis]').forEach(b=>b.onclick=()=>openScreenAnalysis(b.dataset.screenAnalysis))}
+  function openScreenAnalysis(id){const s=baseData.screenAnalyses.find(x=>x.id===id);selectedScreenAnalysis=id;renderScreenList();$('#screenDetail').innerHTML=`<span class="badge active">Screenshot ${s.id}</span><h2>${s.chapter} · ${s.title}</h2><p class="purpose">${s.purpose}</p><section class="ppas-section"><h3>Engines</h3><div class="tag-list">${s.engines.map(x=>`<span class="tag">${x}</span>`).join('')}</div></section><section class="ppas-section"><h3>UI analysis</h3><div class="item-list">${s.ui.map(x=>`<div class="item"><i></i><span>${x}</span></div>`).join('')}</div></section><section class="ppas-section"><h3>Workflow</h3><div class="workflow-flow">${s.workflow.map(x=>`<span class="workflow-step">${x}</span>`).join('')}</div></section><section class="ppas-section"><h3>Discoveries</h3><div class="tag-list">${s.discoveries.map(x=>`<span class="tag">${x}</span>`).join('')}</div></section><section class="ppas-section"><h3>Reverse engineering targets</h3><div class="item-list">${s.reverseTargets.map(x=>`<div class="item"><i></i><span>${x}</span></div>`).join('')}</div></section><section class="ppas-section"><h3>Open questions</h3><div class="item-list">${s.openQuestions.map(x=>`<div class="item hyp"><i></i><span>${x}</span></div>`).join('')}</div></section><section class="ppas-section"><h3>Validation</h3><div class="validation-grid">${Object.entries(s.validation).map(([k,v])=>`<div class="validation-card ${v?'yes':''}"><b>${v?'✓':'○'}</b><span>${k}</span></div>`).join('')}</div></section>`}
+  function renderPrinciples(){$('#principleGrid').innerHTML=baseData.designPrinciples.map(p=>`<article class="panel principle-card"><span class="pid">${p.id}</span><h3>${p.title}</h3><p>${p.summary}</p>${p.examples.map(x=>`<span class="example-chip">${x}</span>`).join('')}</article>`).join('')}
+  function renderEngineRegistryV1(){renderRegistry();renderDiscoveries();renderScreenList();renderPrinciples()}
+  function exportProgress(){
     const payload={version:baseData.version,exported:new Date().toISOString(),engines:baseData.engines.map(e=>({id:e.id,progress:e.progress,confidence:e.confidence,status:e.status}))};
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));a.download='ppcc-progress.json';a.click();URL.revokeObjectURL(a.href);toast('Voortgang geëxporteerd')
   }
@@ -476,6 +485,9 @@ function exportProgress(){
   $('#saveCategoryFilter').onchange=renderSaveList;
   $('#exeSearch').oninput=renderExeList;
   $('#exeTypeFilter').onchange=renderExeList;
+  $('#registrySearch').oninput=renderRegistry;
+  $('#discoverySearch').oninput=renderDiscoveries;
+  $('#screenSearch').oninput=renderScreenList;
   $('#engineSearch').oninput=e=>{
     const q=e.target.value.toLowerCase();
     $('#engineGrid').innerHTML=baseData.engines.filter(x=>(x.name+' '+x.group+' '+x.summary).toLowerCase().includes(q)).map(x=>engineCard(x)).join('');

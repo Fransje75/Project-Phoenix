@@ -13,11 +13,15 @@
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <div class="logo">🔥</div>
-      <div><strong>Project Phoenix</strong><span>Command Center · v1.7</span></div>
+      <div><strong>Project Phoenix</strong><span>Command Center · v1.8</span></div>
     </div>
     <nav>
       <button class="nav active" data-view="dashboard"><span>⌂</span>Dashboard</button>
       <button class="nav" data-view="engines"><span>⚙</span>Engine Registry</button>
+      <button class="nav" data-view="registry"><span>▦</span>Registry v1.0</button>
+      <button class="nav" data-view="discoveries"><span>◆</span>Discoveries</button>
+      <button class="nav" data-view="screens"><span>▧</span>Screen Analysis</button>
+      <button class="nav" data-view="principles"><span>✦</span>Design Principles</button>
       <button class="nav" data-view="explorer"><span>◉</span>Engine Explorer</button>
       <button class="nav" data-view="graph"><span>◎</span>Knowledge Graph</button>
       <button class="nav" data-view="research"><span>⌬</span>Research Center</button>
@@ -231,6 +235,10 @@
         </section>
       </section>
 
+      <section class="view" id="registry"><div class="section-header"><div><h2>Engine Registry v1.0</h2><p>Definitieve indeling van de subsystemen van UEFA Manager 2000.</p></div><div class="search"><span>⌕</span><input id="registrySearch" placeholder="Zoek engine of domein…"></div></div><div id="registryDomains" class="registry-domains"></div></section>
+      <section class="view" id="discoveries"><div class="section-header"><div><h2>Discovery Registry</h2><p>Genummerde ontdekkingen met bronnen, engines en confidence.</p></div><div class="search"><span>⌕</span><input id="discoverySearch" placeholder="Zoek discovery…"></div></div><div id="discoveryList" class="discovery-list"></div></section>
+      <section class="view" id="screens"><div class="section-header"><div><h2>PPAS Screen Analysis</h2><p>Schermhoofdstukken volgens de Project Phoenix Analysis Standard.</p></div><div class="search"><span>⌕</span><input id="screenSearch" placeholder="Zoek scherm…"></div></div><div class="screen-layout"><aside class="panel screen-list" id="screenList"></aside><section class="panel screen-detail" id="screenDetail"><div class="empty-state"><strong>Selecteer een schermhoofdstuk</strong><span>Bekijk UI, workflow, discoveries en validatie.</span></div></section></div></section>
+      <section class="view" id="principles"><div class="section-header"><div><h2>Design Philosophy</h2><p>Waarom UEFA Manager 2000 zo snel en prettig speelt.</p></div></div><div id="principleGrid" class="principle-grid"></div></section>
       <section class="view" id="updates">
         <div class="section-header"><div><h2>Updates & Changelog</h2><p>De onderzoeksgeschiedenis van Project Phoenix.</p></div></div>
         <div id="updatesTimeline" class="timeline"></div>

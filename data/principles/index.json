@@ -1,0 +1,62 @@
+[
+  {
+    "id": "DP-001",
+    "title": "Context before complexity",
+    "summary": "Show information when it becomes relevant and route directly to the action.",
+    "examples": [
+      "Quick Access",
+      "Football Today"
+    ]
+  },
+  {
+    "id": "DP-002",
+    "title": "Flexibility without simplification",
+    "summary": "Players can perform every role with different effectiveness.",
+    "examples": [
+      "Role matrix",
+      "Preferred roles"
+    ]
+  },
+  {
+    "id": "DP-003",
+    "title": "Dense information, minimal clicks",
+    "summary": "Compact iconography exposes critical status in player rows.",
+    "examples": [
+      "Player status icons",
+      "Normal View"
+    ]
+  },
+  {
+    "id": "DP-004",
+    "title": "Intelligent automation",
+    "summary": "Automate routine work without taking away control.",
+    "examples": [
+      "Delegate",
+      "Automatic bench fill"
+    ]
+  },
+  {
+    "id": "DP-005",
+    "title": "Inform, do not restrict",
+    "summary": "Adapt the interface to rules instead of repeatedly blocking the user.",
+    "examples": [
+      "Match Rules"
+    ]
+  },
+  {
+    "id": "DP-009",
+    "title": "Visual configuration over numeric configuration",
+    "summary": "Tactics are edited directly on the pitch.",
+    "examples": [
+      "Pitch Tactics"
+    ]
+  },
+  {
+    "id": "DP-010",
+    "title": "One editor, many contexts",
+    "summary": "The same field editor handles formation, marking, coverage and set pieces.",
+    "examples": [
+      "Mode menu"
+    ]
+  }
+]

@@ -1,0 +1,205 @@
+[
+  {
+    "id": "009",
+    "chapter": "3.1",
+    "title": "Team Selection",
+    "category": "03 Team Management",
+    "purpose": "Build and review the match squad, bench, reserves and assignments.",
+    "engines": [
+      "team",
+      "player",
+      "role",
+      "formation",
+      "ui-framework"
+    ],
+    "ui": [
+      "Starting Eleven",
+      "Substitutes",
+      "Reserves",
+      "Team Assignments",
+      "Pitch preview",
+      "View Mode",
+      "Your Tactics",
+      "Rules",
+      "Delegate",
+      "Status icons"
+    ],
+    "workflow": [
+      "Review availability",
+      "Choose tactic",
+      "Arrange squad",
+      "Review assignments"
+    ],
+    "discoveries": [
+      "AD-020",
+      "AD-023",
+      "AD-026"
+    ],
+    "principles": [
+      "DP-002",
+      "DP-003",
+      "DP-004"
+    ],
+    "reverseTargets": [
+      "Role rating matrix",
+      "Preferred role mask",
+      "Assignment player IDs",
+      "Status flags"
+    ],
+    "openQuestions": [
+      "Exact role-rating formula"
+    ],
+    "validation": {
+      "screenshot": true,
+      "gameplay": true,
+      "manual": true,
+      "savegame": true,
+      "executable": false
+    }
+  },
+  {
+    "id": "010",
+    "chapter": "3.2",
+    "title": "Match Rules",
+    "category": "03 Team Management",
+    "purpose": "Display forthcoming fixture rules while Team Selection adapts automatically.",
+    "engines": [
+      "competition",
+      "team",
+      "ui-framework"
+    ],
+    "ui": [
+      "Match Rules popup",
+      "Substitute count"
+    ],
+    "workflow": [
+      "Open Rules",
+      "Review",
+      "Close"
+    ],
+    "discoveries": [
+      "AD-037"
+    ],
+    "principles": [
+      "DP-004",
+      "DP-005"
+    ],
+    "reverseTargets": [
+      "Fixture rules object",
+      "Allowed substitute count"
+    ],
+    "openQuestions": [
+      "Which additional rules vary?"
+    ],
+    "validation": {
+      "screenshot": true,
+      "gameplay": true,
+      "manual": true,
+      "savegame": false,
+      "executable": false
+    }
+  },
+  {
+    "id": "011",
+    "chapter": "3.3",
+    "title": "Team Selection Delegate",
+    "category": "03 Team Management",
+    "purpose": "Generate a valid tactic, line-up and assignments through assistant AI.",
+    "engines": [
+      "delegate-ai",
+      "formation",
+      "role",
+      "team"
+    ],
+    "ui": [
+      "Delegate dialog",
+      "Style selection"
+    ],
+    "workflow": [
+      "Choose style",
+      "Confirm",
+      "Review result",
+      "Adjust manually"
+    ],
+    "discoveries": [
+      "AD-042"
+    ],
+    "principles": [
+      "DP-004"
+    ],
+    "reverseTargets": [
+      "AutoSelectTeam",
+      "Formation heuristic",
+      "Role preference evaluator"
+    ],
+    "openQuestions": [
+      "One-shot or persistent?"
+    ],
+    "validation": {
+      "screenshot": true,
+      "gameplay": true,
+      "manual": true,
+      "savegame": false,
+      "executable": false
+    }
+  },
+  {
+    "id": "012",
+    "chapter": "3.4",
+    "title": "Pitch Tactics",
+    "category": "03 Team Management",
+    "purpose": "Create, edit, save and load tactics through a shared pitch editor.",
+    "engines": [
+      "formation",
+      "role",
+      "team-orders",
+      "set-piece",
+      "savegame",
+      "ui-framework"
+    ],
+    "ui": [
+      "Your Tactics",
+      "Mode",
+      "Opposition",
+      "Sixteen-zone pitch",
+      "Drag and drop",
+      "Save dialog",
+      "Named tactics"
+    ],
+    "workflow": [
+      "Choose tactic",
+      "Choose mode",
+      "Drag players",
+      "Autosave working tactic",
+      "Save named preset"
+    ],
+    "discoveries": [
+      "AD-047",
+      "AD-051",
+      "AD-054"
+    ],
+    "principles": [
+      "DP-009",
+      "DP-010"
+    ],
+    "reverseTargets": [
+      "Zone enumeration",
+      "Zone-to-role mapping",
+      "Named tactic records",
+      "Mode layouts"
+    ],
+    "openQuestions": [
+      "Marking",
+      "Coverage",
+      "Opposition",
+      "Substitute mode"
+    ],
+    "validation": {
+      "screenshot": true,
+      "gameplay": true,
+      "manual": true,
+      "savegame": false,
+      "executable": false
+    }
+  }
+]

@@ -1,6 +1,6 @@
 window.PPCC_DATA = {
-  "version": "1.7",
-  "updated": "13 juli 2026 — v1.7",
+  "version": "1.8",
+  "updated": "16 juli 2026 — v1.8",
   "overall": 67,
   "confidence": 74,
   "sprint": "Sprint 1 — Reverse Engineering",
@@ -633,6 +633,12 @@ window.PPCC_DATA = {
     }
   ],
   "updates": [
+    {
+      "date": "2026-07-16",
+      "type": "release",
+      "title": "PPCC v1.8 — Engine Registry v1.0",
+      "summary": "Engine taxonomy, Discovery Registry, Design Principles and PPAS screen chapters added."
+    },
     {
       "date": "2026-07-13",
       "type": "release",
@@ -2178,6 +2184,733 @@ window.PPCC_DATA = {
       "confidence": 0,
       "engine": "savegame",
       "notes": "Te vinden via WriteFile-breakpoints tijdens Save."
+    }
+  ],
+  "engineRegistryV1": [
+    {
+      "id": "player",
+      "name": "Player Engine",
+      "domain": "Core Simulation",
+      "status": "active",
+      "progress": 62,
+      "confidence": 68
+    },
+    {
+      "id": "team",
+      "name": "Team Engine",
+      "domain": "Core Simulation",
+      "status": "active",
+      "progress": 58,
+      "confidence": 70
+    },
+    {
+      "id": "club",
+      "name": "Club Engine",
+      "domain": "Core Simulation",
+      "status": "research",
+      "progress": 45,
+      "confidence": 58
+    },
+    {
+      "id": "competition",
+      "name": "Competition Engine",
+      "domain": "Core Simulation",
+      "status": "research",
+      "progress": 40,
+      "confidence": 50
+    },
+    {
+      "id": "match",
+      "name": "Match Engine",
+      "domain": "Core Simulation",
+      "status": "active",
+      "progress": 55,
+      "confidence": 62
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar Engine",
+      "domain": "Core Simulation",
+      "status": "research",
+      "progress": 46,
+      "confidence": 61
+    },
+    {
+      "id": "finance",
+      "name": "Finance Engine",
+      "domain": "Core Simulation",
+      "status": "active",
+      "progress": 58,
+      "confidence": 68
+    },
+    {
+      "id": "formation",
+      "name": "Formation Engine",
+      "domain": "Tactical Systems",
+      "status": "active",
+      "progress": 78,
+      "confidence": 90
+    },
+    {
+      "id": "role",
+      "name": "Role Engine",
+      "domain": "Tactical Systems",
+      "status": "active",
+      "progress": 76,
+      "confidence": 88
+    },
+    {
+      "id": "team-orders",
+      "name": "Team Orders Engine",
+      "domain": "Tactical Systems",
+      "status": "active",
+      "progress": 62,
+      "confidence": 72
+    },
+    {
+      "id": "set-piece",
+      "name": "Set Piece Engine",
+      "domain": "Tactical Systems",
+      "status": "research",
+      "progress": 38,
+      "confidence": 48
+    },
+    {
+      "id": "delegate-ai",
+      "name": "Delegate AI Engine",
+      "domain": "Tactical Systems",
+      "status": "active",
+      "progress": 64,
+      "confidence": 78
+    },
+    {
+      "id": "transfer",
+      "name": "Transfer Engine",
+      "domain": "Management",
+      "status": "active",
+      "progress": 68,
+      "confidence": 75
+    },
+    {
+      "id": "contract",
+      "name": "Contract Engine",
+      "domain": "Management",
+      "status": "active",
+      "progress": 64,
+      "confidence": 72
+    },
+    {
+      "id": "training",
+      "name": "Training Engine",
+      "domain": "Management",
+      "status": "active",
+      "progress": 90,
+      "confidence": 92
+    },
+    {
+      "id": "staff",
+      "name": "Staff Engine",
+      "domain": "Management",
+      "status": "active",
+      "progress": 70,
+      "confidence": 78
+    },
+    {
+      "id": "youth",
+      "name": "Youth Engine",
+      "domain": "Management",
+      "status": "research",
+      "progress": 35,
+      "confidence": 44
+    },
+    {
+      "id": "scouting",
+      "name": "Scouting Engine",
+      "domain": "Management",
+      "status": "research",
+      "progress": 46,
+      "confidence": 58
+    },
+    {
+      "id": "news",
+      "name": "News Engine",
+      "domain": "World Simulation",
+      "status": "research",
+      "progress": 42,
+      "confidence": 60
+    },
+    {
+      "id": "notification",
+      "name": "Notification Engine",
+      "domain": "World Simulation",
+      "status": "active",
+      "progress": 69,
+      "confidence": 84
+    },
+    {
+      "id": "stadium",
+      "name": "Stadium Development Engine",
+      "domain": "World Simulation",
+      "status": "active",
+      "progress": 62,
+      "confidence": 72
+    },
+    {
+      "id": "sponsor",
+      "name": "Sponsor Engine",
+      "domain": "World Simulation",
+      "status": "research",
+      "progress": 41,
+      "confidence": 53
+    },
+    {
+      "id": "board",
+      "name": "Board Engine",
+      "domain": "World Simulation",
+      "status": "research",
+      "progress": 43,
+      "confidence": 55
+    },
+    {
+      "id": "supporters",
+      "name": "Fan / Supporter Engine",
+      "domain": "World Simulation",
+      "status": "research",
+      "progress": 48,
+      "confidence": 58
+    },
+    {
+      "id": "savegame",
+      "name": "Savegame Engine",
+      "domain": "Technical",
+      "status": "active",
+      "progress": 70,
+      "confidence": 72
+    },
+    {
+      "id": "database",
+      "name": "Database Engine",
+      "domain": "Technical",
+      "status": "research",
+      "progress": 28,
+      "confidence": 35
+    },
+    {
+      "id": "ui-framework",
+      "name": "UI Framework",
+      "domain": "Technical",
+      "status": "active",
+      "progress": 74,
+      "confidence": 88
+    },
+    {
+      "id": "audio",
+      "name": "Audio Engine",
+      "domain": "Technical",
+      "status": "research",
+      "progress": 12,
+      "confidence": 20
+    },
+    {
+      "id": "executable",
+      "name": "Executable Reconstruction",
+      "domain": "Technical",
+      "status": "research",
+      "progress": 15,
+      "confidence": 20
+    },
+    {
+      "id": "statistics",
+      "name": "Statistics Engine",
+      "domain": "Analytics",
+      "status": "research",
+      "progress": 44,
+      "confidence": 56
+    },
+    {
+      "id": "history",
+      "name": "History Engine",
+      "domain": "Analytics",
+      "status": "research",
+      "progress": 47,
+      "confidence": 61
+    },
+    {
+      "id": "forecast",
+      "name": "Forecast Engine",
+      "domain": "Analytics",
+      "status": "research",
+      "progress": 54,
+      "confidence": 76
+    }
+  ],
+  "discoveries": [
+    {
+      "id": "AD-001",
+      "title": "Multiplayer is part of New Game initialization",
+      "confidence": 100,
+      "screens": [
+        "001-006"
+      ],
+      "engines": [
+        "team",
+        "club",
+        "savegame"
+      ],
+      "summary": "Setup Managers supports up to four human managers before the game world begins.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "AD-008",
+      "title": "Budget forecast is dynamically recalculated",
+      "confidence": 100,
+      "screens": [
+        "007-008"
+      ],
+      "engines": [
+        "forecast",
+        "finance",
+        "staff"
+      ],
+      "summary": "The orange forecast line responds continuously to financial decisions and staff quality.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay",
+        "manual"
+      ]
+    },
+    {
+      "id": "AD-010",
+      "title": "Quick Access is event-driven",
+      "confidence": 100,
+      "screens": [
+        "007-008"
+      ],
+      "engines": [
+        "notification",
+        "calendar",
+        "news",
+        "stadium"
+      ],
+      "summary": "Icons activate only when information or action is relevant and route to the target screen.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "AD-020",
+      "title": "Players have a role-rating matrix",
+      "confidence": 100,
+      "screens": [
+        "009a"
+      ],
+      "engines": [
+        "player",
+        "role"
+      ],
+      "summary": "Every player has a rating for every available role.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "AD-023",
+      "title": "Role preference is separate from role rating",
+      "confidence": 100,
+      "screens": [
+        "009a"
+      ],
+      "engines": [
+        "player",
+        "role"
+      ],
+      "summary": "Favourite and comfortable roles are stored independently from numeric role ratings.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "AD-026",
+      "title": "Player rows are compact status dashboards",
+      "confidence": 100,
+      "screens": [
+        "009"
+      ],
+      "engines": [
+        "player",
+        "ui-framework",
+        "transfer"
+      ],
+      "summary": "Nationality, transfer, discipline, medical and retirement states appear as independent icons.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "AD-037",
+      "title": "Team Selection adapts to match rules",
+      "confidence": 100,
+      "screens": [
+        "010"
+      ],
+      "engines": [
+        "team",
+        "competition",
+        "ui-framework"
+      ],
+      "summary": "Substitute slots and automatic bench filling follow the forthcoming fixture rules.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay",
+        "manual"
+      ]
+    },
+    {
+      "id": "AD-042",
+      "title": "Delegate optimizes the complete match setup",
+      "confidence": 100,
+      "screens": [
+        "011"
+      ],
+      "engines": [
+        "delegate-ai",
+        "formation",
+        "role",
+        "team"
+      ],
+      "summary": "Delegate may change formation, line-up and team assignments while respecting availability.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "AD-047",
+      "title": "Pitch Tactics uses a sixteen-zone grid",
+      "confidence": 100,
+      "screens": [
+        "012"
+      ],
+      "engines": [
+        "formation",
+        "role",
+        "ui-framework"
+      ],
+      "summary": "Dragging a player resolves to one of sixteen tactical role zones.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "AD-051",
+      "title": "Named custom tactics form a persistent library",
+      "confidence": 100,
+      "screens": [
+        "012a",
+        "012b"
+      ],
+      "engines": [
+        "formation",
+        "savegame",
+        "ui-framework"
+      ],
+      "summary": "Multiple named tactics can be stored and selected through Your Tactics.",
+      "confirmedBy": [
+        "screenshot",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "AD-054",
+      "title": "A tactic contains multiple editing modes",
+      "confidence": 100,
+      "screens": [
+        "012c"
+      ],
+      "engines": [
+        "formation",
+        "team-orders",
+        "set-piece"
+      ],
+      "summary": "Formation, Marking, Coverage and set pieces are edited in the same pitch interface.",
+      "confirmedBy": [
+        "screenshot"
+      ]
+    }
+  ],
+  "designPrinciples": [
+    {
+      "id": "DP-001",
+      "title": "Context before complexity",
+      "summary": "Show information when it becomes relevant and route directly to the action.",
+      "examples": [
+        "Quick Access",
+        "Football Today"
+      ]
+    },
+    {
+      "id": "DP-002",
+      "title": "Flexibility without simplification",
+      "summary": "Players can perform every role with different effectiveness.",
+      "examples": [
+        "Role matrix",
+        "Preferred roles"
+      ]
+    },
+    {
+      "id": "DP-003",
+      "title": "Dense information, minimal clicks",
+      "summary": "Compact iconography exposes critical status in player rows.",
+      "examples": [
+        "Player status icons",
+        "Normal View"
+      ]
+    },
+    {
+      "id": "DP-004",
+      "title": "Intelligent automation",
+      "summary": "Automate routine work without taking away control.",
+      "examples": [
+        "Delegate",
+        "Automatic bench fill"
+      ]
+    },
+    {
+      "id": "DP-005",
+      "title": "Inform, do not restrict",
+      "summary": "Adapt the interface to rules instead of repeatedly blocking the user.",
+      "examples": [
+        "Match Rules"
+      ]
+    },
+    {
+      "id": "DP-009",
+      "title": "Visual configuration over numeric configuration",
+      "summary": "Tactics are edited directly on the pitch.",
+      "examples": [
+        "Pitch Tactics"
+      ]
+    },
+    {
+      "id": "DP-010",
+      "title": "One editor, many contexts",
+      "summary": "The same field editor handles formation, marking, coverage and set pieces.",
+      "examples": [
+        "Mode menu"
+      ]
+    }
+  ],
+  "screenAnalyses": [
+    {
+      "id": "009",
+      "chapter": "3.1",
+      "title": "Team Selection",
+      "category": "03 Team Management",
+      "purpose": "Build and review the match squad, bench, reserves and assignments.",
+      "engines": [
+        "team",
+        "player",
+        "role",
+        "formation",
+        "ui-framework"
+      ],
+      "ui": [
+        "Starting Eleven",
+        "Substitutes",
+        "Reserves",
+        "Team Assignments",
+        "Pitch preview",
+        "View Mode",
+        "Your Tactics",
+        "Rules",
+        "Delegate",
+        "Status icons"
+      ],
+      "workflow": [
+        "Review availability",
+        "Choose tactic",
+        "Arrange squad",
+        "Review assignments"
+      ],
+      "discoveries": [
+        "AD-020",
+        "AD-023",
+        "AD-026"
+      ],
+      "principles": [
+        "DP-002",
+        "DP-003",
+        "DP-004"
+      ],
+      "reverseTargets": [
+        "Role rating matrix",
+        "Preferred role mask",
+        "Assignment player IDs",
+        "Status flags"
+      ],
+      "openQuestions": [
+        "Exact role-rating formula"
+      ],
+      "validation": {
+        "screenshot": true,
+        "gameplay": true,
+        "manual": true,
+        "savegame": true,
+        "executable": false
+      }
+    },
+    {
+      "id": "010",
+      "chapter": "3.2",
+      "title": "Match Rules",
+      "category": "03 Team Management",
+      "purpose": "Display forthcoming fixture rules while Team Selection adapts automatically.",
+      "engines": [
+        "competition",
+        "team",
+        "ui-framework"
+      ],
+      "ui": [
+        "Match Rules popup",
+        "Substitute count"
+      ],
+      "workflow": [
+        "Open Rules",
+        "Review",
+        "Close"
+      ],
+      "discoveries": [
+        "AD-037"
+      ],
+      "principles": [
+        "DP-004",
+        "DP-005"
+      ],
+      "reverseTargets": [
+        "Fixture rules object",
+        "Allowed substitute count"
+      ],
+      "openQuestions": [
+        "Which additional rules vary?"
+      ],
+      "validation": {
+        "screenshot": true,
+        "gameplay": true,
+        "manual": true,
+        "savegame": false,
+        "executable": false
+      }
+    },
+    {
+      "id": "011",
+      "chapter": "3.3",
+      "title": "Team Selection Delegate",
+      "category": "03 Team Management",
+      "purpose": "Generate a valid tactic, line-up and assignments through assistant AI.",
+      "engines": [
+        "delegate-ai",
+        "formation",
+        "role",
+        "team"
+      ],
+      "ui": [
+        "Delegate dialog",
+        "Style selection"
+      ],
+      "workflow": [
+        "Choose style",
+        "Confirm",
+        "Review result",
+        "Adjust manually"
+      ],
+      "discoveries": [
+        "AD-042"
+      ],
+      "principles": [
+        "DP-004"
+      ],
+      "reverseTargets": [
+        "AutoSelectTeam",
+        "Formation heuristic",
+        "Role preference evaluator"
+      ],
+      "openQuestions": [
+        "One-shot or persistent?"
+      ],
+      "validation": {
+        "screenshot": true,
+        "gameplay": true,
+        "manual": true,
+        "savegame": false,
+        "executable": false
+      }
+    },
+    {
+      "id": "012",
+      "chapter": "3.4",
+      "title": "Pitch Tactics",
+      "category": "03 Team Management",
+      "purpose": "Create, edit, save and load tactics through a shared pitch editor.",
+      "engines": [
+        "formation",
+        "role",
+        "team-orders",
+        "set-piece",
+        "savegame",
+        "ui-framework"
+      ],
+      "ui": [
+        "Your Tactics",
+        "Mode",
+        "Opposition",
+        "Sixteen-zone pitch",
+        "Drag and drop",
+        "Save dialog",
+        "Named tactics"
+      ],
+      "workflow": [
+        "Choose tactic",
+        "Choose mode",
+        "Drag players",
+        "Autosave working tactic",
+        "Save named preset"
+      ],
+      "discoveries": [
+        "AD-047",
+        "AD-051",
+        "AD-054"
+      ],
+      "principles": [
+        "DP-009",
+        "DP-010"
+      ],
+      "reverseTargets": [
+        "Zone enumeration",
+        "Zone-to-role mapping",
+        "Named tactic records",
+        "Mode layouts"
+      ],
+      "openQuestions": [
+        "Marking",
+        "Coverage",
+        "Opposition",
+        "Substitute mode"
+      ],
+      "validation": {
+        "screenshot": true,
+        "gameplay": true,
+        "manual": true,
+        "savegame": false,
+        "executable": false
+      }
     }
   ]
 };
